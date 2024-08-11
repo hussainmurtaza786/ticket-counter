@@ -1,13 +1,15 @@
-import { Box, ChakraProvider } from '@chakra-ui/react';
+import { Box, ChakraProvider, Flex } from '@chakra-ui/react';
 import './App.css';
 import Header from './components/Header-Navbar/Header';
+import Home from './components/Link-Component/Home';
 
 function App() {
   return (
     <ChakraProvider>
-      <Box >
+      <Flex display='flex' flexDirection='column' >
         <Header />
-      </Box>
+        <Home/>
+      </Flex>
 
     </ChakraProvider>
   );
