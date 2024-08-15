@@ -7,7 +7,7 @@ function Logo() {
             <Box
                 fontSize="36px"
                 fontWeight="bold"
-                m="10px"
+                m="10px 30px"
                 color="#FF4500"
                 fontFamily={"'Open Sans', 'Raleway', sans-serif'"}
                 textShadow="2px 2px 10px rgba(0, 0, 0, 0.7)"
