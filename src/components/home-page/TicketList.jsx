@@ -1,50 +1,35 @@
-import { Button, Flex } from '@chakra-ui/react';
-// import ButtonStyle from './button/ButtonStyle';
-
-
+import { Button, Flex } from "@chakra-ui/react";
 
 function TicketList({ showMovie }) {
-
   return (
     <div>
-      <Flex
-        m='15px 4rem'
-        direction='column'
-        pl='0'
-      >
-
+      <Flex m="15px 4rem" flexDirection='column' >
         <ButtonStyle
-          onClick={() => showMovie('Flight')}
-          backgroundImage='https://image.slidesdocs.com/responsive-images/background/above-the-clouds-animated-airplane-in-flight-powerpoint-background_9c9f8f0944__960_540.jpg'
+          onClick={() => showMovie("Flight")}
+          backgroundImage="https://image.slidesdocs.com/responsive-images/background/above-the-clouds-animated-airplane-in-flight-powerpoint-background_9c9f8f0944__960_540.jpg"
         >
           Flight
         </ButtonStyle>
 
         <ButtonStyle
-          backgroundImage='https://media.istockphoto.com/id/1478374885/photo/joyful-family-watching-movie-in-cinema.jpg?s=612x612&w=0&k=20&c=U0Qp-c2vCTUPG51ZOD2H7KcrByyBKow3r9wSR2QMFZU='
-          onClick={() => showMovie('Movie')}
+          backgroundImage="https://media.istockphoto.com/id/1478374885/photo/joyful-family-watching-movie-in-cinema.jpg?s=612x612&w=0&k=20&c=U0Qp-c2vCTUPG51ZOD2H7KcrByyBKow3r9wSR2QMFZU="
+          onClick={() => showMovie("Movie")}
         >
           Movie
         </ButtonStyle>
 
-
         <ButtonStyle
-          onClick={() => showMovie('Sports')}
-          backgroundImage='https://t4.ftcdn.net/jpg/02/86/76/77/360_F_286767786_boXM75PDLYIsYWzabZ3fKcM3esv50TNS.jpg'
+          onClick={() => showMovie("Sports")}
+          backgroundImage="https://t4.ftcdn.net/jpg/02/86/76/77/360_F_286767786_boXM75PDLYIsYWzabZ3fKcM3esv50TNS.jpg"
         >
           Sport
         </ButtonStyle>
-
-
-
-
       </Flex>
-    </div >
-  )
+    </div>
+  );
 }
 
-export default TicketList
-
+export default TicketList;
 
 const ButtonStyle = ({ onClick, backgroundImage, children }) => {
   return (

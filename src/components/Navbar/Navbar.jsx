@@ -1,20 +1,15 @@
-import {
-  Box,
-} from "@chakra-ui/react";
+import { Box } from "@chakra-ui/react";
 import Items from "./Items";
 import Logo from "./Logo";
 
-
-
 function Navbar(props) {
-
   return (
-    <Box bgColor='white' zIndex={100} opacity={0.4}>
+    <Box display="flex" bgColor="black" opacity="0.7">
       <Logo />
-      <Items />
+      <Box display='flex' justifyContent='center' width='40%'  >
+        <Items />
+      </Box>
     </Box>
-
-
   );
 }
 
