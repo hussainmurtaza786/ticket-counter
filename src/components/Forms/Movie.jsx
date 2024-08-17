@@ -1,27 +1,62 @@
-import { Box, Button, ButtonGroup, Flex, Image, FormControl, FormLabel, Input, VStack, CloseButton } from '@chakra-ui/react'
-import React from 'react'
+import {
+  Box,
+  Button,
+  ButtonGroup,
+  Flex,
+  Image,
+  FormControl,
+  FormLabel,
+  Input,
+  VStack,
+  CloseButton,
+} from "@chakra-ui/react";
+import { useFormik } from "formik";
+import React from "react";
+import { movieFormSchema } from "../../Schemas/Index";
 
-function Movie({onClose}) {
+function Movie({ onClose }) {
+  const onSubmit = (values) => {
+    onClose()
+    console.log("Form Submitted", values);
+  };
+  const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
+    useFormik({
+      initialValues: {
+        firstName: "",
+        email: "",
+        lastName:"",
+        movieName:"",
+        time:"",
+        date:""
+      },
+      validationSchema: movieFormSchema,
+      onSubmit,
+    });
+
   return (
     <Box
-      display='flex'
-      flexDirection='column'
-      width='500px'
-      height='100%'
-      bgColor='whitesmoke'
-      p='20px'
-      boxShadow='xl'
-      borderRadius='md'
+      display="flex"
+      flexDirection="column"
+      width="500px"
+      height="100%"
+      bgColor="whitesmoke"
+      p="20px"
+      boxShadow="xl"
+      borderRadius="md"
     >
-      <CloseButton onClick={() => onClose(false)} fontSize='20px' color='red'>X</CloseButton>
+      <CloseButton onClick={() => onClose(false)} fontSize="20px" color="red">
+        X
+      </CloseButton>
 
       <Box
-        display='flex'
-        flexDirection='column'
-        alignItems='center'
-        marginBottom='20px'
+        display="flex"
+        flexDirection="column"
+        alignItems="center"
+        marginBottom="20px"
       >
-        <label style={{ margin: '15px 8px', fontSize: '30px', fontWeight: 'bold' }}>
+        <label
+          style={{ margin: "15px 8px", fontSize: "30px", fontWeight: "bold" }}
+        >
           Movie Ticket Form
         </label>
         <Image
@@ -32,47 +67,89 @@ function Movie({onClose}) {
           alt="Popcorn"
         />
       </Box>
-      <form>
-        <VStack spacing={4} align='stretch'>
-          <FormControl>
+      <form onSubmit={handleSubmit}>
+        <VStack spacing={4} align="stretch">
+          <FormControl isInvalid={touched.movieName && errors.movieName}>
             <FormLabel>Movie Name</FormLabel>
-            <Input type="text" />
+            <Input
+              name="movieName"
+              value={values.movieName}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              type="text"
+            />
           </FormControl>
 
-          <FormControl>
+          <FormControl isInvalid={touched.date && errors.date}>
             <FormLabel>Date</FormLabel>
-            <Input type="date" />
+            <Input
+              value={values.date}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              name="date"
+              type="date"
+            />
           </FormControl>
 
-          <FormControl>
+          <FormControl isInvalid={touched.time && errors.time}>
             <FormLabel>Time</FormLabel>
-            <Input type='time' />
+            <Input
+              name="time"
+              value={values.time}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              type="time"
+            />
           </FormControl>
 
-          <FormControl>
+          <FormControl isInvalid={touched.email && errors.email}>
             <FormLabel>Email</FormLabel>
-            <Input type='email' />
+            <Input
+              name="email"
+              value={values.email}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              type="email"
+            />
           </FormControl>
 
-          <Flex justifyContent='space-between'>
-            <FormControl width='48%'>
+          <Flex justifyContent="space-between">
+            <FormControl
+              isInvalid={touched.firstName && errors.firstName}
+              width="48%"
+            >
               <FormLabel>First Name</FormLabel>
-              <Input type='text' />
+              <Input
+                name="firstName"
+                value={values.firstName}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                type="text"
+              />
             </FormControl>
 
-            <FormControl width='48%'>
+            <FormControl
+              isInvalid={touched.lastName && errors.lastName}
+              width="48%"
+            >
               <FormLabel>Last Name</FormLabel>
-              <Input type='text' />
+              <Input
+                name="lastName"
+                value={values.lastName}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                type="text"
+              />
             </FormControl>
           </Flex>
 
-
-            <Button spacing={4} mt={4} colorScheme='teal' type='submit'>Submit</Button>
-
+          <Button spacing={4} mt={4} colorScheme="teal" type="submit">
+            Submit
+          </Button>
         </VStack>
       </form>
     </Box>
-  )
+  );
 }
 
-export default Movie
+export default Movie;

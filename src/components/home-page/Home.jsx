@@ -106,7 +106,7 @@ function Home() {
       )}
 
       <Box position="absolute" right="0">
-        <Auth isLoggedout={onLogout} isLoggedin={isLogged} loginForm={setFormType} />
+        <Auth isLoggedout={onLogout} isLogged={isLogged} loginForm={setFormType} />
       </Box>
     </>
   );

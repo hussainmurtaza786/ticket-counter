@@ -24,20 +24,20 @@ const ListStyle = ({ children }) => {
   return (
     <Box
       m={4}
-      bg="#0099ff"
+      fontSize='20px'
       p={2}
       zIndex={1000000}
       borderRadius="md"
       transition="transform 0.3s ease, color 0.3s ease"
       _hover={{
         transform: "scale(1.1)",
-        color: "blue.200",
+        color: "#386B99      ",
       }}
     >
       <Link
-        color="black"
+      color='#4682B4 '
         _hover={{
-          color: "blue.200",
+          color: "#386B99      ",
         }}
       >
         {children}

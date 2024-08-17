@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import {
   Box,
   Button,
@@ -9,55 +9,95 @@ import {
   Heading,
   Text,
   useColorModeValue,
-  CloseButton,
-} from '@chakra-ui/react';
+} from "@chakra-ui/react";
+import { useFormik } from "formik";
+import { loginFormSchema } from "../../Schemas/Index";
 
-const Login = ({onClose,onLogin}) => {
+const Login = ({ onClose, onLogin }) => {
+  const onSubmit = (values) => {
+    onLogin(true);
+    onClose(false);
+    console.log("Form Submitted", values);
+  };
+  const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
+    useFormik({
+      initialValues: {
+        name: "",
+        email: "",
+      },
+      validationSchema: loginFormSchema,
+      onSubmit,
+    });
+
   return (
-    <Box
-      display="flex"
-      alignItems="center"
-      justifyContent="center"
-      bg={useColorModeValue('gray.50', 'gray.800')}
+    <form
+      onSubmit={handleSubmit}
+      style={{
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+      }}
+      bg={useColorModeValue("gray.50", "gray.800")}
     >
       <Box
-        bg={useColorModeValue('white', 'gray.700')}
+        bg={useColorModeValue("white", "gray.700")}
         p={8}
         maxWidth="400px"
         borderRadius="lg"
         boxShadow="lg"
       >
-<CloseButton onClick={() => onClose(false)} fontSize='20px' color='red'>X</CloseButton>
-
         <Stack spacing={4}>
           <Heading fontSize="2xl" textAlign="center">
             Welcome Back
           </Heading>
-          <Text fontSize="lg" color={useColorModeValue('gray.600', 'gray.300')}>
+          <Text fontSize="lg" color={useColorModeValue("gray.600", "gray.300")}>
             Please enter your name and email to log in
           </Text>
-          <FormControl id="name">
+          <FormControl id="name" isInvalid={touched.name && errors.name}>
             <FormLabel>Name</FormLabel>
-            <Input type="text" placeholder="Your Name" />
+            <Input
+              type="text"
+              name="name"
+              placeholder="Your Name"
+              value={values.name}
+              onChange={handleChange}
+              onBlur={handleBlur}
+            />
+            {touched.name && errors.name && (
+              <Text color="red.500" fontSize="sm">
+                {errors.name}
+              </Text>
+            )}
           </FormControl>
-          <FormControl id="email">
+          <FormControl id="email" isInvalid={touched.email && errors.email}>
             <FormLabel>Email address</FormLabel>
-            <Input type="email" placeholder="your@example.com" />
+            <Input
+              type="email"
+              name="email"
+              placeholder="your@example.com"
+              value={values.email}
+              onChange={handleChange}
+              onBlur={handleBlur}
+            />
+            {touched.email && errors.email && (
+              <Text color="red.500" fontSize="sm">
+                {errors.email}
+              </Text>
+            )}
           </FormControl>
           <Button
             colorScheme="teal"
             variant="solid"
             size="lg"
             mt={4}
-            type='submit'
-            onClick={onLogin}
+            type="submit"
           >
             Log In
           </Button>
         </Stack>
       </Box>
-    </Box>
+    </form>
   );
 };
 
-export default Login
+export default Login;

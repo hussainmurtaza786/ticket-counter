@@ -5,10 +5,11 @@ function Logo() {
     return (
         <div>
             <Box
+
                 fontSize="36px"
                 fontWeight="bold"
                 m="10px 30px"
-                color="#FF4500"
+                color="#4682B4  "
                 fontFamily={"'Open Sans', 'Raleway', sans-serif'"}
                 textShadow="2px 2px 10px rgba(0, 0, 0, 0.7)"
                 borderRadius="10px"
