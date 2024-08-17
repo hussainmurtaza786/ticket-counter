@@ -13,10 +13,14 @@ import {
 import { useFormik } from "formik";
 import React from "react";
 import { movieFormSchema } from "../../Schemas/Index";
+import { useDispatch } from "react-redux";
+import { movieData } from "../../store/movie-slice";
 
 function Movie({ onClose }) {
+  const dispatch = useDispatch()
   const onSubmit = (values) => {
     onClose()
+    dispatch(movieData(values))
     console.log("Form Submitted", values);
   };
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
@@ -24,10 +28,10 @@ function Movie({ onClose }) {
       initialValues: {
         firstName: "",
         email: "",
-        lastName:"",
-        movieName:"",
-        time:"",
-        date:""
+        lastName: "",
+        movieName: "",
+        time: "",
+        date: ""
       },
       validationSchema: movieFormSchema,
       onSubmit,
@@ -43,6 +47,8 @@ function Movie({ onClose }) {
       p="20px"
       boxShadow="xl"
       borderRadius="md"
+      overflow-y='auto'
+
     >
       <CloseButton onClick={() => onClose(false)} fontSize="20px" color="red">
         X

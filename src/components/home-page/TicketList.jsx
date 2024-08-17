@@ -1,29 +1,36 @@
-import { Button, Flex } from "@chakra-ui/react";
+import { Box, Button, Flex } from "@chakra-ui/react";
 
-function TicketList({ showMovie }) {
+function TicketList({ showForm }) {
   return (
     <div>
-      <Flex m="15px 4rem" flexDirection='column' >
-        <ButtonStyle
-          onClick={() => showMovie("Flight")}
-          backgroundImage="https://image.slidesdocs.com/responsive-images/background/above-the-clouds-animated-airplane-in-flight-powerpoint-background_9c9f8f0944__960_540.jpg"
-        >
-          Flight
-        </ButtonStyle>
+      <Flex m="15px 53px"  >
 
-        <ButtonStyle
-          backgroundImage="https://media.istockphoto.com/id/1478374885/photo/joyful-family-watching-movie-in-cinema.jpg?s=612x612&w=0&k=20&c=U0Qp-c2vCTUPG51ZOD2H7KcrByyBKow3r9wSR2QMFZU="
-          onClick={() => showMovie("Movie")}
-        >
-          Movie
-        </ButtonStyle>
+        <Box m='4px 8px'>
+          <ButtonStyle
+            onClick={() => showForm("Flight")}
+            backgroundImage="https://image.slidesdocs.com/responsive-images/background/above-the-clouds-animated-airplane-in-flight-powerpoint-background_9c9f8f0944__960_540.jpg"
+          >
+            Flight
+          </ButtonStyle>
+        </Box>
+        <Box m='4px 8px'>
 
-        <ButtonStyle
-          onClick={() => showMovie("Sports")}
-          backgroundImage="https://t4.ftcdn.net/jpg/02/86/76/77/360_F_286767786_boXM75PDLYIsYWzabZ3fKcM3esv50TNS.jpg"
-        >
-          Sport
-        </ButtonStyle>
+          <ButtonStyle
+            backgroundImage="https://media.istockphoto.com/id/1478374885/photo/joyful-family-watching-movie-in-cinema.jpg?s=612x612&w=0&k=20&c=U0Qp-c2vCTUPG51ZOD2H7KcrByyBKow3r9wSR2QMFZU="
+            onClick={() => showForm("Movie")}
+          >
+            Movie
+          </ButtonStyle>
+        </Box>
+        <Box m='4px 8px'>
+
+          <ButtonStyle
+            onClick={() => showForm("Sports")}
+            backgroundImage="https://t4.ftcdn.net/jpg/02/86/76/77/360_F_286767786_boXM75PDLYIsYWzabZ3fKcM3esv50TNS.jpg"
+          >
+            Sport
+          </ButtonStyle>
+        </Box>
       </Flex>
     </div>
   );

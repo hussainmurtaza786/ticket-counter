@@ -6,20 +6,21 @@ import Flight from "./Flight";
 import Sport from "./Sport";
 import Login from "./Login";
 
-function Form({ formType, showMovie,onLogin }) {
+function Form({ formType, showForm, onLogin }) {
   return (
     formType && (
-      <Modal>
+      <Modal onClose={e => { showForm("") }} >
         <Box
-          display="flex"
-          justifyContent="center"
-          alignItems="center"
-          m="8rem 0rem"
+        // display="flex"
+        // justifyContent="center"
+        // alignItems="center"
+        // m="8rem 0rem"
         >
-          {formType === "Movie" && <Movie onClose={showMovie} />}
-          {formType === "Flight" && <Flight onClose={showMovie} />}
-          {formType === "Sports" && <Sport onClose={showMovie} />}
-          {formType === "LogIn" && <Login onLogin={onLogin} onClose={showMovie} />}
+          {formType === "Movie"  && <Movie onClose={showForm} />}
+          {formType === "Flight" && <Flight onClose={showForm} />}
+          {formType === "Sports" && <Sport onClose={showForm} />}
+          {formType === "LogIn" && <Login onLogin={onLogin} onClose={showForm} />}
+          
         </Box>
       </Modal>
     )

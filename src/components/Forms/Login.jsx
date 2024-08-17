@@ -12,9 +12,13 @@ import {
 } from "@chakra-ui/react";
 import { useFormik } from "formik";
 import { loginFormSchema } from "../../Schemas/Index";
+import { useDispatch } from "react-redux";
+import { sendLoginData } from "../../store/login-slice";
 
 const Login = ({ onClose, onLogin }) => {
+  const dispatch = useDispatch()
   const onSubmit = (values) => {
+    dispatch(sendLoginData(values))
     onLogin(true);
     onClose(false);
     console.log("Form Submitted", values);

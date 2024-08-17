@@ -56,18 +56,19 @@ function Home() {
       >
         <Slider {...settings}>
           {images.map((image, index) => (
-            <Box display="flex" flexDirection="column" key={index}>
-              <Image width="100%" src={image} alt={`Event ${index + 1}`} />
+            <Box display="flex"
+              flexDirection="column" key={index}>
+              <Image height='100%' width='100%' src={image} alt={`Event ${index + 1}`} />
             </Box>
           ))}
         </Slider>
       </Box>
 
       <Box position="absolute" top="30rem" zIndex={100}>
-        {ticket && <TicketList showMovie={showForm} />}
+        {isLogged && ticket && !formType && <TicketList showForm={showForm} />}
       </Box>
 
-      <Form onLogin={onLogin} showMovie={setFormType} formType={formType} />
+      <Form onLogin={onLogin} showForm={setFormType} formType={formType} />
 
       <Box position="absolute" top="6rem">
         <WebText />

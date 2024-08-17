@@ -6,7 +6,7 @@ function Navbar(props) {
   return (
     <Box display="flex" bgColor="#B0C4DE   " opacity="0.7">
       <Logo />
-      <Box display='flex' justifyContent='center' width='40%'  >
+      <Box display='flex' justifyContent='center' width='50%'  >
         <Items />
       </Box>
     </Box>

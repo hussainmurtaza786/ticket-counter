@@ -1,12 +1,8 @@
-import React, { useState } from 'react'
+
 import { Box, Button, Flex, Image, FormControl, FormLabel, Input, VStack, CloseButton } from '@chakra-ui/react'
 
 function Flight({ onClose }) {
-  const [cartIsShown, setCartIsShown] = useState(true)
 
-  const hideCartHandler = () => {
-    setCartIsShown(false)
-  }
   return (
     <Box
       display='flex'
@@ -34,7 +30,7 @@ function Flight({ onClose }) {
           alt="Airplane"
         />
       </Box>
-      <form>
+      <form >
         <VStack spacing={4} align='stretch'>
           <FormControl>
             <FormLabel>Departure Airport</FormLabel>
