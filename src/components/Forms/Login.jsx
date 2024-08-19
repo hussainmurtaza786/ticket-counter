@@ -13,7 +13,7 @@ import {
 import { useFormik } from "formik";
 import { loginFormSchema } from "../../Schemas/Index";
 import { useDispatch } from "react-redux";
-import { sendLoginData } from "../../store/login-slice";
+import { sendLoginData } from "../../store/login-action";
 
 const Login = ({ onClose, onLogin }) => {
   const dispatch = useDispatch()

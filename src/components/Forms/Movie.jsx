@@ -14,13 +14,13 @@ import { useFormik } from "formik";
 import React from "react";
 import { movieFormSchema } from "../../Schemas/Index";
 import { useDispatch } from "react-redux";
-import { movieData } from "../../store/movie-slice";
+import { sendMovieData } from "../../store/movie-action";
 
 function Movie({ onClose }) {
   const dispatch = useDispatch()
   const onSubmit = (values) => {
     onClose()
-    dispatch(movieData(values))
+    dispatch(sendMovieData(values))
     console.log("Form Submitted", values);
   };
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
