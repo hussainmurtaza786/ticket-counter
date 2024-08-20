@@ -3,15 +3,19 @@ import React, { useState } from "react";
 import Form from "../Forms/Form";
 import WebText from "./Text";
 import TicketList from "./TicketList";
-import Slider from "react-slick";
+
 import Auth from "../Navbar/Auth";
+import Slider from "./Slider";
 
 function Home() {
   const [formType, setFormType] = useState("");
 
   const showForm = (_formType) => {
     setFormType(_formType);
-  };
+    console.log('formType ==>' ,_formType)
+
+  }
+
   const [ticket, setTicket] = useState(false);
 
   const showTicket = () => {
@@ -19,56 +23,34 @@ function Home() {
   };
 
   const [isLogged, setIsLogged] = useState(false);
+  const [isSignin, setIsSignin] = useState(false)
+
 
   const onLogin = () => {
     setIsLogged(true);
   };
 
+  const onSignin = () => {
+    setIsSignin(true)
+  }
   const onLogout = () => {
+    setIsSignin(false)
     setIsLogged(false)
   };
 
-  const settings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    autoplay: true,
-    autoplaySpeed: 3000,
-    arrows: false,
-  };
+  
 
-  const images = [
-    "https://www.popsci.com/wp-content/uploads/2022/07/11/josue-isai-ramos-figueroa-n2NBgIx3A28-unsplash.jpg?text=Event+1",
-    "https://wallpapers.com/images/hd/sports-balls-in-4k-4tcqtsgp899vx4f4.jpg?text=Event+2",
-    "https://wallpapers.com/images/hd/movie-theater-background-2048-x-1536-9wlq655dcp63cdi8.jpg?text=Event+3",
-  ];
+  
 
   return (
     <>
-      <Box
-        maxW="100%"
-        mx="auto"
-        overflow="hidden"
-        borderRadius="md"
-        boxShadow="lg"
-      >
-        <Slider {...settings}>
-          {images.map((image, index) => (
-            <Box display="flex"
-              flexDirection="column" key={index}>
-              <Image height='100%' width='100%' src={image} alt={`Event ${index + 1}`} />
-            </Box>
-          ))}
-        </Slider>
-      </Box>
+
 
       <Box position="absolute" top="30rem" zIndex={100}>
         {isLogged && ticket && !formType && <TicketList showForm={showForm} />}
       </Box>
 
-      <Form onLogin={onLogin} showForm={setFormType} formType={formType} />
+      <Form isSignin={onSignin} onLogin={onLogin} showForm={setFormType} formType={formType} />
 
       <Box position="absolute" top="6rem">
         <WebText />

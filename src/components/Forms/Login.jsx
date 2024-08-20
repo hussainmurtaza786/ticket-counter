@@ -12,21 +12,19 @@ import {
 } from "@chakra-ui/react";
 import { useFormik } from "formik";
 import { loginFormSchema } from "../../Schemas/Index";
-import { useDispatch } from "react-redux";
-import { sendLoginData } from "../../store/login-action";
+
+
 
 const Login = ({ onClose, onLogin }) => {
-  const dispatch = useDispatch()
   const onSubmit = (values) => {
-    dispatch(sendLoginData(values))
     onLogin(true);
     onClose(false);
-    console.log("Form Submitted", values);
+
   };
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
     useFormik({
       initialValues: {
-        name: "",
+        password: "",
         email: "",
       },
       validationSchema: loginFormSchema,
@@ -57,22 +55,7 @@ const Login = ({ onClose, onLogin }) => {
           <Text fontSize="lg" color={useColorModeValue("gray.600", "gray.300")}>
             Please enter your name and email to log in
           </Text>
-          <FormControl id="name" isInvalid={touched.name && errors.name}>
-            <FormLabel>Name</FormLabel>
-            <Input
-              type="text"
-              name="name"
-              placeholder="Your Name"
-              value={values.name}
-              onChange={handleChange}
-              onBlur={handleBlur}
-            />
-            {touched.name && errors.name && (
-              <Text color="red.500" fontSize="sm">
-                {errors.name}
-              </Text>
-            )}
-          </FormControl>
+
           <FormControl id="email" isInvalid={touched.email && errors.email}>
             <FormLabel>Email address</FormLabel>
             <Input
@@ -86,6 +69,22 @@ const Login = ({ onClose, onLogin }) => {
             {touched.email && errors.email && (
               <Text color="red.500" fontSize="sm">
                 {errors.email}
+              </Text>
+            )}
+          </FormControl>
+          <FormControl id="password" isInvalid={touched.password && errors.password}>
+            <FormLabel>Password</FormLabel>
+            <Input
+              type="text"
+              name="password"
+              placeholder="Enter Password"
+              value={values.password}
+              onChange={handleChange}
+              onBlur={handleBlur}
+            />
+            {touched.password && errors.password && (
+              <Text color="red.500" fontSize="sm">
+                {errors.password}
               </Text>
             )}
           </FormControl>

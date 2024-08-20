@@ -5,8 +5,9 @@ import Modal from "../UI/Modal";
 import Flight from "./Flight";
 import Sport from "./Sport";
 import Login from "./Login";
+import Signup from "./Signup";
 
-function Form({ formType, showForm, onLogin }) {
+function Form({ formType, showForm, onLogin,isSignin }) {
   return (
     formType && (
       <Modal onClose={e => { showForm("") }} >
@@ -16,11 +17,12 @@ function Form({ formType, showForm, onLogin }) {
         // alignItems="center"
         // m="8rem 0rem"
         >
-          {formType === "Movie"  && <Movie onClose={showForm} />}
+          {formType === "Movie" && <Movie onClose={showForm} />}
           {formType === "Flight" && <Flight onClose={showForm} />}
           {formType === "Sports" && <Sport onClose={showForm} />}
           {formType === "LogIn" && <Login onLogin={onLogin} onClose={showForm} />}
-          
+          {formType === "Signup" && < Signup isSignin={isSignin} onClose={showForm} />}
+
         </Box>
       </Modal>
     )

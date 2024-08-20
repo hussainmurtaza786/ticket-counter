@@ -2,7 +2,7 @@ import { Box, Button, ButtonGroup, Icon } from "@chakra-ui/react";
 import { FaSignInAlt, FaSignOutAlt } from "react-icons/fa";
 import React from "react";
 
-function Auth({ loginForm, isLogged, isLoggedout }) {
+function Auth({ loginForm, isLogged, isLoggedout, onSignin }) {
   return (
     <Box>
       <ButtonGroup m={4} spacing={4}>
@@ -32,7 +32,37 @@ function Auth({ loginForm, isLogged, isLoggedout }) {
           >
             Sign In
           </Button>
+
         )}
+
+        {!isLogged && <Button
+          onClick={() => loginForm("Signup")}
+          leftIcon={<Icon as={FaSignInAlt} />}
+          bgGradient="linear(to-r, #007bff, #0056b3)"
+          color="white"
+          fontSize="lg"
+          fontWeight="bold"
+          px={6}
+          py={4}
+          borderRadius="md"
+          boxShadow="md"
+          _hover={{
+            bgGradient: "linear(to-r, #0056b3, #003d7a)",
+            transform: "scale(1.05)",
+          }}
+          _active={{
+            bgGradient: "linear(to-r, #003d7a, #001d3d)",
+            transform: "scale(0.95)",
+          }}
+          _focus={{
+            boxShadow: "outline",
+          }}
+        >
+          Sign Up
+        </Button>}
+
+
+
 
         {isLogged && (
           <Button

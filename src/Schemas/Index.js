@@ -5,7 +5,7 @@ import * as yup from "yup"
 
 export const loginFormSchema = yup.object().shape({
     email: yup.string().email("Please enter a valid email").required("Email is Required"),
-    name: yup.string().required(" Name is Required"),
+    password: yup.string().required(" Password is Required"),
 })
 
 export const movieFormSchema = yup.object().shape({
