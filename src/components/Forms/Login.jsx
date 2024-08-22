@@ -13,13 +13,9 @@ import {
 import { useFormik } from "formik";
 import { loginFormSchema } from "../../Schemas/Index";
 
-
-
-const Login = ({ onClose, onLogin }) => {
+const Login = () => {
   const onSubmit = (values) => {
-    onLogin(true);
-    onClose(false);
-
+  
   };
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
     useFormik({
@@ -39,14 +35,14 @@ const Login = ({ onClose, onLogin }) => {
         alignItems: "center",
         justifyContent: "center",
       }}
-      bg={useColorModeValue("gray.50", "gray.800")}
+      // bg={useColorModeValue("gray.50", "gray.800")}
     >
       <Box
-        bg={useColorModeValue("white", "gray.700")}
+        // bg={useColorModeValue("white", "gray.700")}
         p={8}
         maxWidth="400px"
         borderRadius="lg"
-        boxShadow="lg"
+        // boxShadow="lg"
       >
         <Stack spacing={4}>
           <Heading fontSize="2xl" textAlign="center">
@@ -72,7 +68,10 @@ const Login = ({ onClose, onLogin }) => {
               </Text>
             )}
           </FormControl>
-          <FormControl id="password" isInvalid={touched.password && errors.password}>
+          <FormControl
+            id="password"
+            isInvalid={touched.password && errors.password}
+          >
             <FormLabel>Password</FormLabel>
             <Input
               type="text"

@@ -44,10 +44,10 @@ console.log('movieForm ', onClose())
       flexDirection="column"
       width="500px"
       height="100%"
-      bgColor="whitesmoke"
+      // bgColor="whitesmoke"
       p="20px"
-      boxShadow="xl"
-      borderRadius="md"
+      // boxShadow="xl"
+      // borderRadius="md"
       overflow-y='auto'
 
     >

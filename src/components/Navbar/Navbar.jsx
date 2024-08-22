@@ -4,9 +4,18 @@ import Logo from "./Logo";
 
 function Navbar(props) {
   return (
-    <Box display="flex" bgColor="#B0C4DE   " opacity="0.7">
+    <Box
+      display={{ base: "block", md: "flex" }} 
+      // bgColor="#B0C4DE"
+      opacity="0.7"
+      p={{ base: "4", md: "2" }} 
+    >
       <Logo />
-      <Box display='flex' justifyContent='center' width='50%'  >
+      <Box
+        display={{ base: "none", md: "flex" }} 
+        justifyContent="center"
+        width={{ base: "100%", md: "50%" }}   
+      >
         <Items />
       </Box>
     </Box>

@@ -12,7 +12,7 @@ const Signup = ({ isSignin, onClose }) => {
   };
 
   return (
-    <Box display='flex' justifyContent='center' alignItems='center'  maxW="md" mx="auto" p={6} borderWidth={1} borderRadius="md" boxShadow="lg">
+    <Box display='flex'  justifyContent='center' alignItems='center'    p={6}  borderRadius="md" >
       <form onSubmit={handleSubmit}>
         <Stack spacing={4}>
           <FormControl id="username" isRequired>

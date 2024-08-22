@@ -30,13 +30,13 @@ const SlidingBox = () => {
       borderRadius="md"
       boxShadow="lg"
     >
-      {/* <Slider {...settings}>
+      <Slider {...settings}>
         {images.map((image, index) => (
           <Box key={index}>
             <Image src={image} alt={`Event ${index + 1}`} />
           </Box>
         ))}
-      </Slider> */}
+      </Slider>
     </Box>
   );
 };

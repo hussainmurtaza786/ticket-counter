@@ -7,25 +7,16 @@ import Sport from "./Sport";
 import Login from "./Login";
 import Signup from "./Signup";
 
-function Form({ formType, showForm, onLogin,isSignin }) {
+function Form() {
   return (
-    formType && (
-      <Modal onClose={e => { showForm("") }} >
-        <Box
-        // display="flex"
-        // justifyContent="center"
-        // alignItems="center"
-        // m="8rem 0rem"
-        >
-          {formType === "Movie" && <Movie onClose={showForm} />}
-          {formType === "Flight" && <Flight onClose={showForm} />}
-          {formType === "Sports" && <Sport onClose={showForm} />}
-          {formType === "LogIn" && <Login onLogin={onLogin} onClose={showForm} />}
-          {formType === "Signup" && < Signup isSignin={isSignin} onClose={showForm} />}
-
-        </Box>
-      </Modal>
-    )
+    <Modal>
+      <Box>
+        <Movie />
+        <Flight />
+        <Login />
+        <Signup />
+      </Box>
+    </Modal>
   );
 }
 
