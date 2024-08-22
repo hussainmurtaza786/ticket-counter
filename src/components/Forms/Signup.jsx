@@ -1,18 +1,18 @@
 import React from 'react';
 import { Box, Button, FormControl, FormLabel, Input, Stack, } from '@chakra-ui/react';
 
-const Signup = ({ isSignin, onClose }) => {
+const Signup = ({ signup, onClose }) => {
 
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    isSignin(true)
-    onClose(false)
+    signup()
+    onClose()
 
   };
 
   return (
-    <Box display='flex'  justifyContent='center' alignItems='center'    p={6}  borderRadius="md" >
+    <Box display='flex' justifyContent='center' alignItems='center' p={6} borderRadius="md" >
       <form onSubmit={handleSubmit}>
         <Stack spacing={4}>
           <FormControl id="username" isRequired>

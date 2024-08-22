@@ -3,7 +3,7 @@ import { Box, Button, Flex } from "@chakra-ui/react";
 function TicketList({ showForm }) {
   return (
     <div>
-      <Flex m="15px 53px"  >
+      <Flex  >
 
         <Box m='4px 8px'>
           <ButtonStyle

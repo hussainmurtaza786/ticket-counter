@@ -4,32 +4,15 @@ import { Box, Button, Flex, Image, FormControl, FormLabel, Input, VStack, CloseB
 function Flight({ onClose }) {
 
   return (
-    <Box
-      display='flex'
-      flexDirection='column'
-      width='500px'
-      height='100%'
-      bgColor='whitesmoke'
-      p='20px'
-      boxShadow='xl'
-      borderRadius='md'
-    >
+    <Box display='flex' flexDirection='column' width='500px' height='100%' bgColor='whitesmoke' p='20px' boxShadow='xl' borderRadius='md'>
       <CloseButton onClick={() => onClose(false)} fontSize='20px' color='red'>X</CloseButton>
-      <Box
-        display='flex'
-        flexDirection='column'
-        alignItems='center'
-        marginBottom='20px'
-      >
+      <Box display='flex' flexDirection='column' alignItems='center' marginBottom='20px'>
         <label style={{ margin: '15px 8px', fontSize: '30px', fontWeight: 'bold' }}>
           Flight Ticket Form
         </label>
-        <Image
-          zIndex={1}
-          src="https://i.pinimg.com/originals/b9/b8/1a/b9b81ab0e549a0ef6bbd9616e32031d5.gif"
-          alt="Airplane"
-        />
+        <Image zIndex={1} src="https://i.pinimg.com/originals/b9/b8/1a/b9b81ab0e549a0ef6bbd9616e32031d5.gif" alt="Airplane" />
       </Box>
+      
       <form >
         <VStack spacing={4} align='stretch'>
           <FormControl>

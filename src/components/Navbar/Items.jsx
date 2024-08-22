@@ -31,13 +31,13 @@ const ListStyle = ({ children }) => {
       transition="transform 0.3s ease, color 0.3s ease"
       _hover={{
         transform: "scale(1.1)",
-        color: "#386B99      ",
+        color: "#386B99",
       }}
     >
       <Link
       color='#4682B4 '
         _hover={{
-          color: "#386B99      ",
+          color: "#386B99",
         }}
       >
         {children}

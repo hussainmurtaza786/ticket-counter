@@ -1,36 +1,16 @@
 import React from 'react'
 import { Box, Button, ButtonGroup, Flex, Image, FormControl, FormLabel, Input, VStack, Radio, RadioGroup, CloseButton } from '@chakra-ui/react'
 
-function Sport({onClose}) {
+function Sport({ onClose }) {
   return (
-    <Box
-      display='flex'
-      flexDirection='column'
-      width='500px'
-      height='100%'
-      bgColor='whitesmoke'
-      p='20px'
-      boxShadow='xl'
-      borderRadius='md'
-    >
+    <Box display='flex' flexDirection='column' width='500px' height='100%' bgColor='whitesmoke' p='20px' boxShadow='xl' borderRadius='md'>
+      <CloseButton onClick={() => onClose(false)} fontSize='20px' color='red'>X</CloseButton>
 
-<CloseButton onClick={() => onClose(false)} fontSize='20px' color='red'>X</CloseButton>
-
-      <Box
-        display='flex'
-        flexDirection='column'
-        alignItems='center'
-        marginBottom='20px'
-      >
+      <Box display='flex' flexDirection='column' alignItems='center' marginBottom='20px'>
         <label style={{ margin: '15px 8px', fontSize: '30px', fontWeight: 'bold' }}>
           Sports Ticket Form
         </label>
-        <Image
-          zIndex={1}
-          
-          src="https://png.pngtree.com/thumb_back/fh260/background/20220217/pngtree-colorful-sports-theme-background-material-image_944423.jpg"
-          alt="Popcorn"
-        />
+        <Image zIndex={1} src="https://png.pngtree.com/thumb_back/fh260/background/20220217/pngtree-colorful-sports-theme-background-material-image_944423.jpg" alt="Popcorn" />
       </Box>
       <form>
         <FormControl >
@@ -78,11 +58,6 @@ function Sport({onClose}) {
               </Flex>
             </RadioGroup>
           </FormControl>
-
-
-
-
-
 
           <Button spacing={4} mt={4} colorScheme='teal' type='submit'>Submit</Button>
 

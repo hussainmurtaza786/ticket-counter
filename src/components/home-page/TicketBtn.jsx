@@ -1,6 +1,7 @@
+import { Button } from '@chakra-ui/react'
 import React from 'react'
 
-function Button({showTicket}) {
+function TicketButton({showTicket}) {
   return (
     <div>
        <Button
@@ -36,4 +37,4 @@ function Button({showTicket}) {
   )
 }
 
-export default Button
+export default TicketButton
