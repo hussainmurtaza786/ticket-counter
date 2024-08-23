@@ -2,13 +2,28 @@ import React from "react";
 import { Box, Button, FormControl, FormLabel, Input, Stack, Heading, Text, useColorModeValue, } from "@chakra-ui/react";
 import { useFormik } from "formik";
 import { loginFormSchema } from "../../Schemas/Index";
+import { useDispatch, useSelector } from "react-redux";
+import { signInThunk } from "../../store/authSlice";
 
-const Login = ({ login, onClose }) => {
-  const onSubmit = (values) => {
-    login()
-    onClose()
+const Login = ({ onClose }) => {
+  const dispatch = useDispatch()
+  const error = useSelector(state => state.auth.error)
+  // console.log("error ==>", error)
+  const isAuthenticated = useSelector(state => state.auth.isAuthenticated)
+  const onSubmit = async (values) => {
+    try {
+      await dispatch(signInThunk(values)).unwrap(); 
+      if (isAuthenticated) {
+        onClose();
+      } else {
+        alert("Authentication failed"); 
+      }
+    } catch (error) {
+      alert(error.message || "An error occurred during login"); 
+    }
+    console.log('Values ==>', values);
   };
-
+  
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
     useFormik({
       initialValues: {
@@ -39,7 +54,7 @@ const Login = ({ login, onClose }) => {
 
           <FormControl id="password" isInvalid={touched.password && errors.password}>
             <FormLabel>Password</FormLabel>
-            <Input type="text" name="password" placeholder="Enter Password" value={values.password} onChange={handleChange} onBlur={handleBlur}
+            <Input type="password" name="password" placeholder="Enter Password" value={values.password} onChange={handleChange} onBlur={handleBlur}
             />
             {touched.password && errors.password && (
               <Text color="red.500" fontSize="sm">
@@ -47,7 +62,7 @@ const Login = ({ login, onClose }) => {
               </Text>
             )}
           </FormControl>
-          
+
           <Button colorScheme="teal" variant="solid" size="lg" mt={4} type="submit">
             Log In
           </Button>

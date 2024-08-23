@@ -1,13 +1,15 @@
 import { Box, Button, ButtonGroup, Icon } from "@chakra-ui/react";
 import { FaSignInAlt, FaSignOutAlt } from "react-icons/fa";
 import React from "react";
+import { useSelector } from "react-redux";
 
-function Auth({ onLogout, showForm, isLogged }) {
+function Auth({ onLogout, showForm, }) {
+  const isAuthenticated = useSelector(state => state.auth.isAuthenticated)
   return (
     <Box>
       <ButtonGroup m={3} spacing={4}>
 
-        {!isLogged && <Button
+        {!isAuthenticated && <Button
           onClick={() => showForm("Login")}
           leftIcon={<Icon as={FaSignInAlt} />}
           bgGradient="linear(to-r, teal.500, green.500)"
@@ -35,7 +37,7 @@ function Auth({ onLogout, showForm, isLogged }) {
 
 
 
-        {!isLogged && <Button
+        {!isAuthenticated && <Button
           onClick={() => showForm("Signup")}
           leftIcon={<Icon as={FaSignInAlt} />}
           bgGradient="linear(to-r, #007bff, #0056b3)"
@@ -65,7 +67,7 @@ function Auth({ onLogout, showForm, isLogged }) {
 
 
 
-        {isLogged && <Button
+        {isAuthenticated && <Button
           onClick={onLogout}
           leftIcon={<Icon as={FaSignOutAlt} />}
           bgGradient="linear(to-r, red.500, orange.500)"

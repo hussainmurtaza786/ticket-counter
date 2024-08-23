@@ -7,7 +7,7 @@ import Sport from "./Sport";
 import Login from "./Login";
 import Signup from "./Signup";
 
-function Form({ onClose, formType, auth }) {
+function Form({ onClose, formType }) {
 
   return (
     <Modal onClose={onClose} >
@@ -15,8 +15,8 @@ function Form({ onClose, formType, auth }) {
         {formType === 'Movie' && <Movie />}
         {formType === 'Flight' && <Flight />}
         {formType === 'Sports' && <Sport />}
-        {formType === 'Login' && <Login onClose={onClose} login={auth} />}
-        {formType === 'Signup' && <Signup onClose={onClose} signup={auth} />}
+        {formType === 'Login' && <Login onClose={onClose}  />}
+        {formType === 'Signup' && <Signup onClose={onClose}  />}
       </Box>
     </Modal>
   );
