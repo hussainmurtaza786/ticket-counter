@@ -1,12 +1,12 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { movieData } from "../services";
+import { addMovieTicket } from "../services";
 
 
 
 const moviesThunk = createAsyncThunk(
     'movie-Data',
     async ({ firstName, lastName, movieName, email, time, date }, thunkAPI) => {
-        const movie = await movieData({ firstName, lastName, movieName, email, time, date });
+        const movie = await addMovieTicket({ firstName, lastName, movieName, email, time, date });
         // console.log("singup thunk user ==>", user)
         return movie;
     }
