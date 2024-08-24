@@ -6,7 +6,7 @@ import { moviesThunk } from '../store/movieSlice';
 
 function FetchData() {
     const dispatch = useDispatch();
-    const { data, isLoading, error } = useSelector(state => state.movie);
+    const { data, isLoading } = useSelector(state => state.movie);
 
     useEffect(() => {
         dispatch(moviesThunk());
@@ -16,10 +16,7 @@ function FetchData() {
         return <Text>Loading...</Text>;
     }
 
-    if (error) {
-        // return <Text>Error: {error}</Text>;
-    }
-
+   
     return (
         <Flex justifyContent='center' alignItems='center'>
             {data && data.map((movie, index) => (
