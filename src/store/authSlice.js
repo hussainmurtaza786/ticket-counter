@@ -29,7 +29,7 @@ const signInThunk = createAsyncThunk(
             const user = await signIn({ email, password });
             return user;
         } catch (error) {
-            return thunkAPI.rejectWithValue(error.message); // Ensure errors are returned correctly
+            return thunkAPI.rejectWithValue(error.message);
         }
     }
 );
@@ -82,8 +82,7 @@ const Slice = createSlice({
         builder.addCase(signInThunk.rejected, (state, { payload, error }) => {
             state.isAuthenticating = false;
             state.isAuthenticated = false;
-            state.error = error;
-            console.log("error-Rejected", error)
+            state.error = payload;
             state.user = null;
         })
 

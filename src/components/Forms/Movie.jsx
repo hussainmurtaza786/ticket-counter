@@ -4,12 +4,22 @@ import {
 import { useFormik } from "formik";
 import React from "react";
 import { movieFormSchema } from "../../Schemas/Index";
+import { useDispatch } from "react-redux";
+import { moviesThunk } from "../../store/movieSlice";
+
 
 function Movie({ onClose }) {
 
-  const onSubmit = (values) => {
-    onClose()
-    console.log('movieForm ', onClose())
+  const dispatch = useDispatch()
+  const onSubmit = async (values) => {
+    try {
+      await dispatch(moviesThunk(values));
+      onClose();
+
+    } catch (error) {
+      alert(error);
+    }
+
   };
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
     useFormik({

@@ -13,7 +13,6 @@ function Home() {
   const [showTicket, setShowTicket] = useState(false)
 
   const isAuthenticated = useSelector(state => state.auth.isAuthenticated)
-  // console.log("isAuthenticated ==>", isAuthenticated)
 
   const dispatch = useDispatch()
 
@@ -31,7 +30,7 @@ function Home() {
         <ImageSlider />
       </Box>
 
-      <Box position='absolute' bottom='20rem' left='4rem'>
+      <Box position='absolute' top='30rem' left='4rem'>
         {isAuthenticated && showTicket && <TicketList showForm={showForm} />}
       </Box>
 

@@ -1,24 +1,35 @@
-import React from 'react';
-import { Box, Button, FormControl, FormLabel, Input, Stack, Text, } from '@chakra-ui/react';
+import React, { useState } from 'react';
+import { Box, Button, FormControl, FormLabel, IconButton, Input, InputGroup, InputRightElement, Spinner, Stack, Text, } from '@chakra-ui/react';
 import { useDispatch, useSelector } from 'react-redux';
 import { signUpThunk } from '../../store/authSlice';
 import { useFormik } from 'formik';
 import { signupFormSchema } from '../../Schemas/Index'
+import { IoEyeSharp } from 'react-icons/io5';
+import { FaRegEyeSlash } from 'react-icons/fa';
 
-const Signup = ({ signup, onClose }) => {
+const Signup = ({ onClose }) => {
+
+  const isAuthenticating = useSelector(state => state.auth.isAuthenticating)
+
+
+
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+  const togglePasswordVisibility = () => {
+    setIsPasswordVisible(!isPasswordVisible);
+  };
 
   const dispatch = useDispatch()
 
+  const onSubmit = async (values) => {
+    try {
+      await dispatch(signUpThunk(values)).unwrap();
+      onClose();
+    } catch (error) {
 
-
-  const onSubmit = (values) => {
-    dispatch(signUpThunk(values));
-    signup = true;
-    onClose();
-    // console.error("Signup Error:", error.message);
-
-
+      alert(error.message);
+    }
   };
+
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
     useFormik({
       initialValues: {
@@ -38,6 +49,7 @@ const Signup = ({ signup, onClose }) => {
       <form onSubmit={handleSubmit}>
 
         <Stack spacing={4}>
+          {isAuthenticating && <Spinner/>}
 
           <FormControl id="username" isInvalid={touched.username && errors.username}  >
             <FormLabel>Username</FormLabel>
@@ -79,11 +91,29 @@ const Signup = ({ signup, onClose }) => {
             )}
           </FormControl>
 
-          <FormControl id="password" isInvalid={touched.password && errors.password} >
+          <FormControl id="password" isInvalid={touched.password && errors.password}>
             <FormLabel>Password</FormLabel>
-            <Input type="password" placeholder="Enter your password" value={values.password} onChange={handleChange} onBlur={handleBlur} />
+            <InputGroup>
+              <Input
+                name="password"
+                placeholder="Enter Password"
+                value={values.password}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                type={isPasswordVisible ? 'text' : 'password'}
+              />
+              <InputRightElement>
+                <IconButton
+                  aria-label={isPasswordVisible ? "Hide password" : "Show password"}
+                  icon={isPasswordVisible ? <IoEyeSharp /> : <FaRegEyeSlash />}
+                  onClick={togglePasswordVisibility}
+                  variant="ghost"
+                  size="sm"
+                />
+              </InputRightElement>
+            </InputGroup>
             {touched.password && errors.password && (
-              <Text color="red.500" fontSize="sm">
+              <Text color="red.500" fontSize="sm" mt={1}>
                 {errors.password}
               </Text>
             )}

@@ -12,7 +12,7 @@ function Form({ onClose, formType }) {
   return (
     <Modal onClose={onClose} >
       <Box>
-        {formType === 'Movie' && <Movie />}
+        {formType === 'Movie' && <Movie onClose={onClose} />}
         {formType === 'Flight' && <Flight />}
         {formType === 'Sports' && <Sport />}
         {formType === 'Login' && <Login onClose={onClose}  />}

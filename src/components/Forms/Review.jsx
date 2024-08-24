@@ -14,7 +14,7 @@ function Review({ email, rating, text, handleRatingChange, handleSubmit, handleI
                     <FormLabel>Review</FormLabel>
                     <Textarea name="text" value={text} onChange={handleInputChange} />
                 </FormControl>
-                <FormControl mb="1rem">
+                <FormControl mb="1rem"> 
                     <FormLabel>Rating</FormLabel>
                     <Flex>
                         {Array(5).fill("").map((_, i) => (
