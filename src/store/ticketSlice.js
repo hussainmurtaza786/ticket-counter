@@ -7,6 +7,7 @@ const loadTicketsThunk = createAsyncThunk(
     async (userId, thunkAPI) => {
         if (!userId) throw Error("UserId not provided");
         const movies = await getMovieTicketsByUserId({ userId });
+        // console.log("movies ==>", movies)
         // const flights = await getFlightTickets({ userId });
         return {
             movies,
@@ -78,4 +79,4 @@ const slice = createSlice({
 })
 
 export default slice.reducer;
-export { loadTicketsThunk,addMovieTicketThunk }
+export { loadTicketsThunk, addMovieTicketThunk }

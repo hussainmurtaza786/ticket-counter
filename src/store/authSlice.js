@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { signUp, signIn } from '../services';
+import { loadTicketsThunk } from './ticketSlice';
 
 const signUpThunk = createAsyncThunk(
     'auth-signUp',
@@ -27,6 +28,10 @@ const signInThunk = createAsyncThunk(
     async ({ email, password }, thunkAPI) => {
         try {
             const user = await signIn({ email, password });
+
+            /* Any action can be called here if login is successfull */
+            thunkAPI.dispatch(loadTicketsThunk(user.id));
+
             return user;
         } catch (error) {
             return thunkAPI.rejectWithValue(error.message);

@@ -1,33 +1,36 @@
 import {
-  Box,
-  Button,
-  Flex,
-  Image,
-  FormControl,
-  FormLabel,
-  Input,
-  VStack,
-  CloseButton,
-  Text,
+  Box, Button, VStack, Image, FormControl, FormLabel, Input, CloseButton, Text, Select,
 } from "@chakra-ui/react";
 import { useFormik } from "formik";
 import React from "react";
 import { movieFormSchema } from "../../Schemas/Index";
-import { useDispatch } from "react-redux";
-import { moviesThunk } from "../../store/movieSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { addMovieTicketThunk } from "../../store/ticketSlice";
 
 function Movie({ onClose }) {
   const dispatch = useDispatch();
+  const userId = useSelector(state => state.auth.user.id);
+
+
   const onSubmit = async (values) => {
+    console.log("Submitting form with values:", values);
     try {
-      // await dispatch(moviesThunk(values));
-      console.log("Values==>", values);
+      const unixTimestamp = new Date(values.timestamp).getTime() / 1000;
+      const data = {
+        ...values,
+        timestamp: unixTimestamp,
+        userId:userId
+      };
+
+      await dispatch(addMovieTicketThunk(data));
       onClose();
     } catch (error) {
-      alert(error);
+      // console.error("Error submitting form:", error);
+      alert(error.message);
     }
   };
-  const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
+
+  const { values, errors, touched, isValid, isSubmitting, handleBlur, handleChange, handleSubmit } =
     useFormik({
       initialValues: {
         name: "",
@@ -35,11 +38,16 @@ function Movie({ onClose }) {
         price: "",
         seat: "",
         genre: "",
-        userId: "",
+        // userId: userId,
       },
       validationSchema: movieFormSchema,
       onSubmit,
     });
+
+
+  // console.log("errors ==>", errors)
+  // console.log("isValid ==>", isValid)
+
 
   return (
     <Box
@@ -48,7 +56,7 @@ function Movie({ onClose }) {
       width="500px"
       height="100%"
       p="20px"
-      overflow-y="auto"
+      overflowY="auto"
     >
       <CloseButton onClick={() => onClose(false)} fontSize="20px" color="red">
         X
@@ -91,9 +99,33 @@ function Movie({ onClose }) {
             )}
           </FormControl>
 
+          <FormControl isInvalid={touched.genre && errors.genre}>
+            <FormLabel>Movie Genre</FormLabel>
+            <Select
+              name="genre"
+              value={values.genre}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              placeholder="Select genre"
+            >
+              <option value="Funny">Funny</option>
+              <option value="Action">Action</option>
+              <option value="Drama">Drama</option>
+              <option value="Horror">Horror</option>
+              <option value="Sci-Fi">Sci-Fi</option>
+              <option value="Romance">Romance</option>
+              <option value="Adventure">Adventure</option>
+            </Select>
+            {touched.genre && errors.genre && (
+              <Text color="red.500" fontSize="sm">
+                {errors.genre}
+              </Text>
+            )}
+          </FormControl>
+
           <FormControl isInvalid={touched.price && errors.price}>
             <FormLabel>Price</FormLabel>
-            <Input
+            <Input required
               value={values.price}
               onChange={handleChange}
               onBlur={handleBlur}
@@ -106,6 +138,7 @@ function Movie({ onClose }) {
               </Text>
             )}
           </FormControl>
+
           <FormControl isInvalid={touched.seat && errors.seat}>
             <FormLabel>Seat</FormLabel>
             <Input
@@ -122,44 +155,23 @@ function Movie({ onClose }) {
             )}
           </FormControl>
 
-       
-
-          <Flex justifyContent="space-between">
-            {/* <FormControl
-              isInvalid={touched.genre && errors.genre}
-              width="48%"
-            >
-              <FormLabel>Movie Genre</FormLabel>
-              <Input
-                name="genre"
-                value={values.genre}
-                onChange={handleChange}
-                onBlur={handleBlur}
-                type="text"
-              />
-                {touched.genre && errors.genre && (
+          <FormControl isInvalid={touched.timestamp && errors.timestamp}>
+            <FormLabel>Time Stamp</FormLabel>
+            <Input
+              value={values.timestamp}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              name="timestamp"
+              type="datetime-local"
+            />
+            {touched.timestamp && errors.timestamp && (
               <Text color="red.500" fontSize="sm">
-                {errors.genre}
+                {errors.timestamp}
               </Text>
             )}
-            </FormControl> */}
+          </FormControl>
 
-            <FormControl
-              isInvalid={touched.lastName && errors.lastName}
-              width="48%"
-            >
-              <FormLabel>Last Name</FormLabel>
-              <Input
-                name="lastName"
-                value={values.lastName}
-                onChange={handleChange}
-                onBlur={handleBlur}
-                type="text"
-              />
-            </FormControl>
-          </Flex>
-
-          <Button spacing={4} mt={4} colorScheme="teal" type="submit">
+          <Button spacing={4} mt={4} colorScheme="teal" type="submit" aria-disabled={!isValid || isSubmitting} disabled={!isValid || isSubmitting}>
             Submit
           </Button>
         </VStack>

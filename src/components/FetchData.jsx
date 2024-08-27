@@ -1,27 +1,20 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Box, Text, VStack, HStack, Flex } from '@chakra-ui/react';
-import { useDispatch, useSelector } from 'react-redux';
-import { moviesThunk } from '../store/movieSlice';
-
+import { useSelector } from 'react-redux';
 
 function FetchData() {
-    const dispatch = useDispatch();
-    const { data, isLoading } = useSelector(state => state.movie);
+    const data = useSelector(state => state.ticket.movies);
 
-    useEffect(() => {
-        dispatch(moviesThunk());
-    }, [dispatch]);
+    const formatDate = (isoString) => {
+        const date = new Date(isoString);
+        return `${date.toLocaleDateString()} ${date.toLocaleTimeString()}`;
+    };
 
-    if (isLoading) {
-        return <Text>Loading...</Text>;
-    }
-
-   
     return (
         <Flex justifyContent='center' alignItems='center'>
             {data && data.map((movie, index) => (
                 <Box
-                    key={index}
+                    key={movie.id}
                     width='400px'
                     m='16px 8px'
                     border='2px dashed black'
@@ -34,24 +27,24 @@ function FetchData() {
                 >
                     <VStack align="start" spacing={3}>
                         <HStack>
-                            <Text fontWeight="bold">Name:</Text>
-                            <Text>{movie.firstName} {movie.lastName}</Text>
+                            <Text fontWeight="bold">Movie Name:</Text>
+                            <Text>{movie.name}</Text>
                         </HStack>
                         <HStack>
-                            <Text fontWeight="bold">Movie:</Text>
-                            <Text>{movie.movieName}</Text>
+                            <Text fontWeight="bold">Movie Genre:</Text>
+                            <Text>{movie.genre}</Text>
                         </HStack>
                         <HStack>
-                            <Text fontWeight="bold">Email:</Text>
-                            <Text>{movie.email}</Text>
+                            <Text fontWeight="bold">Price:</Text>
+                            <Text>{movie.price}</Text>
                         </HStack>
                         <HStack>
-                            <Text fontWeight="bold">Time:</Text>
-                            <Text>{movie.time}</Text>
+                            <Text fontWeight="bold">Date-Time:</Text>
+                            <Text>{formatDate(movie.timestamp)}</Text>
                         </HStack>
                         <HStack>
-                            <Text fontWeight="bold">Date:</Text>
-                            <Text>{movie.date}</Text>
+                            <Text fontWeight="bold">Seat:</Text>
+                            <Text>{movie.seat}</Text>
                         </HStack>
                     </VStack>
                 </Box>
