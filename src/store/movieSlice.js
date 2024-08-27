@@ -5,8 +5,8 @@ import { addMovieTicket } from "../services";
 
 const moviesThunk = createAsyncThunk(
     'movie-Data',
-    async ({ firstName, lastName, movieName, email, time, date }, thunkAPI) => {
-        const movie = await addMovieTicket({ firstName, lastName, movieName, email, time, date });
+    async ({ name, timestamp, price, seat, genre, userId }, thunkAPI) => {
+        const movie = await addMovieTicket({ name, timestamp, price, seat, genre, userId });
         // console.log("singup thunk user ==>", user)
         return movie;
     }
