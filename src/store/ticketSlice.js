@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { addMovieTicket, getMovieTicketsByUserId } from "../services";
+import { addMovieTicket, getTransportationTicketsByUserId,getMovieTicketsByUserId, addTransportTicket } from "../services";
 
 /* Thunks */
 const loadTicketsThunk = createAsyncThunk(
@@ -8,10 +8,10 @@ const loadTicketsThunk = createAsyncThunk(
         if (!userId) throw Error("UserId not provided");
         const movies = await getMovieTicketsByUserId({ userId });
         // console.log("movies ==>", movies)
-        // const flights = await getFlightTickets({ userId });
+        const transport = await getTransportationTicketsByUserId({ userId });
         return {
             movies,
-            // flights,
+            transport,
         }
     }
 )
@@ -19,8 +19,18 @@ const addMovieTicketThunk = createAsyncThunk(
     "addMovieTicket",
     async ({ name, price, seat, timestamp, userId, genre }, thunkAPI) => {
         const movieTicket = await addMovieTicket({ name, price, seat, timestamp, userId, genre });
-        // const flights = await getFlightTickets({ userId });
+        // const transportTicket = await getFlightTickets({ name, email, phone, passengers, depAirport, desAirport, depDate, depTime, returnDate, returnTime, userId });
         return movieTicket;
+        // return transportTicket
+    }
+)
+
+const addTransportTicketThunk =createAsyncThunk(
+    "addTransportTicket",
+    async({ name, email, phone, passengers, depAirport, desAirport, depDate, depTime, returnDate, returnTime, userId },thunkAPI)=>{
+        const transportTicket = await addTransportTicket({ name, email, phone, passengers, depAirport, desAirport, depDate, depTime, returnDate, returnTime, userId });
+        return transportTicket
+    
     }
 )
 
@@ -29,7 +39,7 @@ const slice = createSlice({
     name: 'ticket',
     initialState: {
         movies: [],
-        flights: [],
+        transports: [],
         sports: [],
         fetchingState: {
             loadTickets: false,
@@ -72,6 +82,21 @@ const slice = createSlice({
         })
 
 
+    
+        builder.addCase(addTransportTicketThunk.pending, (state, { payload }) => {
+            state.fetchingState.addMovieTicket = true;
+        })
+        builder.addCase(addTransportTicketThunk.fulfilled, (state, { payload }) => {
+            state.fetchingState.addMovieTicket = false;
+            state.error.addMovieTicket = null;
+            state.movies.push(payload);
+        })
+        builder.addCase(addTransportTicketThunk.rejected, (state, { payload, error }) => {
+            state.fetchingState.addMovieTicket = false;
+            state.error.addMovieTicket = error;
+        })
+
+
 
 
 
@@ -79,4 +104,4 @@ const slice = createSlice({
 })
 
 export default slice.reducer;
-export { loadTicketsThunk, addMovieTicketThunk }
+export { loadTicketsThunk, addMovieTicketThunk ,addTransportTicketThunk }

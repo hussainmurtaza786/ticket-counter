@@ -21,6 +21,51 @@ export const signupFormSchema = yup.object().shape({
     password: yup.string().required(" Password is Required"),
     age: yup.number().required("Age is Required"),
     username: yup.string().required("User Name is Required"),
-    phone: yup.number().required("Phone Number is Required")
+    phone: yup.number().required("Phone Number is Required"),
+
+})
+
+export const planeSchema = yup.object().shape({
+    name: yup.string().required("  Name is Required"),
+    email: yup.string().email("Please enter a valid email").required("Email is Required"),
+    phone: yup.number().required("Phone Number is Required"),
+    passengers: yup.string().required("Number of Passengers is Required "),
+    depAirport: yup.string().required("Departure Airport is Required"),
+    desAirport: yup.string().required("Destination Airport is Required"),
+    depDate: yup.date().required('Departure Date '),
+    depTime: yup.string().matches(/^([01]\d|2[0-3]):([0-5]\d)$/, "Please enter a valid time in HH:mm format")
+    .required('Departure Time is Required'),
+    returnDate:yup.date().required('Return Date is Required'),
+    returnTime:yup.string().matches(/^([01]\d|2[0-3]):([0-5]\d)$/, "Please enter a valid time in HH:mm format")
+    .required('Retun Time is Required'),
+
+})
+
+export const trainSchema = yup.object().shape({
+    name: yup.string().required("  Name is Required"),
+    email: yup.string().email("Please enter a valid email").required("Email is Required"),
+    phone: yup.number().required("Phone Number is Required"),
+    passengers: yup.string().required("Number of Passengers"),
+    depStation: yup.string().required("Departure Airport is Required"),
+    desStation: yup.string().required("Destination Airport is Required"),
+    depDate: yup.date().required('Departure Date '),
+    depTime: yup.string().matches(/^([01]\d|2[0-3]):([0-5]\d)$/, "Please enter a valid time in HH:mm format")
+    .required('Departure Time is Required'),
+    returnDate:yup.date().required('Departure Date '),
+    returnTime:yup.string().matches(/^([01]\d|2[0-3]):([0-5]\d)$/, "Please enter a valid time in HH:mm format")
+    .required('Retun Time is Required'),
+
+})
+
+export const busSchema = yup.object().shape({
+    name: yup.string().required("  Name is Required"),
+    email: yup.string().email("Please enter a valid email").required("Email is Required"),
+    phone: yup.number().required("Phone Number is Required"),
+    passengers: yup.string().required("Number of Passengers"),
+    depLocation: yup.string().required("Departure Airport is Required"),
+    desLocation: yup.string().required("Destination Airport is Required"),
+    depDate: yup.date().required('Departure Date '),
+    depTime: yup.string().matches(/^([01]\d|2[0-3]):([0-5]\d)$/, "Please enter a valid time in HH:mm format")
+    .required('Departure Time is Required'),
 
 })

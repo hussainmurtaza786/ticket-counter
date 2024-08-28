@@ -38,16 +38,13 @@ function Movie({ onClose }) {
         price: "",
         seat: "",
         genre: "",
-        // userId: userId,
       },
       validationSchema: movieFormSchema,
       onSubmit,
     });
 
 
-  // console.log("errors ==>", errors)
-  // console.log("isValid ==>", isValid)
-
+  
 
   return (
     <Box
@@ -85,7 +82,7 @@ function Movie({ onClose }) {
         <VStack spacing={4} align="stretch">
           <FormControl isInvalid={touched.name && errors.name}>
             <FormLabel>Movie Name</FormLabel>
-            <Input
+            <Input required
               name="name"
               value={values.name}
               onChange={handleChange}
@@ -101,7 +98,7 @@ function Movie({ onClose }) {
 
           <FormControl isInvalid={touched.genre && errors.genre}>
             <FormLabel>Movie Genre</FormLabel>
-            <Select
+            <Select required
               name="genre"
               value={values.genre}
               onChange={handleChange}
@@ -141,7 +138,7 @@ function Movie({ onClose }) {
 
           <FormControl isInvalid={touched.seat && errors.seat}>
             <FormLabel>Seat</FormLabel>
-            <Input
+            <Input required
               value={values.seat}
               onChange={handleChange}
               onBlur={handleBlur}
@@ -157,7 +154,7 @@ function Movie({ onClose }) {
 
           <FormControl isInvalid={touched.timestamp && errors.timestamp}>
             <FormLabel>Time Stamp</FormLabel>
-            <Input
+            <Input required
               value={values.timestamp}
               onChange={handleChange}
               onBlur={handleBlur}

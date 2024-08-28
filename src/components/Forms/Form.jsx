@@ -2,21 +2,20 @@ import React from "react";
 import Movie from "./Movie";
 import { Box } from "@chakra-ui/react";
 import Modal from "../UI/Modal";
-import Flight from "./Flight";
+import Transportation from "./Transportation";
 import Sport from "./Sport";
 import Login from "./Login";
 import Signup from "./Signup";
 
 function Form({ onClose, formType }) {
-
   return (
-    <Modal onClose={onClose} >
+    <Modal onClose={onClose}>
       <Box>
-        {formType === 'Movie' && <Movie onClose={onClose} />}
-        {formType === 'Flight' && <Flight />}
-        {formType === 'Sports' && <Sport />}
-        {formType === 'Login' && <Login onClose={onClose}  />}
-        {formType === 'Signup' && <Signup onClose={onClose}  />}
+        {formType === "Movie" && <Movie onClose={onClose} />}
+        {formType === "Transportation" && <Transportation onClose={onClose} />}
+        {formType === "Sports" && <Sport />}
+        {formType === "Login" && <Login onClose={onClose} />}
+        {formType === "Signup" && <Signup onClose={onClose} />}
       </Box>
     </Modal>
   );

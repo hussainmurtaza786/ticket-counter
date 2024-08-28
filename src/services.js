@@ -50,27 +50,8 @@ export async function signIn({ email, password }) {
     return user
 
 }
-// async function getUsers() {
-//     const usersRes = await fetch(`${DATABASE_CONNECTION_STRING}/users.json`,)
-//     if (!usersRes.ok) { throw new Error('Something went wrong') }
-//     return await usersRes.json() || [];
-// }
 
-
-/////////////////////// Movie ticket services ///////////////////
-// export async function getMovieTicketsByAge({ age }) {
-//     const users = await getUsers();
-//     const userByAge = users.filter(u => u.age === age);
-
-//     const moviesRes = await fetch(`${DATABASE_CONNECTION_STRING}/movies.json`,)
-//     if (!moviesRes.ok) { throw new Error('Something went wrong') }
-//     const movies = await moviesRes.json() || [];
-
-//     const userIds = userByAge.map(u => u.id);
-//     return movies.filter(m => userIds.includes(m.userId))
-
-// }
-// getMovieTicketsByAge({age: 15})
+//////////////////////////// Movie Ticket /////////////////////////
 
 export async function getMovieTicketsByUserId({ userId }) {
     const moviesRes = await fetch(`${DATABASE_CONNECTION_STRING}/movies.json`,)
@@ -102,5 +83,35 @@ export async function addMovieTicket({ name, timestamp, price, seat, genre, user
     return newMovieTicket;
 }
 
+////////////////////////// Transportation Ticket ////////////////////////
 
 
+export async function getTransportationTicketsByUserId({ userId }) {
+    const transportRes = await fetch(`${DATABASE_CONNECTION_STRING}/transport.json`,)
+    if (!transportRes.ok) { throw new Error('Something went wrong') }
+    const transport = await transportRes.json() || [];
+    return transport.filter(m => m.userId === userId);
+}
+
+
+export async function addTransportTicket({ name, email, phone, passengers, depAirport, desAirport, depDate, depTime, returnDate, returnTime, userId }) {
+    const transportRes = await fetch(`${DATABASE_CONNECTION_STRING}/transport.json`,)
+    if (!transportRes.ok) { throw new Error('Something went wrong') }
+    const transport = await transportRes.json() || [];
+
+    /* adding new transport ticket here */
+    const newTransportTicket = { id: nanoid(), name, email, phone, passengers, depAirport, desAirport, depDate, depTime, returnDate, returnTime, userId };
+    transport.push(newTransportTicket);
+
+    const addNewTransportRes = await fetch(`${DATABASE_CONNECTION_STRING}/transport.json`, {
+        method: 'PUT',
+        body: JSON.stringify(transport)
+    })
+
+    if (!addNewTransportRes.ok) {
+        throw new Error('Something went wrongs.')
+    }
+    const updatedTransportList = await addNewTransportRes.json();
+    console.log("transport-response", updatedTransportList);
+    return newTransportTicket;
+}

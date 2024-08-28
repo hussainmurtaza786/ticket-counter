@@ -1,0 +1,21 @@
+// async function getUsers() {
+//     const usersRes = await fetch(`${DATABASE_CONNECTION_STRING}/users.json`,)
+//     if (!usersRes.ok) { throw new Error('Something went wrong') }
+//     return await usersRes.json() || [];
+// }
+
+
+/////////////////////// Movie ticket services ///////////////////
+// export async function getMovieTicketsByAge({ age }) {
+//     const users = await getUsers();
+//     const userByAge = users.filter(u => u.age === age);
+
+//     const moviesRes = await fetch(`${DATABASE_CONNECTION_STRING}/movies.json`,)
+//     if (!moviesRes.ok) { throw new Error('Something went wrong') }
+//     const movies = await moviesRes.json() || [];
+
+//     const userIds = userByAge.map(u => u.id);
+//     return movies.filter(m => userIds.includes(m.userId))
+
+// }
+// getMovieTicketsByAge({age: 15})
