@@ -1,51 +1,35 @@
 import React from "react";
-import {
-  Button,
-  FormControl,
-  FormLabel,
-  Input,
-  Text,
-  VStack,
-} from "@chakra-ui/react";
+import { Button, FormControl, FormLabel, Input, Text, VStack, } from "@chakra-ui/react";
 import { useFormik } from "formik";
 import { planeSchema } from "../../Schemas/Index";
 import { addTransportTicketThunk } from "../../store/ticketSlice";
 import { useDispatch, useSelector } from "react-redux";
 
-function Plane({ selectedTransport,onClose }) {
+function Plane({ selectedTransport, onClose }) {
   const userId = useSelector(state => state.auth.user.id);
-  const dispatch=useDispatch()
+  const dispatch = useDispatch()
 
   const onSubmit = async (values) => {
     console.log("Submitting form with values:", values);
-      try {
-        const data = {
-          ...values,
-          transport: selectedTransport,
-          userId: userId,
-        };
-  
-        await dispatch(addTransportTicketThunk(data));
-        console.log("Plane Data ==>", data);
-        onClose();
-      } catch (error) {
-        // console.error("Error submitting form:", error);
-        alert(error.message);
-      }
-    
-   
+    try {
+      const data = {
+        ...values,
+        transportType: selectedTransport,
+        userId: userId,
+      };
+
+      await dispatch(addTransportTicketThunk(data)).unwrap();
+      console.log("Plane Data ==>", data);
+      onClose();
+    } catch (error) {
+      // console.error("Error submitting form:", error);
+      alert(error.message);
+    }
+
+
   };
 
-  const {
-    values,
-    errors,
-    touched,
-    isValid,
-    isSubmitting,
-    handleBlur,
-    handleChange,
-    handleSubmit,
-  } = useFormik({
+  const { values, errors, touched, isValid, isSubmitting, handleBlur, handleChange, handleSubmit, } = useFormik({
     initialValues: {
       name: "",
       email: "",
@@ -230,9 +214,9 @@ function Plane({ selectedTransport,onClose }) {
           )}
         </FormControl>
 
-        <Button mt={4} colorScheme="teal" type="submit">
-          Submit
-        </Button>
+        <Button spacing={4} mt={4} colorScheme="teal" type="submit" aria-disabled={!isValid || isSubmitting} disabled={!isValid || isSubmitting}>
+            Submit
+          </Button>
       </VStack>
     </form>
   );

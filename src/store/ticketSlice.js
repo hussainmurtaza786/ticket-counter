@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { addMovieTicket, getTransportationTicketsByUserId,getMovieTicketsByUserId, addTransportTicket } from "../services";
+import { addMovieTicket, addSportTicket,getSportTicketsByUserId, getTransportationTicketsByUserId, getMovieTicketsByUserId, addTransportTicket } from "../services";
 
 /* Thunks */
 const loadTicketsThunk = createAsyncThunk(
@@ -8,10 +8,12 @@ const loadTicketsThunk = createAsyncThunk(
         if (!userId) throw Error("UserId not provided");
         const movies = await getMovieTicketsByUserId({ userId });
         // console.log("movies ==>", movies)
-        const transport = await getTransportationTicketsByUserId({ userId });
+        const transports = await getTransportationTicketsByUserId({ userId });
+        const sports=await getSportTicketsByUserId({userId});
         return {
             movies,
-            transport,
+            sports,
+            transports,
         }
     }
 )
@@ -25,15 +27,23 @@ const addMovieTicketThunk = createAsyncThunk(
     }
 )
 
-const addTransportTicketThunk =createAsyncThunk(
+const addTransportTicketThunk = createAsyncThunk(
     "addTransportTicket",
-    async({ name, email, phone, passengers, depAirport, desAirport, depDate, depTime, returnDate, returnTime, userId },thunkAPI)=>{
-        const transportTicket = await addTransportTicket({ name, email, phone, passengers, depAirport, desAirport, depDate, depTime, returnDate, returnTime, userId });
+    async ({ transportType, name, email, phone, passengers, depAirport, desAirport,depStation,desStation,depLocation,desLocation, depDate, depTime, returnDate, returnTime, userId }, thunkAPI) => {
+        const transportTicket = await addTransportTicket({ transportType, name, email, phone, passengers,depStation,desStation, depAirport, desAirport,depLocation,desLocation, depDate, depTime, returnDate, returnTime, userId });
         return transportTicket
-    
+
     }
 )
 
+const addSportTicketThunk = createAsyncThunk(
+    "addSportTicket",
+    async ({  sportType, date, stadium, ticket, team, homeTeam, awayTeam, court, player1, player2, userId  }, thunkAPI) => {
+        const sportTicket = await addSportTicket({  sportType, date, stadium, ticket, team, homeTeam, awayTeam, court, player1, player2, userId  });
+        return sportTicket
+
+    }
+)
 
 const slice = createSlice({
     name: 'ticket',
@@ -41,67 +51,82 @@ const slice = createSlice({
         movies: [],
         transports: [],
         sports: [],
+
         fetchingState: {
             loadTickets: false,
             addMovieTicket: false,
+            addTransportTicket: false,
+            addSportTicket:false,
         },
         error: {
             loadTickets: null,
             addMovieTicket: null,
+            addTransportTicket: null,
+            addSportTicket:null,
+
         }
     },
     reducers: {},
     extraReducers: builder => {
 
-        builder.addCase(loadTicketsThunk.pending, (state, { payload }) => {
+        // Load tickets 
+        builder.addCase(loadTicketsThunk.pending, (state) => {
             state.fetchingState.loadTickets = true;
-        })
+        });
         builder.addCase(loadTicketsThunk.fulfilled, (state, { payload }) => {
             state.fetchingState.loadTickets = false;
             state.error.loadTickets = null;
             state.movies = payload.movies;
-
-        })
-        builder.addCase(loadTicketsThunk.rejected, (state, { payload, error }) => {
+            state.transports = payload.transports;
+            state.sports=payload.sports;
+        });
+        builder.addCase(loadTicketsThunk.rejected, (state, { error }) => {
             state.fetchingState.loadTickets = false;
-            state.error.loadTickets = error;
-        })
+            state.error.loadTickets = error.message;
+        });
 
-
-        builder.addCase(addMovieTicketThunk.pending, (state, { payload }) => {
+        //  movie ticket
+        builder.addCase(addMovieTicketThunk.pending, (state) => {
             state.fetchingState.addMovieTicket = true;
-        })
+        });
         builder.addCase(addMovieTicketThunk.fulfilled, (state, { payload }) => {
             state.fetchingState.addMovieTicket = false;
             state.error.addMovieTicket = null;
             state.movies.push(payload);
-        })
-        builder.addCase(addMovieTicketThunk.rejected, (state, { payload, error }) => {
+        });
+        builder.addCase(addMovieTicketThunk.rejected, (state, { error }) => {
             state.fetchingState.addMovieTicket = false;
-            state.error.addMovieTicket = error;
-        })
+            state.error.addMovieTicket = error.message;
+        });
 
-
-    
-        builder.addCase(addTransportTicketThunk.pending, (state, { payload }) => {
-            state.fetchingState.addMovieTicket = true;
-        })
+        //  transport ticket
+        builder.addCase(addTransportTicketThunk.pending, (state) => {
+            state.fetchingState.addTransportTicket = true;
+        });
         builder.addCase(addTransportTicketThunk.fulfilled, (state, { payload }) => {
-            state.fetchingState.addMovieTicket = false;
-            state.error.addMovieTicket = null;
-            state.movies.push(payload);
-        })
-        builder.addCase(addTransportTicketThunk.rejected, (state, { payload, error }) => {
-            state.fetchingState.addMovieTicket = false;
-            state.error.addMovieTicket = error;
-        })
-
-
-
-
-
+            state.fetchingState.addTransportTicket = false;
+            state.error.addTransportTicket = null;
+            state.transports.push(payload);
+        });
+        builder.addCase(addTransportTicketThunk.rejected, (state, { error }) => {
+            state.fetchingState.addTransportTicket = false;
+            state.error.addTransportTicket = error.message;
+        });
+        //  Sport ticket
+        builder.addCase(addSportTicketThunk.pending, (state) => {
+            state.fetchingState.addSportTicket = true;
+        });
+        builder.addCase(addSportTicketThunk.fulfilled, (state, { payload }) => {
+            state.fetchingState.addSportTicket = false;
+            state.error.addSportTicket = null;
+            state.sports.push(payload);
+        });
+        builder.addCase(addSportTicketThunk.rejected, (state, { error }) => {
+            state.fetchingState.addSportTicket = false;
+            state.error.addSportTicket = error.message;
+        });
     }
-})
+});
 
 export default slice.reducer;
-export { loadTicketsThunk, addMovieTicketThunk ,addTransportTicketThunk }
+export { loadTicketsThunk, addMovieTicketThunk, addTransportTicketThunk,addSportTicketThunk }

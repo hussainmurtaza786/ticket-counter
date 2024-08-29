@@ -10,8 +10,9 @@ import { addMovieTicketThunk } from "../../store/ticketSlice";
 function Movie({ onClose }) {
   const dispatch = useDispatch();
   const userId = useSelector(state => state.auth.user.id);
+  const loader = useSelector(state => state.ticket.fetchingState.loadTickets)
 
-
+console.log('movie loader ==>', loader)
   const onSubmit = async (values) => {
     console.log("Submitting form with values:", values);
     try {
@@ -19,7 +20,7 @@ function Movie({ onClose }) {
       const data = {
         ...values,
         timestamp: unixTimestamp,
-        userId:userId
+        userId: userId
       };
 
       await dispatch(addMovieTicketThunk(data));
@@ -28,6 +29,7 @@ function Movie({ onClose }) {
       // console.error("Error submitting form:", error);
       alert(error.message);
     }
+
   };
 
   const { values, errors, touched, isValid, isSubmitting, handleBlur, handleChange, handleSubmit } =
@@ -44,7 +46,7 @@ function Movie({ onClose }) {
     });
 
 
-  
+
 
   return (
     <Box
@@ -80,6 +82,7 @@ function Movie({ onClose }) {
       </Box>
       <form onSubmit={handleSubmit}>
         <VStack spacing={4} align="stretch">
+          {loader && <Text>loading...</Text>}
           <FormControl isInvalid={touched.name && errors.name}>
             <FormLabel>Movie Name</FormLabel>
             <Input required

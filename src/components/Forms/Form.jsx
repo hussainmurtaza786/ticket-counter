@@ -13,7 +13,7 @@ function Form({ onClose, formType }) {
       <Box>
         {formType === "Movie" && <Movie onClose={onClose} />}
         {formType === "Transportation" && <Transportation onClose={onClose} />}
-        {formType === "Sports" && <Sport />}
+        {formType === "Sports" && <Sport onClose={onClose} />}
         {formType === "Login" && <Login onClose={onClose} />}
         {formType === "Signup" && <Signup onClose={onClose} />}
       </Box>

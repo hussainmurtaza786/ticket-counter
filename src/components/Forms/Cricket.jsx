@@ -1,45 +1,125 @@
 import React from 'react'
-import { Box, Button, Flex, Image, FormControl, FormLabel, Input, VStack, Radio, RadioGroup, CloseButton, Select } from '@chakra-ui/react';
+import { Button, FormControl, FormLabel, Input, Text, VStack, } from '@chakra-ui/react';
+import { useFormik } from 'formik';
+import { cricketSchema } from '../../Schemas/Index';
+import { useDispatch, useSelector } from 'react-redux';
+import { addSportTicketThunk } from '../../store/ticketSlice';
 
-function Cricket() {
+function Cricket({ selectedSport, onClose }) {
+  const userId = useSelector(state => state.auth.user.id);
+  const loader = useSelector(state => state.ticket.fetchingState.loadTickets)
+  const dispatch = useDispatch()
+
+  const onSubmit = async (values) => {
+    console.log("Submitting form with values:", values);
+    try {
+      const data = {
+        ...values,
+        sportType: selectedSport,
+        userId: userId,
+      };
+
+      await dispatch(addSportTicketThunk(data)).unwrap();
+      console.log("Sport Data ==>", data);
+      onClose();
+    } catch (error) {
+      // console.error("Error submitting form:", error);
+      alert(error.message);
+    }
+
+
+  };
+  const { values, errors, touched, isValid, isSubmitting, handleBlur, handleChange, handleSubmit, } = useFormik({
+    initialValues: {
+      stadium: "",
+      team: "",
+      ticket: "",
+      date: "",
+
+    },
+    validationSchema: cricketSchema,
+    onSubmit,
+  });
   return (
     <div>
-     <form>
-      <VStack spacing={4} align='stretch'>
-        <FormControl>
+      <form onSubmit={handleSubmit}>
+        <VStack spacing={4} align='stretch'>
+          {loader && <Text>loading...</Text> }
+        <FormControl isInvalid={touched.date && errors.date}>
           <FormLabel>Match Date</FormLabel>
-          <Input type='date' />
+          <Input
+            type="date"
+            name="date"
+            value={values.date}
+            onChange={handleChange}
+            onBlur={handleBlur}
+          />
+          {touched.date && errors.date && (
+            <Text color="red.500" fontSize="sm">
+              {errors.date}
+            </Text>
+          )}
         </FormControl>
 
-        <FormControl>
-          <FormLabel>Stadium</FormLabel>
-          <Input type='text' />
+        <FormControl isInvalid={touched.stadium && errors.stadium}>
+          <FormLabel> Stadium </FormLabel>
+          <Input
+            required
+            name="stadium"
+            value={values.stadium}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            type="text"
+          />
+          {touched.stadium && errors.stadium && (
+            <Text color="red.500" fontSize="sm">
+              {errors.stadium}
+            </Text>
+          )}
         </FormControl>
 
-        <FormControl>
-          <FormLabel>Team Name</FormLabel>
-          <Input type='text' />
+        <FormControl isInvalid={touched.team && errors.team}>
+          <FormLabel>  Team</FormLabel>
+          <Input
+            required
+            name="team"
+            value={values.team}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            type="text"
+          />
+          {touched.team && errors.team && (
+            <Text color="red.500" fontSize="sm">
+              {errors.team}
+            </Text>
+          )}
         </FormControl>
 
-        <FormControl>
-          <FormLabel>Number of Tickets</FormLabel>
-          <Input type='number' />
+
+        <FormControl isInvalid={touched.ticket && errors.ticket}>
+          <FormLabel> Number of ticket</FormLabel>
+          <Input
+            required
+            name="ticket"
+            value={values.ticket}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            type="number"
+          />
+          {touched.ticket && errors.ticket && (
+            <Text color="red.500" fontSize="sm">
+              {errors.ticket}
+            </Text>
+          )}
         </FormControl>
 
-        <FormControl as="fieldset">
-          <FormLabel as="legend">Payment Method</FormLabel>
-          <RadioGroup defaultValue="cash">
-            <Flex justifyContent='left'>
-              <Radio m='4px 8px' value="cash">Cash</Radio>
-              <Radio value="card">Card</Radio>
-            </Flex>
-          </RadioGroup>
-        </FormControl>
 
-        <Button mt={4} colorScheme='teal' type='submit'>Submit</Button>
+        <Button spacing={4} mt={4} colorScheme="teal" type="submit" aria-disabled={!isValid || isSubmitting} disabled={!isValid || isSubmitting}>
+          Submit
+        </Button>
       </VStack>
-    </form>  
-    </div>
+    </form>
+    </div >
   )
 }
 

@@ -94,13 +94,13 @@ export async function getTransportationTicketsByUserId({ userId }) {
 }
 
 
-export async function addTransportTicket({ name, email, phone, passengers, depAirport, desAirport, depDate, depTime, returnDate, returnTime, userId }) {
+export async function addTransportTicket({ transportType, name, email, phone, passengers, depAirport, desAirport, depStation, desStation, depLocation, desLocation, depDate, depTime, returnDate, returnTime, userId }) {
     const transportRes = await fetch(`${DATABASE_CONNECTION_STRING}/transport.json`,)
     if (!transportRes.ok) { throw new Error('Something went wrong') }
     const transport = await transportRes.json() || [];
 
     /* adding new transport ticket here */
-    const newTransportTicket = { id: nanoid(), name, email, phone, passengers, depAirport, desAirport, depDate, depTime, returnDate, returnTime, userId };
+    const newTransportTicket = { id: nanoid(), transportType, name, email, phone, passengers, depAirport, desAirport, depStation, desStation, depLocation, desLocation, depDate, depTime, returnDate, returnTime, userId };
     transport.push(newTransportTicket);
 
     const addNewTransportRes = await fetch(`${DATABASE_CONNECTION_STRING}/transport.json`, {
@@ -114,4 +114,40 @@ export async function addTransportTicket({ name, email, phone, passengers, depAi
     const updatedTransportList = await addNewTransportRes.json();
     console.log("transport-response", updatedTransportList);
     return newTransportTicket;
+}
+
+
+///////////////// Sport Ticket /////////
+
+
+
+
+export async function getSportTicketsByUserId({ userId }) {
+    const sportRes = await fetch(`${DATABASE_CONNECTION_STRING}/sports.json`,)
+    if (!sportRes.ok) { throw new Error('Something went wrong') }
+    const sport = await sportRes.json() || [];
+    return sport.filter(m => m.userId === userId);
+}
+
+
+export async function addSportTicket({  sportType, date, stadium, ticket, team, homeTeam, awayTeam, court, player1, player2,  userId }) {
+    const sportRes = await fetch(`${DATABASE_CONNECTION_STRING}/sports.json`,)
+    if (!sportRes.ok) { throw new Error('Something went wrong') }
+    const sport = await sportRes.json() || [];
+
+    /* adding new transport ticket here */
+    const newSportTicket = { id: nanoid(), sportType, date, stadium, ticket, team, homeTeam, awayTeam, court, player1, player2, userId };
+    sport.push(newSportTicket);
+
+    const addNewSportRes = await fetch(`${DATABASE_CONNECTION_STRING}/sports.json`, {
+        method: 'PUT',
+        body: JSON.stringify(sport)
+    })
+
+    if (!addNewSportRes.ok) {
+        throw new Error('Something went wrongs.')
+    }
+    const updatedTransportList = await addNewSportRes.json();
+    console.log("transport-response", updatedTransportList);
+    return newSportTicket;
 }

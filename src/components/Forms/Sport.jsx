@@ -4,17 +4,17 @@ import Cricket from './Cricket'
 import FootBall from './FootBall'
 import Tennis from './Tennis'
 
-function SportForm({ onClose }) {
+function Sport({ onClose }) {
   const [selectedSport, setSelectedSport] = useState('cricket');
 
   const renderForm = () => {
     switch (selectedSport) {
       case 'cricket':
-        return <Cricket />;
+        return <Cricket  onClose={onClose} selectedSport={selectedSport} />;
       case 'football':
-        return <FootBall/>;
+        return <FootBall onClose={onClose} selectedSport={selectedSport} />;
       case 'tennis':
-        return <Tennis/>;
+        return <Tennis onClose={onClose} selectedSport={selectedSport} />;
       default:
         return null;
     }
@@ -41,4 +41,4 @@ function SportForm({ onClose }) {
 
 
 
-export default SportForm;
+export default Sport;

@@ -29,7 +29,7 @@ const Login = ({ onClose }) => {
 
   };
 
-  const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
+  const { values, isValid,isSubmitting, errors, touched, handleBlur, handleChange, handleSubmit } =
     useFormik({
       initialValues: {
         password: "",
@@ -88,8 +88,8 @@ const Login = ({ onClose }) => {
             )}
           </FormControl>
 
-          <Button colorScheme="teal" variant="solid" size="lg" mt={4} type="submit">
-            Log In
+          <Button spacing={4} mt={4} colorScheme="teal" type="submit" aria-disabled={!isValid || isSubmitting} disabled={!isValid || isSubmitting}>
+            Submit
           </Button>
         </Stack>
       </Box>

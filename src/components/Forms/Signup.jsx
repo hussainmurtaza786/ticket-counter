@@ -30,7 +30,7 @@ const Signup = ({ onClose }) => {
     }
   };
 
-  const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
+  const { values, isValid, isSubmitting, errors, touched, handleBlur, handleChange, handleSubmit } =
     useFormik({
       initialValues: {
         username: "",
@@ -49,7 +49,7 @@ const Signup = ({ onClose }) => {
       <form onSubmit={handleSubmit}>
 
         <Stack spacing={4}>
-          {isAuthenticating && <Spinner/>}
+          {isAuthenticating && <Spinner />}
 
           <FormControl id="username" isInvalid={touched.username && errors.username}  >
             <FormLabel>Username</FormLabel>
@@ -119,8 +119,8 @@ const Signup = ({ onClose }) => {
             )}
           </FormControl>
 
-          <Button type="submit" colorScheme="blue" mt={4}>
-            Sign Up
+          <Button spacing={4} mt={4} colorScheme="teal" type="submit" aria-disabled={!isValid || isSubmitting} disabled={!isValid || isSubmitting}>
+            Submit
           </Button>
         </Stack>
       </form>
