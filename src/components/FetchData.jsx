@@ -3,9 +3,19 @@ import { Box, Text, VStack, HStack, Flex, Image, Badge, Grid } from '@chakra-ui/
 import { useSelector } from 'react-redux';
 
 function FetchData() {
+    const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
     const movieData = useSelector(state => state.ticket.movies);
     const transportData = useSelector(state => state.ticket.transports);
     const sportData = useSelector(state => state.ticket.sports)
+    console.log('isAuthenticated', isAuthenticated)
+    if (!isAuthenticated) {
+        return (
+            <Text color='black' fontSize='40px' >
+                Please Sign In
+            </Text>
+        )
+    }
+
     console.log("Sport data ==>", sportData)
 
     const formatDate = (isoString) => {
@@ -15,6 +25,8 @@ function FetchData() {
 
     return (
         <>
+
+            {/* {!isAuthenticated && <Box> PLease Sign In to show your ticket</Box>} */}
             {/* Movie Data */}
             <Grid templateColumns='repeat(3, 1fr)' gap={4}>
                 {movieData && movieData.map((movie) => (
@@ -161,7 +173,7 @@ function FetchData() {
                                 'https://t3.ftcdn.net/jpg/02/86/26/28/360_F_286262835_HZL6nc8KDiZlYawKW0gInGK7yZMu4EUC.jpg'}
                             alt={sport.sportType} objectFit="cover" width="100%" height="100%" position="absolute" top="0" left="0" zIndex="0" />
 
-                        <VStack align="start" spacing={3} position="relative" top="0" left="0" right="0" bottom="0" p={4} zIndex="1" color="white" height='100%'  bg="rgba(0, 0, 0, 0.5)">
+                        <VStack align="start" spacing={3} position="relative" top="0" left="0" right="0" bottom="0" p={4} zIndex="1" color="white" height='100%' bg="rgba(0, 0, 0, 0.5)">
                             <HStack>
                                 <Text fontWeight="bold">Sport:</Text>
                                 <Badge fontSize='13px' variant='outline' colorScheme='green'>

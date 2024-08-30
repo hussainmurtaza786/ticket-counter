@@ -1,24 +1,44 @@
-import { Box } from '@chakra-ui/react'
-import React from 'react'
+import { Box, Text, HStack, Image } from '@chakra-ui/react';
+import React from 'react';
 
 function Logo() {
     return (
-        <div>
+        <HStack
+            m="20px"
+            spacing="10px"
+            alignItems="center"
+        >
             <Box
+                p="10px"
+                borderRadius="full"
+                bgGradient="linear(to-r, #6A5ACD, #00BFFF)"
+                boxSize="50px"
+                display="flex"
+                alignItems="center"
+                justifyContent="center"
+                boxShadow="0 4px 10px rgba(0, 0, 0, 0.3)"
+            >
+                <Text
+                    fontSize="24px"
+                    fontWeight="bold"
+                    color="white"
+                >
+                    T
+                </Text>
+            </Box>
 
-                fontSize="36px"
+            <Text
+                fontSize="24px"
                 fontWeight="bold"
-                m="10px 30px"
-                color="#4682B4  "
-                fontFamily={"'Open Sans', 'Raleway', sans-serif'"}
-                textShadow="2px 2px 10px rgba(0, 0, 0, 0.7)"
-                borderRadius="10px"
-                boxShadow="0 4px 8px rgba(0, 0, 0, 0.5)"
+                color="black"
+                fontFamily="'Raleway', sans-serif"
+                textTransform="uppercase"
+                letterSpacing="2px"
             >
                 Ticket Counter
-            </Box>
-        </div>
-    )
+            </Text>
+        </HStack>
+    );
 }
 
-export default Logo
+export default Logo;

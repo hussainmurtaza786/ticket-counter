@@ -6,7 +6,7 @@ function Navbar(props) {
   return (
     <Box
       display={{ base: "block", md: "flex" }} 
-      // bgColor="#B0C4DE"
+      bgColor="#B0C4DE"
       opacity="0.4"
       p={{ base: "4", md: "2" }} 
       position='sticky' 

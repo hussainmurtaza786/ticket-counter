@@ -1,5 +1,6 @@
-import { Box, Flex, Link } from "@chakra-ui/react";
+import { Box, Flex } from "@chakra-ui/react";
 import React from "react";
+import { NavLink } from "react-router-dom";
 
 function Items() {
   return (
@@ -8,10 +9,11 @@ function Items() {
 
 
         <Flex>
-          <ListStyle>Home</ListStyle>
-          <ListStyle>Ticket</ListStyle>
-          <ListStyle>Contact</ListStyle>
-          <ListStyle>About</ListStyle>
+          <ListStyle path='/' >Home</ListStyle>
+          <ListStyle path='/ticket' >Ticket</ListStyle>
+          <ListStyle path='/contact'>Contact</ListStyle>
+          <ListStyle path='/about'>About</ListStyle>
+          <ListStyle path='/review'>Review</ListStyle>
         </Flex>
       </Box>
     </div>
@@ -20,11 +22,12 @@ function Items() {
 
 export default Items;
 
-const ListStyle = ({ children }) => {
+const ListStyle = ({ children, path }) => {
   return (
     <Box
       m={4}
       fontSize='20px'
+      color='black'
       p={2}
       zIndex={1000000}
       borderRadius="md"
@@ -34,14 +37,15 @@ const ListStyle = ({ children }) => {
         color: "#386B99",
       }}
     >
-      <Link
-      color='#4682B4 '
+      <NavLink
+        to={path}
+        color='#4682B4 '
         _hover={{
           color: "#386B99",
         }}
       >
         {children}
-      </Link>
+      </NavLink>
     </Box>
   );
 };
