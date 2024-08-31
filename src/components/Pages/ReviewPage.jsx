@@ -1,8 +1,7 @@
 import { Box, Flex, Text } from "@chakra-ui/react";
 import { useState } from "react";
-import Review from "./Forms/Review";
 import { StarIcon } from "@chakra-ui/icons";
-
+import Review from '../Forms/Review'
 const ReviewPage = () => {
   const [reviews, setReviews] = useState([
     {
