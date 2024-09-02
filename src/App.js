@@ -1,4 +1,4 @@
-import { Box, ChakraProvider, Heading, Highlight, Text } from '@chakra-ui/react';
+import { Box, Button, ChakraProvider, Heading, Highlight, Text } from '@chakra-ui/react';
 import './App.css';
 import Navbar from './components/Navbar/Navbar';
 import Home from './components/home-page/Home';
@@ -43,13 +43,14 @@ function App() {
           element: isAuthenticated
             ? <Ticket />
             : <Text display='flex' fontSize='30px' fontWeight='bold' height='600px' justifyContent='center' alignItems='center'>
+
+
               <Heading lineHeight='tall' userSelect='none'>
                 <Highlight
                   query='Please Sign in to show Ticket'
                   styles={{ px: '2', py: '1', rounded: 'full', bg: 'blue.400' }}
                 >
                   Please Sign in to show Ticket
-
                 </Highlight>
               </Heading>
             </Text>
