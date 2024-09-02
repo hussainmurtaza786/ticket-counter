@@ -3,7 +3,7 @@ import React from 'react';
 function TicketButton({ isShowing, toggle }) {
   return (
     <Button
-      width={{ base: "150px", md: "180px" }}
+      width={{ base: "150px", md: "150px" }}
       height={{ base: "50px", md: "60px" }}
       bg="blue.500"
       color="white"

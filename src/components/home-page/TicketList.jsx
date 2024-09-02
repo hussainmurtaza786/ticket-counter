@@ -1,29 +1,27 @@
 import { Box, Button, Flex } from "@chakra-ui/react";
-
+import { keyframes } from "@emotion/react";
 function TicketList({ showForm }) {
+ 
   return (
     <div>
-      <Flex  >
-
-        <Box m='4px 8px'>
+      <Flex>
+        <Box m="4px 8px">
           <ButtonStyle
             onClick={() => showForm("Transportation")}
-            backgroundImage="https://png.pngtree.com/thumb_back/fh260/back_our/20190628/ourmid/pngtree-beautiful-hand-painted-blue-transportation-industry-background-image_280158.jpg"
+            backgroundImage="https://t4.ftcdn.net/jpg/02/44/80/75/360_F_244807532_NxTCRHVFEkIfCClYMaf02j45SxxLhUXv.jpg"
           >
             Transports
           </ButtonStyle>
         </Box>
-        <Box m='4px 8px' opacity={0.6}>
-
-          <ButtonStyle 
+        <Box m="4px 8px" >
+          <ButtonStyle
             backgroundImage="https://media.istockphoto.com/id/1478374885/photo/joyful-family-watching-movie-in-cinema.jpg?s=612x612&w=0&k=20&c=U0Qp-c2vCTUPG51ZOD2H7KcrByyBKow3r9wSR2QMFZU="
             onClick={() => showForm("Movie")}
           >
             Movies
           </ButtonStyle>
         </Box>
-        <Box m='4px 8px'>
-
+        <Box m="4px 8px">
           <ButtonStyle
             onClick={() => showForm("Sports")}
             backgroundImage="https://t4.ftcdn.net/jpg/02/86/76/77/360_F_286767786_boXM75PDLYIsYWzabZ3fKcM3esv50TNS.jpg"
@@ -39,34 +37,34 @@ function TicketList({ showForm }) {
 export default TicketList;
 
 const ButtonStyle = ({ onClick, backgroundImage, children }) => {
+  const gradientAnimation = keyframes`
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+`;
   return (
     <Button
-      onClick={onClick}
-      fontSize="30px"
-      marginBottom="12px"
-      fontFamily="Open Sans, Raleway, sans-serif"
-      color="#FFFFFF"
-      textShadow="2px 2px 5px rgba(0, 0, 0, 0.7)"
-      padding="10px 20px"
-      borderRadius="10px"
       backgroundImage={`url('${backgroundImage}')`}
-      backgroundSize="cover"
-      backgroundPosition="center"
-      boxShadow="0 8px 15px rgba(0, 0, 0, 0.3)"
-      transition="transform 0.3s ease, box-shadow 0.3s ease"
-      width="180px"
-      height="60px"
-      textAlign="center"
-      cursor="pointer"
+      bgGradient="linear(to-r, teal.400, blue.500, purple.600)"
+      onClick={onClick}
+      bgSize="200% 200%"
+      width='150px'
+      height='50px'
+      animation={`${gradientAnimation} 7s ease infinite`}
+      color="white"
+      fontSize="lg"
+      fontWeight="bold"
+      padding="8px 24px"
+      borderRadius="full"
+      boxShadow="0 5px 15px rgba(0, 0, 0, 0.2)"
       _hover={{
         transform: "scale(1.05)",
-        boxShadow: "0 12px 20px rgba(0, 0, 0, 0.5)",
+        boxShadow: "0 7px 20px rgba(0, 0, 0, 0.3)",
       }}
       _active={{
-        transform: "scale(1)",
-        boxShadow: "0 8px 15px rgba(0, 0, 0, 0.3)",
+        transform: "scale(0.98)",
+        boxShadow: "0 4px 10px rgba(0, 0, 0, 0.2)",
       }}
-      _focus={{ boxShadow: 'outline' }}
     >
       {children}
     </Button>

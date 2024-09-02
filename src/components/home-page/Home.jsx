@@ -1,19 +1,17 @@
-import { Box, Image } from "@chakra-ui/react";
+import { Box, Button, Image } from "@chakra-ui/react";
 import React, { useState } from "react";
-import Form from "../Forms/Form";
 import WebText from "./Text";
 import TicketList from "./TicketList";
 import background from "../../background.png";
 import TicketButton from "./TicketBtn";
 import { useSelector } from "react-redux";
 
-function Home({ showForm, setFormType, formType }) {
+function Home({ showForm }) {
   const [showTicket, setShowTicket] = useState(false);
 
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
 
   const toggleTicketHandler = () => setShowTicket((prev) => !prev);
-  const onClose = () => setFormType("");
 
   return (
     <Box>
@@ -62,11 +60,7 @@ function Home({ showForm, setFormType, formType }) {
       >
         {isAuthenticated && showTicket && <TicketList showForm={showForm} />}
       </Box>
-
-      {/* Form Modal */}
-      <Box position="relative" zIndex="1">
-        {formType && <Form onClose={onClose} formType={formType} />}
-      </Box>
+     
     </Box>
   );
 }

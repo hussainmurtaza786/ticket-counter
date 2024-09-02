@@ -94,3 +94,13 @@ export const tennisSchema = yup.object().shape({
     date: yup.date().required(' Date is Required '),
 
 })
+
+export const contactSchema = yup.object().shape({
+    name: yup.string().required("  Name is Required"),
+    subject: yup.string().required("  Subject is Required"),
+    message: yup.string().required("  Messages is Required"),
+    email: yup.string().email("Please enter a valid email").required("Email is Required"),
+
+})
+
+
