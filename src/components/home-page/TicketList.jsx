@@ -1,7 +1,6 @@
 import { Box, Button, Flex } from "@chakra-ui/react";
 import { keyframes } from "@emotion/react";
 function TicketList({ showForm }) {
- 
   return (
     <div>
       <Flex>
@@ -13,7 +12,7 @@ function TicketList({ showForm }) {
             Transports
           </ButtonStyle>
         </Box>
-        <Box m="4px 8px" >
+        <Box m="4px 8px">
           <ButtonStyle
             backgroundImage="https://media.istockphoto.com/id/1478374885/photo/joyful-family-watching-movie-in-cinema.jpg?s=612x612&w=0&k=20&c=U0Qp-c2vCTUPG51ZOD2H7KcrByyBKow3r9wSR2QMFZU="
             onClick={() => showForm("Movie")}
@@ -43,19 +42,18 @@ const ButtonStyle = ({ onClick, backgroundImage, children }) => {
   100% { background-position: 0% 50%; }
 `;
   return (
+    <Box>
     <Button
-      backgroundImage={`url('${backgroundImage}')`}
-      bgGradient="linear(to-r, teal.400, blue.500, purple.600)"
+      position="relative"
+      backgroundColor="#1a1a1a"
       onClick={onClick}
-      bgSize="200% 200%"
-      width='150px'
-      height='50px'
-      animation={`${gradientAnimation} 7s ease infinite`}
+      width="200px"
+      height="70px"
       color="white"
       fontSize="lg"
       fontWeight="bold"
       padding="8px 24px"
-      borderRadius="full"
+      borderRadius="12px"
       boxShadow="0 5px 15px rgba(0, 0, 0, 0.2)"
       _hover={{
         transform: "scale(1.05)",
@@ -65,8 +63,36 @@ const ButtonStyle = ({ onClick, backgroundImage, children }) => {
         transform: "scale(0.98)",
         boxShadow: "0 4px 10px rgba(0, 0, 0, 0.2)",
       }}
+      _before={{
+        content: '""',
+        position: "absolute",
+        top: 0,
+        left: 0,
+        width: "100%",
+        height: "100%",
+        backgroundImage: `url('${backgroundImage}')`,
+        backgroundSize: "200% 200%",
+        backgroundPosition: "center",
+        opacity: 0.3, 
+        borderRadius: "15px",
+        zIndex: 1, 
+      }}
+      _after={{
+        content: '""',
+        position: "absolute",
+        top: 0,
+        left: 0,
+        width: "100%",
+        height: "100%",
+        borderRadius: "full",
+        zIndex: 2,
+      }}
     >
-      {children}
+      <Box position="relative" zIndex={3}>
+        {children}
+      </Box>
     </Button>
+  </Box>
+  
   );
 };

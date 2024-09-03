@@ -4,17 +4,18 @@ import { NavLink } from "react-router-dom";
 
 function Items() {
   return (
-    <div>
-      <Box color={"whitesmoke"}>
-        <Flex>
-          <ListStyle path='/'>Home</ListStyle>
-          <ListStyle path='/ticket'>Ticket</ListStyle>
-          <ListStyle path='/contact'>Contact</ListStyle>
-          <ListStyle path='/about'>About</ListStyle>
-          <ListStyle path='/review'>Review</ListStyle>
-        </Flex>
-      </Box>
-    </div>
+    <Box color={"whitesmoke"}>
+      <Flex
+        direction={{ base: "column", md: "row" }}  // Change direction based on screen size
+        alignItems={{ base: "center", md: "initial" }}  // Center items in the column layout
+      >
+        <ListStyle path='/'>Home</ListStyle>
+        <ListStyle path='/ticket'>Ticket</ListStyle>
+        <ListStyle path='/contact'>Contact</ListStyle>
+        <ListStyle path='/about'>About</ListStyle>
+        <ListStyle path='/review'>Review</ListStyle>
+      </Flex>
+    </Box>
   );
 }
 
@@ -31,7 +32,7 @@ const ListStyle = ({ children, path }) => {
           textDecoration: 'none',
           transition: 'transform 0.3s ease, color 0.3s ease',
           transform: isActive ? 'scale(1.1)' : 'scale(1)',
-          outline: 'none', 
+          outline: 'none',
         })}
         onMouseEnter={(e) => {
           e.currentTarget.style.color = '#386B99';

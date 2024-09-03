@@ -26,7 +26,7 @@ function TicketButton({ isShowing, toggle }) {
       }}
       onClick={toggle}
     >
-      {isShowing ? 'Hide Tickets' : 'Show Tickets'}
+      {isShowing ? 'Hide Tickets' : 'Book Tickets'}
     </Button>
   );
 }
