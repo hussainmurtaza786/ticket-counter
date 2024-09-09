@@ -1,126 +1,69 @@
-import React from 'react'
-import { Button, FormControl, FormLabel, Input, Text, VStack, } from '@chakra-ui/react';
-import { useFormik } from 'formik';
-import { cricketSchema } from '../../Schemas/Index';
+import React from 'react';
+import { Button, Text, VStack, HStack, Box } from '@chakra-ui/react';
+import cricketData from '../../json-data/cricket.json';
 import { useDispatch, useSelector } from 'react-redux';
 import { addSportTicketThunk } from '../../store/ticketSlice';
 
 function Cricket({ selectedSport, onClose }) {
-  const userId = useSelector(state => state.auth.user.id);
-  const loader = useSelector(state => state.ticket.fetchingState.loadTickets)
-  const dispatch = useDispatch()
+  const userId = useSelector((state) => state.auth.user.id);
+  const loader = useSelector((state) => state.ticket.fetchingState.loadTickets);
+  const dispatch = useDispatch();
 
-  const onSubmit = async (values) => {
-    console.log("Submitting form with values:", values);
+  const sendData = async (ticketData) => {
     try {
       const data = {
-        ...values,
+        ...ticketData,
         sportType: selectedSport,
         userId: userId,
       };
 
       await dispatch(addSportTicketThunk(data)).unwrap();
-      console.log("Sport Data ==>", data);
+      // console.log('Cricket data ==>',data)
+
       onClose();
     } catch (error) {
-      // console.error("Error submitting form:", error);
+      console.error('Error sending data:', error);
       alert(error.message);
     }
-
-
   };
-  const { values, errors, touched, isValid, isSubmitting, handleBlur, handleChange, handleSubmit, } = useFormik({
-    initialValues: {
-      stadium: "",
-      team: "",
-      ticket: "",
-      date: "",
 
-    },
-    validationSchema: cricketSchema,
-    onSubmit,
-  });
   return (
     <div>
-      <form onSubmit={handleSubmit}>
-        <VStack spacing={4} align='stretch'>
-          {loader && <Text>loading...</Text> }
-        <FormControl isInvalid={touched.date && errors.date}>
-          <FormLabel>Match Date</FormLabel>
-          <Input
-            type="date"
-            name="date"
-            value={values.date}
-            onChange={handleChange}
-            onBlur={handleBlur}
-          />
-          {touched.date && errors.date && (
-            <Text color="red.500" fontSize="sm">
-              {errors.date}
-            </Text>
-          )}
-        </FormControl>
+      {loader && <Text>Loading...</Text>}
 
-        <FormControl isInvalid={touched.stadium && errors.stadium}>
-          <FormLabel> Stadium </FormLabel>
-          <Input
-            required
-            name="stadium"
-            value={values.stadium}
-            onChange={handleChange}
-            onBlur={handleBlur}
-            type="text"
-          />
-          {touched.stadium && errors.stadium && (
-            <Text color="red.500" fontSize="sm">
-              {errors.stadium}
-            </Text>
-          )}
-        </FormControl>
+      <VStack spacing={6} align="stretch">
+        {cricketData.map((ticket, index) => (
+          <Box key={index} borderWidth="1px" borderRadius="lg" p={4} bg="gray.50">
 
-        <FormControl isInvalid={touched.team && errors.team}>
-          <FormLabel>  Team</FormLabel>
-          <Input
-            required
-            name="team"
-            value={values.team}
-            onChange={handleChange}
-            onBlur={handleBlur}
-            type="text"
-          />
-          {touched.team && errors.team && (
-            <Text color="red.500" fontSize="sm">
-              {errors.team}
-            </Text>
-          )}
-        </FormControl>
+            <HStack>
+              <Text textAlign='center' width='100%' fontWeight='bolder' fontSize='20px' >{ticket.teams}</Text>
+            </HStack>
+            <HStack
+              width='100%' backgroundColor='black' color='white'>
 
+              <Text margin='2px 16px'  fontSize='18px'>{ticket.cricketType}</Text>
+            </HStack>
+            <HStack>
+              <Text fontWeight="bold">Date:</Text>
+              <Text>{ticket.matchDate}</Text>
+            </HStack>
+            <HStack>
+              <Text fontWeight="bold">Stadium:</Text>
+              <Text>{ticket.venue}</Text>
+            </HStack>
 
-        <FormControl isInvalid={touched.ticket && errors.ticket}>
-          <FormLabel> Number of ticket</FormLabel>
-          <Input
-            required
-            name="ticket"
-            value={values.ticket}
-            onChange={handleChange}
-            onBlur={handleBlur}
-            type="number"
-          />
-          {touched.ticket && errors.ticket && (
-            <Text color="red.500" fontSize="sm">
-              {errors.ticket}
-            </Text>
-          )}
-        </FormControl>
-
-
-        <Button spacing={4} mt={4} colorScheme="teal" type="submit" aria-disabled={!isValid || isSubmitting} disabled={!isValid || isSubmitting}>
-          Submit
-        </Button>
+            <HStack>
+              <Text fontWeight="bold">Price:</Text>
+              <Text>${ticket.price}</Text>
+            </HStack>
+            <Button mt={4} colorScheme="teal" onClick={() => sendData(ticket)}>
+              Book Now
+            </Button>
+          </Box>
+        ))}
       </VStack>
-    </form>
-    </div >
-  )
+    </div>
+  );
 }
 
-export default Cricket
+export default Cricket;

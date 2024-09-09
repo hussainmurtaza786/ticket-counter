@@ -1,0 +1,152 @@
+[
+    {
+        "matchDate": "2024-09-12",
+        "venue": "Old Trafford",
+        "teams": "Manchester United vs Chelsea",
+        "price": 120
+    },
+    {
+        "matchDate": "2024-09-15",
+        "venue": "Camp Nou",
+        "teams": "Barcelona vs Real Madrid",
+        "price": 150
+    },
+    {
+        "matchDate": "2024-09-18",
+        "venue": "Anfield",
+        "teams": "Liverpool vs Manchester City",
+        "price": 130
+    },
+    {
+        "matchDate": "2024-09-20",
+        "venue": "Signal Iduna Park",
+        "teams": "Borussia Dortmund vs Bayern Munich",
+        "price": 140
+    },
+    {
+        "matchDate": "2024-09-25",
+        "venue": "San Siro",
+        "teams": "AC Milan vs Inter Milan",
+        "price": 125
+    },
+    {
+        "matchDate": "2024-09-28",
+        "venue": "Allianz Arena",
+        "teams": "Bayern Munich vs RB Leipzig",
+        "price": 135
+    },
+    {
+        "matchDate": "2024-10-01",
+        "venue": "Stamford Bridge",
+        "teams": "Chelsea vs Arsenal",
+        "price": 110
+    },
+    {
+        "matchDate": "2024-10-05",
+        "venue": "Wembley Stadium",
+        "teams": "Tottenham Hotspur vs West Ham United",
+        "price": 100
+    },
+    {
+        "matchDate": "2024-10-10",
+        "venue": "Etihad Stadium",
+        "teams": "Manchester City vs Everton",
+        "price": 115
+    },
+    {
+        "matchDate": "2024-10-12",
+        "venue": "Parc des Princes",
+        "teams": "Paris Saint-Germain vs Lyon",
+        "price": 140
+    },
+    {
+        "matchDate": "2024-10-15",
+        "venue": "Estadio do Dragao",
+        "teams": "Porto vs Benfica",
+        "price": 125
+    },
+    {
+        "matchDate": "2024-10-18",
+        "venue": "Amsterdam Arena",
+        "teams": "Ajax vs PSV Eindhoven",
+        "price": 110
+    },
+    {
+        "matchDate": "2024-10-20",
+        "venue": "Celtic Park",
+        "teams": "Celtic vs Rangers",
+        "price": 130
+    },
+    {
+        "matchDate": "2024-10-22",
+        "venue": "Emirates Stadium",
+        "teams": "Arsenal vs Liverpool",
+        "price": 145
+    },
+    {
+        "matchDate": "2024-10-25",
+        "venue": "King Power Stadium",
+        "teams": "Leicester City vs Aston Villa",
+        "price": 100
+    },
+    {
+        "matchDate": "2024-10-28",
+        "venue": "Stadio Olimpico",
+        "teams": "AS Roma vs Lazio",
+        "price": 120
+    },
+    {
+        "matchDate": "2024-11-01",
+        "venue": "Metropolitano Stadium",
+        "teams": "Atletico Madrid vs Sevilla",
+        "price": 130
+    },
+    {
+        "matchDate": "2024-11-05",
+        "venue": "Estadio Santiago Bernabeu",
+        "teams": "Real Madrid vs Atletico Madrid",
+        "price": 150
+    },
+    {
+        "matchDate": "2024-11-10",
+        "venue": "Goodison Park",
+        "teams": "Everton vs Leeds United",
+        "price": 95
+    },
+    {
+        "matchDate": "2024-11-12",
+        "venue": "Olympiastadion",
+        "teams": "Hertha Berlin vs RB Leipzig",
+        "price": 110
+    },
+    {
+        "matchDate": "2024-11-15",
+        "venue": "Stade Velodrome",
+        "teams": "Marseille vs AS Monaco",
+        "price": 125
+    },
+    {
+        "matchDate": "2024-11-18",
+        "venue": "BayArena",
+        "teams": "Bayer Leverkusen vs Eintracht Frankfurt",
+        "price": 105
+    },
+    {
+        "matchDate": "2024-11-22",
+        "venue": "Stade de France",
+        "teams": "France vs Germany",
+        "price": 160
+    },
+    {
+        "matchDate": "2024-11-25",
+        "venue": "Luzhniki Stadium",
+        "teams": "Russia vs Spain",
+        "price": 155
+    },
+    {
+        "matchDate": "2024-11-28",
+        "venue": "Maracana Stadium",
+        "teams": "Brazil vs Argentina",
+        "price": 170
+    }
+]

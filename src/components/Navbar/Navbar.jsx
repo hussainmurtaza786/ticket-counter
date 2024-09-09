@@ -20,7 +20,7 @@ function Navbar({ showForm }) {
       justifyContent="space-between"
       alignItems="center"
       width="100%"
-      zIndex={1}
+      zIndex={100}
       bgColor="#B0C4DE"
       px="20px"
       position="sticky"

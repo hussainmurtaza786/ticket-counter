@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { addMovieTicket, addSportTicket,getSportTicketsByUserId, getTransportationTicketsByUserId, getMovieTicketsByUserId, addTransportTicket } from "../services";
+import { addMovieTicket, addSportTicket, getSportTicketsByUserId, getTransportationTicketsByUserId, getMovieTicketsByUserId, addTransportTicket } from "../services";
 
 /* Thunks */
 const loadTicketsThunk = createAsyncThunk(
@@ -9,7 +9,7 @@ const loadTicketsThunk = createAsyncThunk(
         const movies = await getMovieTicketsByUserId({ userId });
         // console.log("movies ==>", movies)
         const transports = await getTransportationTicketsByUserId({ userId });
-        const sports=await getSportTicketsByUserId({userId});
+        const sports = await getSportTicketsByUserId({ userId });
         return {
             movies,
             sports,
@@ -29,8 +29,8 @@ const addMovieTicketThunk = createAsyncThunk(
 
 const addTransportTicketThunk = createAsyncThunk(
     "addTransportTicket",
-    async ({ transportType, name, email, phone, passengers, depAirport, desAirport,depStation,desStation,depLocation,desLocation, depDate, depTime, returnDate, returnTime, userId }, thunkAPI) => {
-        const transportTicket = await addTransportTicket({ transportType, name, email, phone, passengers,depStation,desStation, depAirport, desAirport,depLocation,desLocation, depDate, depTime, returnDate, returnTime, userId });
+    async ({ transportType, name, email, phone, passengers, depAirport, desAirport, depStation, desStation, depLocation, desLocation, depDate, depTime, returnDate, returnTime, userId }, thunkAPI) => {
+        const transportTicket = await addTransportTicket({ transportType, name, email, phone, passengers, depStation, desStation, depAirport, desAirport, depLocation, desLocation, depDate, depTime, returnDate, returnTime, userId });
         return transportTicket
 
     }
@@ -38,8 +38,8 @@ const addTransportTicketThunk = createAsyncThunk(
 
 const addSportTicketThunk = createAsyncThunk(
     "addSportTicket",
-    async ({  sportType, date, stadium, ticket, team, homeTeam, awayTeam, court, player1, player2, userId  }, thunkAPI) => {
-        const sportTicket = await addSportTicket({  sportType, date, stadium, ticket, team, homeTeam, awayTeam, court, player1, player2, userId  });
+    async ({ sportType, date, matchDate, venue, teams, price, stadium, ticket, team, homeTeam, awayTeam, court, player1, player2, userId }, thunkAPI) => {
+        const sportTicket = await addSportTicket({ sportType, date, matchDate, venue, teams, price, stadium, ticket, team, homeTeam, awayTeam, court, player1, player2, userId });
         return sportTicket
 
     }
@@ -56,13 +56,13 @@ const slice = createSlice({
             loadTickets: false,
             addMovieTicket: false,
             addTransportTicket: false,
-            addSportTicket:false,
+            addSportTicket: false,
         },
         error: {
             loadTickets: null,
             addMovieTicket: null,
             addTransportTicket: null,
-            addSportTicket:null,
+            addSportTicket: null,
 
         }
     },
@@ -78,7 +78,7 @@ const slice = createSlice({
             state.error.loadTickets = null;
             state.movies = payload.movies;
             state.transports = payload.transports;
-            state.sports=payload.sports;
+            state.sports = payload.sports;
         });
         builder.addCase(loadTicketsThunk.rejected, (state, { error }) => {
             state.fetchingState.loadTickets = false;
@@ -129,4 +129,4 @@ const slice = createSlice({
 });
 
 export default slice.reducer;
-export { loadTicketsThunk, addMovieTicketThunk, addTransportTicketThunk,addSportTicketThunk }
+export { loadTicketsThunk, addMovieTicketThunk, addTransportTicketThunk, addSportTicketThunk }

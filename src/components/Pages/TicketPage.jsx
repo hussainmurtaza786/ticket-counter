@@ -35,8 +35,8 @@ function FetchData() {
     <Box m="1rem 0px" outline="none" textDecoration="none" userSelect={"none"}>
       <hr />
       <Text textAlign='center' fontWeight='bolder' fontSize='20px' userSelect='none'>
-  <h1 style={{ userSelect: 'none' }}>You can view your booked ticket here</h1>
-</Text>
+        <h1 style={{ userSelect: 'none' }}>You can view your booked ticket here</h1>
+      </Text>
 
 
       <hr />
@@ -103,8 +103,8 @@ function FetchData() {
                   transport.transportType === "plane"
                     ? "https://png.pngtree.com/thumb_back/fh260/background/20230805/pngtree-the-flight-path-on-both-sides-of-the-runway-image_12972430.jpg"
                     : transport.transportType === "bus"
-                    ? "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT95AAuIODV91eecjsNyt7u86vRH7ohjyGtGQ&s"
-                    : "https://c1.wallpaperflare.com/preview/10/22/374/airplane-plane-track-railway.jpg"
+                      ? "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT95AAuIODV91eecjsNyt7u86vRH7ohjyGtGQ&s"
+                      : "https://c1.wallpaperflare.com/preview/10/22/374/airplane-plane-track-railway.jpg"
                 }
                 alt={transport.transportType}
                 objectFit="cover"
@@ -244,8 +244,8 @@ function FetchData() {
                   sport.sportType === "cricket"
                     ? "https://png.pngtree.com/thumb_back/fh260/background/20230714/pngtree-d-illustration-of-a-cricket-stadium-with-a-front-view-and-image_3857836.jpg"
                     : sport.sportType === "football"
-                    ? "https://img.freepik.com/free-vector/gradient-football-field-background_23-2149000103.jpg"
-                    : "https://t3.ftcdn.net/jpg/02/86/26/28/360_F_286262835_HZL6nc8KDiZlYawKW0gInGK7yZMu4EUC.jpg"
+                      ? "https://img.freepik.com/free-vector/gradient-football-field-background_23-2149000103.jpg"
+                      : "https://t3.ftcdn.net/jpg/02/86/26/28/360_F_286262835_HZL6nc8KDiZlYawKW0gInGK7yZMu4EUC.jpg"
                 }
                 alt={sport.sportType}
                 objectFit="cover"
@@ -279,26 +279,25 @@ function FetchData() {
                 </HStack>
                 <HStack>
                   <Text fontWeight="bold">Date:</Text>
-                  <Text>{sport.date}</Text>
-                </HStack>
-                <HStack>
-                  <Text fontWeight="bold">Number of Ticket:</Text>
-                  <Text>{sport.ticket}</Text>
+                  <Text>{sport.matchDate}</Text>
                 </HStack>
 
-                {sport.sportType === "cricket" && (
-                  <>
-                    <HStack>
-                      <Text fontWeight="bold">Stadium :</Text>
-                      <Text>{sport.stadium}</Text>
-                    </HStack>
-                    <HStack>
-                      <Text fontWeight="bold">Team :</Text>
-                      <Text>{sport.team}</Text>
-                    </HStack>
-                  </>
-                )}
-                {sport.sportType === "football" && (
+
+                  <HStack>
+                    <Text fontWeight="bold">Stadium :</Text>
+                    <Text>{sport.venue}</Text>
+                  </HStack>
+                  <HStack>
+                    <Text fontWeight="bold">Team :</Text>
+                    <Text>{sport.teams}</Text>
+                  </HStack>
+                  <HStack>
+                    <Text fontWeight="bold">Price :</Text>
+                    <Text>{sport.price}</Text>
+                  </HStack>
+
+
+                {/* {sport.sportType === "football" && (
                   <>
                     <HStack>
                       <Text fontWeight="bold">Stadium :</Text>
@@ -313,7 +312,7 @@ function FetchData() {
                       <Text>{sport.awayTeam}</Text>
                     </HStack>
                   </>
-                )}
+                )} */}
                 {sport.sportType === "tennis" && (
                   <>
                     <HStack>

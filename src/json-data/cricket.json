@@ -1,0 +1,203 @@
+[
+    {
+      "id": 1,
+      "cricketType": "T20",
+      "venue": "Wankhede Stadium",
+      "teams": "India vs Australia",
+      "matchDate": "2024-10-10",
+      "price": 70
+    },
+    {
+      "id": 2,
+      "cricketType": "ODI",
+      "venue": "Lord's Cricket Ground",
+      "teams": "England vs South Africa",
+      "matchDate": "2024-09-15",
+      "price": 80
+    },
+    {
+      "id": 3,
+      "cricketType": "Test",
+      "venue": "Eden Gardens",
+      "teams": "India vs New Zealand",
+      "matchDate": "2024-11-01",
+      "price": 100
+    },
+    {
+      "id": 4,
+      "cricketType": "T20",
+      "venue": "Melbourne Cricket Ground",
+      "teams": "Australia vs West Indies",
+      "matchDate": "2024-09-20",
+      "price": 65
+    },
+    {
+      "id": 5,
+      "cricketType": "ODI",
+      "venue": "The Oval",
+      "teams": "England vs Pakistan",
+      "matchDate": "2024-10-05",
+      "price": 90
+    },
+    {
+      "id": 6,
+      "cricketType": "Test",
+      "venue": "Adelaide Oval",
+      "teams": "Australia vs Sri Lanka",
+      "matchDate": "2024-12-01",
+      "price": 120
+    },
+    {
+      "id": 7,
+      "cricketType": "T20",
+      "venue": "Dubai International Stadium",
+      "teams": "Pakistan vs Afghanistan",
+      "matchDate": "2024-11-20",
+      "price": 75
+    },
+    {
+      "id": 8,
+      "cricketType": "ODI",
+      "venue": "Newlands",
+      "teams": "South Africa vs India",
+      "matchDate": "2024-12-10",
+      "price": 85
+    },
+    {
+      "id": 9,
+      "cricketType": "Test",
+      "venue": "SCG",
+      "teams": "Australia vs England",
+      "matchDate": "2024-10-25",
+      "price": 150
+    },
+    {
+      "id": 10,
+      "cricketType": "T20",
+      "venue": "Sharjah Cricket Stadium",
+      "teams": "UAE vs Oman",
+      "matchDate": "2024-08-30",
+      "price": 50
+    },
+    {
+      "id": 11,
+      "cricketType": "ODI",
+      "venue": "Gaddafi Stadium",
+      "teams": "Pakistan vs Bangladesh",
+      "matchDate": "2024-09-05",
+      "price": 60
+    },
+    {
+      "id": 12,
+      "cricketType": "Test",
+      "venue": "Old Trafford",
+      "teams": "England vs India",
+      "matchDate": "2024-11-15",
+      "price": 110
+    },
+    {
+      "id": 13,
+      "cricketType": "T20",
+      "venue": "Chinnaswamy Stadium",
+      "teams": "India vs Sri Lanka",
+      "matchDate": "2024-10-02",
+      "price": 70
+    },
+    {
+      "id": 14,
+      "cricketType": "ODI",
+      "venue": "R.Premadasa Stadium",
+      "teams": "Sri Lanka vs Australia",
+      "matchDate": "2024-09-22",
+      "price": 75
+    },
+    {
+      "id": 15,
+      "cricketType": "Test",
+      "venue": "WACA Ground",
+      "teams": "Australia vs West Indies",
+      "matchDate": "2024-12-12",
+      "price": 130
+    },
+    {
+      "id": 16,
+      "cricketType": "T20",
+      "venue": "National Stadium Karachi",
+      "teams": "Pakistan vs India",
+      "matchDate": "2024-12-05",
+      "price": 80
+    },
+    {
+      "id": 17,
+      "cricketType": "ODI",
+      "venue": "Queen's Park Oval",
+      "teams": "West Indies vs South Africa",
+      "matchDate": "2024-11-10",
+      "price": 95
+    },
+    {
+      "id": 18,
+      "cricketType": "Test",
+      "venue": "Sabina Park",
+      "teams": "West Indies vs New Zealand",
+      "matchDate": "2024-12-18",
+      "price": 140
+    },
+    {
+      "id": 19,
+      "cricketType": "T20",
+      "venue": "Barabati Stadium",
+      "teams": "India vs Pakistan",
+      "matchDate": "2024-10-18",
+      "price": 100
+    },
+    {
+      "id": 20,
+      "cricketType": "ODI",
+      "venue": "Kensington Oval",
+      "teams": "West Indies vs India",
+      "matchDate": "2024-11-30",
+      "price": 85
+    },
+    {
+      "id": 21,
+      "cricketType": "Test",
+      "venue": "Basin Reserve",
+      "teams": "New Zealand vs Sri Lanka",
+      "matchDate": "2024-12-05",
+      "price": 120
+    },
+    {
+      "id": 22,
+      "cricketType": "T20",
+      "venue": "Seddon Park",
+      "teams": "New Zealand vs Australia",
+      "matchDate": "2024-09-18",
+      "price": 65
+    },
+    {
+      "id": 23,
+      "cricketType": "ODI",
+      "venue": "SuperSport Park",
+      "teams": "South Africa vs England",
+      "matchDate": "2024-11-12",
+      "price": 90
+    },
+    {
+      "id": 24,
+      "cricketType": "Test",
+      "venue": "Gabba",
+      "teams": "Australia vs Pakistan",
+      "matchDate": "2024-10-29",
+      "price": 145
+    },
+    {
+      "id": 25,
+      "cricketType": "T20",
+      "venue": "Rajiv Gandhi Intl. Stadium",
+      "teams": "India vs Afghanistan",
+      "matchDate": "2024-12-20",
+      "price": 85
+    }
+  ]
+  
