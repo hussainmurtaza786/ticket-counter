@@ -15,16 +15,9 @@ import { useFormik } from "formik";
 
 function Contact() {
   const onSubmit = (values) => {
-   
+
   };
-  const {
-    values,
-    errors,
-    touched,
-    handleBlur,
-    handleChange,
-    handleSubmit,
-  } = useFormik({
+  const { values, errors, touched, handleBlur, handleChange, handleSubmit, } = useFormik({
     initialValues: {
       name: "",
       email: "",

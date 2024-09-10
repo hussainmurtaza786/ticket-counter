@@ -1,30 +1,16 @@
 import React from "react";
-import {
-  Box,
-  Text,
-  VStack,
-  HStack,
-  Image,
-  Badge,
-  Grid,
-} from "@chakra-ui/react";
+import { Box, Text, VStack, HStack, Image, Badge, Grid, } from "@chakra-ui/react";
 import { useSelector } from "react-redux";
 
 function FetchData() {
-  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+
   const movieData = useSelector((state) => state.ticket.movies);
   const transportData = useSelector((state) => state.ticket.transports);
   const sportData = useSelector((state) => state.ticket.sports);
-  console.log("isAuthenticated", isAuthenticated);
-  if (!isAuthenticated) {
-    return (
-      <Text color="black" fontSize="40px">
-        Please Sign In
-      </Text>
-    );
-  }
 
-  console.log("Sport data ==>", sportData);
+ 
+
+
 
   const formatDate = (isoString) => {
     const date = new Date(isoString);
@@ -257,20 +243,7 @@ function FetchData() {
                 zIndex="0"
               />
 
-              <VStack
-                align="start"
-                spacing={3}
-                position="relative"
-                top="0"
-                left="0"
-                right="0"
-                bottom="0"
-                p={4}
-                zIndex="1"
-                color="white"
-                height="100%"
-                bg="rgba(0, 0, 0, 0.5)"
-              >
+              <VStack align="start" spacing={3} position="relative" right="0" bottom="0" p={4} zIndex="1" color="white" height="100%" bg="rgba(0, 0, 0, 0.5)"              >
                 <HStack>
                   <Text fontWeight="bold">Sport:</Text>
                   <Badge fontSize="13px" variant="outline" colorScheme="green">
@@ -281,38 +254,21 @@ function FetchData() {
                   <Text fontWeight="bold">Date:</Text>
                   <Text>{sport.matchDate}</Text>
                 </HStack>
+                <HStack>
+                  <Text fontWeight="bold">Stadium :</Text>
+                  <Text>{sport.venue}</Text>
+                </HStack>
+                <HStack>
+                  <Text fontWeight="bold">Team :</Text>
+                  <Text>{sport.teams}</Text>
+                </HStack>
+                <HStack>
+                  <Text fontWeight="bold">Price :</Text>
+                  <Text>{sport.price}</Text>
+                </HStack>
 
 
-                  <HStack>
-                    <Text fontWeight="bold">Stadium :</Text>
-                    <Text>{sport.venue}</Text>
-                  </HStack>
-                  <HStack>
-                    <Text fontWeight="bold">Team :</Text>
-                    <Text>{sport.teams}</Text>
-                  </HStack>
-                  <HStack>
-                    <Text fontWeight="bold">Price :</Text>
-                    <Text>{sport.price}</Text>
-                  </HStack>
 
-
-                {/* {sport.sportType === "football" && (
-                  <>
-                    <HStack>
-                      <Text fontWeight="bold">Stadium :</Text>
-                      <Text>{sport.stadium}</Text>
-                    </HStack>
-                    <HStack>
-                      <Text fontWeight="bold">Home Team :</Text>
-                      <Text>{sport.homeTeam}</Text>
-                    </HStack>
-                    <HStack>
-                      <Text fontWeight="bold">Away Team :</Text>
-                      <Text>{sport.awayTeam}</Text>
-                    </HStack>
-                  </>
-                )} */}
                 {sport.sportType === "tennis" && (
                   <>
                     <HStack>

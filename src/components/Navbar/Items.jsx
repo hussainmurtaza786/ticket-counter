@@ -6,14 +6,30 @@ function Items() {
   return (
     <Box color={"whitesmoke"}>
       <Flex
-        direction={{ base: "column", md: "row" }}  // Change direction based on screen size
-        alignItems={{ base: "center", md: "initial" }}  // Center items in the column layout
+        direction={{ base: "column", md: "row" }}
+        alignItems={{ base: "center", md: "initial" }}
       >
         <ListStyle path='/'>Home</ListStyle>
-        <ListStyle path='/ticket'>Ticket</ListStyle>
         <ListStyle path='/contact'>Contact</ListStyle>
         <ListStyle path='/about'>About</ListStyle>
         <ListStyle path='/review'>Review</ListStyle>
+        <ListStyle path='/ticket'>
+          <Box bgColor='none'>
+            <select style={{
+              background: 'transparent',
+              border: 'none',
+              // appearance: 'none', 
+              outline: 'none'
+            }}>
+              <option value="">Tickets</option>
+              <option value="">Movies</option>
+              <option value="">Sport</option>
+              <option value="">Flight</option>
+            </select>
+          </Box>
+
+
+        </ListStyle>
       </Flex>
     </Box>
   );
