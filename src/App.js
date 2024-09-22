@@ -10,6 +10,7 @@ import ReviewPage from './components/Pages/ReviewPage';
 import Contact from './components/Pages/Contact';
 import About from './components/Pages/About';
 import Form from './components/Forms/Form';
+import Sport from './components/Forms/Sport';
 
 function App() {
   const [formType, setFormType] = useState("");
@@ -55,6 +56,7 @@ function App() {
               </Heading>
             </Text>
         },
+        { path: '/sport', element: <Sport /> },
         { path: '/contact', element: <Contact /> },
         { path: '/about', element: <About /> },
       ],

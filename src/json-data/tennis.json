@@ -1,0 +1,202 @@
+[
+    {
+        "id": 1,
+        "match": "Novak Djokovic vs Rafael Nadal",
+        "date": "2024-10-01",
+        "time": "15:00",
+        "price": 50,
+        "venue": "Arthur Ashe Stadium"
+    },
+    {
+        "id": 2,
+        "match": "Roger Federer vs Andy Murray",
+        "date": "2024-10-02",
+        "time": "16:00",
+        "price": 60,
+        "venue": "Centre Court"
+    },
+    {
+        "id": 3,
+        "match": "Serena Williams vs Naomi Osaka",
+        "date": "2024-10-03",
+        "time": "17:00",
+        "price": 55,
+        "venue": "Rod Laver Arena"
+    },
+    {
+        "id": 4,
+        "match": "Maria Sharapova vs Venus Williams",
+        "date": "2024-10-04",
+        "time": "18:00",
+        "price": 70,
+        "venue": "Wimbledon Court 1"
+    },
+    {
+        "id": 5,
+        "match": "Simona Halep vs Ashleigh Barty",
+        "date": "2024-10-05",
+        "time": "19:00",
+        "price": 80,
+        "venue": "Philippe Chatrier"
+    },
+    {
+        "id": 6,
+        "match": "Stefanos Tsitsipas vs Alexander Zverev",
+        "date": "2024-10-06",
+        "time": "15:00",
+        "price": 65,
+        "venue": "Arthur Ashe Stadium"
+    },
+    {
+        "id": 7,
+        "match": "Daniil Medvedev vs Dominic Thiem",
+        "date": "2024-10-07",
+        "time": "16:00",
+        "price": 90,
+        "venue": "Centre Court"
+    },
+    {
+        "id": 8,
+        "match": "Bianca Andreescu vs Elina Svitolina",
+        "date": "2024-10-08",
+        "time": "17:00",
+        "price": 45,
+        "venue": "Rod Laver Arena"
+    },
+    {
+        "id": 9,
+        "match": "Jannik Sinner vs Felix Auger-Aliassime",
+        "date": "2024-10-09",
+        "time": "18:00",
+        "price": 75,
+        "venue": "Wimbledon Court 2"
+    },
+    {
+        "id": 10,
+        "match": "Maria Sakkari vs Garbiñe Muguruza",
+        "date": "2024-10-10",
+        "time": "19:00",
+        "price": 55,
+        "venue": "Philippe Chatrier"
+    },
+    {
+        "id": 11,
+        "match": "Andrey Rublev vs Denis Shapovalov",
+        "date": "2024-10-11",
+        "time": "15:00",
+        "price": 85,
+        "venue": "Arthur Ashe Stadium"
+    },
+    {
+        "id": 12,
+        "match": "Angelique Kerber vs Petra Kvitova",
+        "date": "2024-10-12",
+        "time": "16:00",
+        "price": 65,
+        "venue": "Centre Court"
+    },
+    {
+        "id": 13,
+        "match": "Sofia Kenin vs Amanda Anisimova",
+        "date": "2024-10-13",
+        "time": "17:00",
+        "price": 50,
+        "venue": "Rod Laver Arena"
+    },
+    {
+        "id": 14,
+        "match": "Karolína Plíšková vs Victoria Azarenka",
+        "date": "2024-10-14",
+        "time": "18:00",
+        "price": 70,
+        "venue": "Wimbledon Court 1"
+    },
+    {
+        "id": 15,
+        "match": "Stefanos Tsitsipas vs Daniil Medvedev",
+        "date": "2024-10-15",
+        "time": "19:00",
+        "price": 75,
+        "venue": "Philippe Chatrier"
+    },
+    {
+        "id": 16,
+        "match": "Simona Halep vs Ashleigh Barty",
+        "date": "2024-10-16",
+        "time": "15:00",
+        "price": 80,
+        "venue": "Arthur Ashe Stadium"
+    },
+    {
+        "id": 17,
+        "match": "Naomi Osaka vs Serena Williams",
+        "date": "2024-10-17",
+        "time": "16:00",
+        "price": 60,
+        "venue": "Centre Court"
+    },
+    {
+        "id": 18,
+        "match": "Rafael Nadal vs Roger Federer",
+        "date": "2024-10-18",
+        "time": "17:00",
+        "price": 90,
+        "venue": "Rod Laver Arena"
+    },
+    {
+        "id": 19,
+        "match": "Bianca Andreescu vs Maria Sharapova",
+        "date": "2024-10-19",
+        "time": "18:00",
+        "price": 45,
+        "venue": "Wimbledon Court 2"
+    },
+    {
+        "id": 20,
+        "match": "Jannik Sinner vs Andrey Rublev",
+        "date": "2024-10-20",
+        "time": "19:00",
+        "price": 75,
+        "venue": "Philippe Chatrier"
+    },
+    {
+        "id": 21,
+        "match": "Felix Auger-Aliassime vs Daniil Medvedev",
+        "date": "2024-10-21",
+        "time": "15:00",
+        "price": 80,
+        "venue": "Arthur Ashe Stadium"
+    },
+    {
+        "id": 22,
+        "match": "Maria Sakkari vs Karolína Plíšková",
+        "date": "2024-10-22",
+        "time": "16:00",
+        "price": 65,
+        "venue": "Centre Court"
+    },
+    {
+        "id": 23,
+        "match": "Elina Svitolina vs Angelique Kerber",
+        "date": "2024-10-23",
+        "time": "17:00",
+        "price": 55,
+        "venue": "Rod Laver Arena"
+    },
+    {
+        "id": 24,
+        "match": "Petra Kvitova vs Victoria Azarenka",
+        "date": "2024-10-24",
+        "time": "18:00",
+        "price": 70,
+        "venue": "Wimbledon Court 1"
+    },
+    {
+        "id": 25,
+        "match": "Naomi Osaka vs Sofia Kenin",
+        "date": "2024-10-25",
+        "time": "19:00",
+        "price": 75,
+        "venue": "Philippe Chatrier"
+    }
+]

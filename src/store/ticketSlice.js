@@ -19,27 +19,27 @@ const loadTicketsThunk = createAsyncThunk(
 )
 const addMovieTicketThunk = createAsyncThunk(
     "addMovieTicket",
-    async ({ name, price, seat, timestamp, userId, genre }, thunkAPI) => {
-        const movieTicket = await addMovieTicket({ name, price, seat, timestamp, userId, genre });
+    async ({ movie, rating, price, image, imdb_url, userId }, thunkAPI) => {
+        const movieTicket = await addMovieTicket({ movie, rating, price, image, imdb_url, userId });
         // const transportTicket = await getFlightTickets({ name, email, phone, passengers, depAirport, desAirport, depDate, depTime, returnDate, returnTime, userId });
         return movieTicket;
         // return transportTicket
     }
 )
-
+ 
 const addTransportTicketThunk = createAsyncThunk(
     "addTransportTicket",
-    async ({ transportType, name, email, phone, passengers, depAirport, desAirport, depStation, desStation, depLocation, desLocation, depDate, depTime, returnDate, returnTime, userId }, thunkAPI) => {
-        const transportTicket = await addTransportTicket({ transportType, name, email, phone, passengers, depStation, desStation, depAirport, desAirport, depLocation, desLocation, depDate, depTime, returnDate, returnTime, userId });
+    async ({ type, from, to, price, departure_time, arrival_time, userId }, thunkAPI) => {
+        const transportTicket = await addTransportTicket({ type, from, to, price, departure_time, arrival_time, userId });
         return transportTicket
 
-    }
+    } 
 )
 
 const addSportTicketThunk = createAsyncThunk(
     "addSportTicket",
-    async ({ sportType, date, matchDate, venue, teams, price, stadium, ticket, team, homeTeam, awayTeam, court, player1, player2, userId }, thunkAPI) => {
-        const sportTicket = await addSportTicket({ sportType, date, matchDate, venue, teams, price, stadium, ticket, team, homeTeam, awayTeam, court, player1, player2, userId });
+    async ({  date, matchDate, venue, teams, price, cricketType, userId }, thunkAPI) => {
+        const sportTicket = await addSportTicket({  date, matchDate, venue, teams, price, cricketType, userId });
         return sportTicket
 
     }

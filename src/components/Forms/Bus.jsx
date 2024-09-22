@@ -19,6 +19,13 @@ function Bus({selectedTransport,onClose}) {
       };
 
       await dispatch(addTransportTicketThunk(data));
+      toast({
+        // title: "Success!",
+        description: "Ticket booked successfully!",
+        status: "success",
+        duration: 3000,
+        isClosable: true,
+      });
       console.log("Bus Data ==>", data);
       onClose();
     } catch (error) {

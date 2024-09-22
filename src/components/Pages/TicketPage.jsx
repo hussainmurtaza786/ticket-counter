@@ -1,294 +1,65 @@
-import React from "react";
-import { Box, Text, VStack, HStack, Image, Badge, Grid, } from "@chakra-ui/react";
-import { useSelector } from "react-redux";
+import React, { useState } from "react";
+import { Box, Kbd, Select, Text } from "@chakra-ui/react";
+import Cricket from "../Forms/Cricket";
+import FootBall from "../Forms/FootBall";
+import Movie from "../Forms/Movie";
+import Tennis from "../Forms/Tennis";
+import TicketSearch from "../Forms/Transportation";
 
 function FetchData() {
+  const [selectedTicket, setSelectedTicket] = useState("movie");
 
-  const movieData = useSelector((state) => state.ticket.movies);
-  const transportData = useSelector((state) => state.ticket.transports);
-  const sportData = useSelector((state) => state.ticket.sports);
+  const handleSportChange = (e) => {
+    setSelectedTicket(e.target.value);
+  };
 
- 
+  const values = ["movie", "cricket", "football", "tennis", "flight"];
 
+  const getDescription = () => {
+    switch (selectedTicket) {
+      case "movie":
+        return "Book your tickets for the latest blockbuster movies!";
+      case "cricket":
+        return "Catch the excitement of live cricket matches and cheer for your favorite team!";
+      case "football":
+        return "Join the thrill of football with live matches and support your team!";
+      case "tennis":
+        return "Experience the intensity of tennis matches and witness the top players in action!";
+      case "flight":
+        return "Book your tickets for the next adventure and explore new destinations!"
 
-
-  const formatDate = (isoString) => {
-    const date = new Date(isoString);
-    return `${date.toLocaleDateString()} ${date.toLocaleTimeString()}`;
+      default:
+        return "";
+    }
   };
 
   return (
-    <Box m="1rem 0px" outline="none" textDecoration="none" userSelect={"none"}>
-      <hr />
-      <Text textAlign='center' fontWeight='bolder' fontSize='20px' userSelect='none'>
-        <h1 style={{ userSelect: 'none' }}>You can view your booked ticket here</h1>
+    <Box userSelect="none">
+      <Box display="flex" m="2px" userSelect="none">
+        <Select
+          value={selectedTicket}
+          onChange={handleSportChange}
+          m={4}
+          width="200px"
+        >
+          {values.map((val) => (
+            <option key={val} value={val}>
+              {val.toUpperCase()}
+            </option>
+          ))}
+        </Select>
+      </Box>
+      <Text fontSize="25px" mb="8" textAlign="center">
+        <Kbd p="4px 10px">{getDescription()}</Kbd>
       </Text>
 
-
-      <hr />
-      {/* Movie Data */}
-      <Grid templateColumns="repeat(3, 1fr)" gap={4}>
-        {movieData &&
-          movieData.map((movie) => (
-            <Box
-              key={movie.id}
-              width="400px"
-              m="16px 8px"
-              border="2px dashed black"
-              borderWidth="1px"
-              borderRadius="lg"
-              overflow="hidden"
-              p={4}
-              bg="white"
-              shadow="md"
-            >
-              <VStack align="start" spacing={3}>
-                <HStack>
-                  <Text fontWeight="bold">Movie Name:</Text>
-                  <Text>{movie.name}</Text>
-                </HStack>
-                <HStack>
-                  <Text fontWeight="bold">Movie Genre:</Text>
-                  <Text>{movie.genre}</Text>
-                </HStack>
-                <HStack>
-                  <Text fontWeight="bold">Price:</Text>
-                  <Text>{movie.price}</Text>
-                </HStack>
-                <HStack>
-                  <Text fontWeight="bold">Date-Time:</Text>
-                  <Text>{formatDate(movie.timestamp)}</Text>
-                </HStack>
-                <HStack>
-                  <Text fontWeight="bold">Seat:</Text>
-                  <Text>{movie.seat}</Text>
-                </HStack>
-              </VStack>
-            </Box>
-          ))}
-      </Grid>
-
-      {/* Transport Data */}
-      <Grid templateColumns="repeat(3, 1fr)" gap={4}>
-        {transportData &&
-          transportData.map((transport) => (
-            <Box
-              key={transport.id}
-              width="400px"
-              m="16px 8px"
-              border="2px dashed black"
-              borderWidth="1px"
-              borderRadius="lg"
-              overflow="hidden"
-              position="relative"
-              bg="white"
-              shadow="md"
-            >
-              <Image
-                src={
-                  transport.transportType === "plane"
-                    ? "https://png.pngtree.com/thumb_back/fh260/background/20230805/pngtree-the-flight-path-on-both-sides-of-the-runway-image_12972430.jpg"
-                    : transport.transportType === "bus"
-                      ? "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT95AAuIODV91eecjsNyt7u86vRH7ohjyGtGQ&s"
-                      : "https://c1.wallpaperflare.com/preview/10/22/374/airplane-plane-track-railway.jpg"
-                }
-                alt={transport.transportType}
-                objectFit="cover"
-                width="100%"
-                height="100%"
-                position="absolute"
-                top="0"
-                left="0"
-                zIndex="0"
-              />
-
-              <VStack
-                align="start"
-                height="100%"
-                spacing={3}
-                position="relative"
-                top="0"
-                left="0"
-                right="0"
-                bottom="0"
-                p={4}
-                zIndex="1"
-                color="white"
-                bg="rgba(0, 0, 0, 0.5)"
-              >
-                <HStack>
-                  <Text fontWeight="bold">Transport:</Text>
-                  <Badge fontSize="13px" variant="outline" colorScheme="green">
-                    {transport.transportType}
-                  </Badge>
-                </HStack>
-                <HStack>
-                  <Text fontWeight="bold">Name:</Text>
-                  <Text>{transport.name}</Text>
-                </HStack>
-                <HStack>
-                  <Text fontWeight="bold">Email:</Text>
-                  <Text>{transport.email}</Text>
-                </HStack>
-                <HStack>
-                  <Text fontWeight="bold">Passengers:</Text>
-                  <Text>{transport.passengers}</Text>
-                </HStack>
-
-                {transport.transportType === "plane" && (
-                  <>
-                    <HStack>
-                      <Text fontWeight="bold">Departure Airport:</Text>
-                      <Text>{transport.depAirport}</Text>
-                    </HStack>
-                    <HStack>
-                      <Text fontWeight="bold">Destination Airport:</Text>
-                      <Text>{transport.desAirport}</Text>
-                    </HStack>
-                    <HStack>
-                      <Text fontWeight="bold">Departure Date:</Text>
-                      <Text>{transport.depDate}</Text>
-                    </HStack>
-                    <HStack>
-                      <Text fontWeight="bold">Departure Time:</Text>
-                      <Text>{transport.depTime}</Text>
-                    </HStack>
-                    <HStack>
-                      <Text fontWeight="bold">Return Date:</Text>
-                      <Text>{transport.returnDate}</Text>
-                    </HStack>
-                    <HStack>
-                      <Text fontWeight="bold">Return Time:</Text>
-                      <Text>{transport.returnTime}</Text>
-                    </HStack>
-                  </>
-                )}
-                {transport.transportType === "bus" && (
-                  <>
-                    <HStack>
-                      <Text fontWeight="bold">Departure Location:</Text>
-                      <Text>{transport.depLocation}</Text>
-                    </HStack>
-                    <HStack>
-                      <Text fontWeight="bold">Destination Location:</Text>
-                      <Text>{transport.desLocation}</Text>
-                    </HStack>
-                    <HStack>
-                      <Text fontWeight="bold">Departure Date:</Text>
-                      <Text>{transport.depDate}</Text>
-                    </HStack>
-                    <HStack>
-                      <Text fontWeight="bold">Departure Time:</Text>
-                      <Text>{transport.depTime}</Text>
-                    </HStack>
-                  </>
-                )}
-                {transport.transportType === "train" && (
-                  <>
-                    <HStack>
-                      <Text fontWeight="bold">Departure Station:</Text>
-                      <Text>{transport.depStation}</Text>
-                    </HStack>
-                    <HStack>
-                      <Text fontWeight="bold">Destination Station:</Text>
-                      <Text>{transport.desStation}</Text>
-                    </HStack>
-                    <HStack>
-                      <Text fontWeight="bold">Departure Date:</Text>
-                      <Text>{transport.depDate}</Text>
-                    </HStack>
-                    <HStack>
-                      <Text fontWeight="bold">Departure Time:</Text>
-                      <Text>{transport.depTime}</Text>
-                    </HStack>
-                  </>
-                )}
-              </VStack>
-            </Box>
-          ))}
-      </Grid>
-
-      {/* /////// Sport ///////////// */}
-
-      <Grid templateColumns="repeat(3, 1fr)" gap={4}>
-        {sportData &&
-          sportData.map((sport) => (
-            <Box
-              key={sport.id}
-              width="400px"
-              m="16px 8px"
-              border="2px dashed black"
-              borderWidth="1px"
-              borderRadius="lg"
-              overflow="hidden"
-              position="relative"
-              bg="white"
-              shadow="md"
-            >
-              <Image
-                src={
-                  sport.sportType === "cricket"
-                    ? "https://png.pngtree.com/thumb_back/fh260/background/20230714/pngtree-d-illustration-of-a-cricket-stadium-with-a-front-view-and-image_3857836.jpg"
-                    : sport.sportType === "football"
-                      ? "https://img.freepik.com/free-vector/gradient-football-field-background_23-2149000103.jpg"
-                      : "https://t3.ftcdn.net/jpg/02/86/26/28/360_F_286262835_HZL6nc8KDiZlYawKW0gInGK7yZMu4EUC.jpg"
-                }
-                alt={sport.sportType}
-                objectFit="cover"
-                width="100%"
-                height="100%"
-                position="absolute"
-                top="0"
-                left="0"
-                zIndex="0"
-              />
-
-              <VStack align="start" spacing={3} position="relative" right="0" bottom="0" p={4} zIndex="1" color="white" height="100%" bg="rgba(0, 0, 0, 0.5)"              >
-                <HStack>
-                  <Text fontWeight="bold">Sport:</Text>
-                  <Badge fontSize="13px" variant="outline" colorScheme="green">
-                    {sport.sportType}
-                  </Badge>
-                </HStack>
-                <HStack>
-                  <Text fontWeight="bold">Date:</Text>
-                  <Text>{sport.matchDate}</Text>
-                </HStack>
-                <HStack>
-                  <Text fontWeight="bold">Stadium :</Text>
-                  <Text>{sport.venue}</Text>
-                </HStack>
-                <HStack>
-                  <Text fontWeight="bold">Team :</Text>
-                  <Text>{sport.teams}</Text>
-                </HStack>
-                <HStack>
-                  <Text fontWeight="bold">Price :</Text>
-                  <Text>{sport.price}</Text>
-                </HStack>
-
-
-
-                {sport.sportType === "tennis" && (
-                  <>
-                    <HStack>
-                      <Text fontWeight="bold">Court Name :</Text>
-                      <Text>{sport.court}</Text>
-                    </HStack>
-                    <HStack>
-                      <Text fontWeight="bold">Player 1 :</Text>
-                      <Text>{sport.player1}</Text>
-                    </HStack>
-                    <HStack>
-                      <Text fontWeight="bold">Player 2 :</Text>
-                      <Text>{sport.player2}</Text>
-                    </HStack>
-                  </>
-                )}
-              </VStack>
-            </Box>
-          ))}
-      </Grid>
+      <Box m="12px 3px">
+        {selectedTicket === "movie" && <Movie />}
+        {selectedTicket === "cricket" && <Cricket />}
+        {selectedTicket === "football" && <FootBall />}
+        {selectedTicket === "tennis" && <Tennis />}
+        {selectedTicket === "flight" && <TicketSearch />}
+      </Box>
     </Box>
   );
 }

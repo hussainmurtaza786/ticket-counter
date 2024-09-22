@@ -1,0 +1,234 @@
+[
+  {
+    "id": 1,
+    "movie": "The Shawshank Redemption",
+    "rating": 9.2,
+    "price": 159,
+    "image": "https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/2fa44b15344917.5628fd261893b.jpg",
+    "imdb_url": "https://www.imdb.com/title/tt0111161/"
+  },
+  {
+    "id": 2,
+    "movie": "The Godfather",
+    "rating": 9.2,
+    "price": 189,
+    "image": "https://m.media-amazon.com/images/M/MV5BM2MyNjYxNmUtYTAwNi00MTYxLWJmNWYtYzZlODY3ZTk3OTFlXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_FMjpg_UX1000_.jpg",
+    "imdb_url": "https://www.imdb.com/title/tt0068646/"
+  },
+  {
+    "id": 3,
+    "movie": "The Dark Knight",
+    "rating": 9,
+    "price": 140,
+    "image": "https://m.media-amazon.com/images/M/MV5BMTMxNTMwODM0NF5BMl5BanBnXkFtZTcwODAyMTk2Mw@@._V1_.jpg",
+    "imdb_url": "https://www.imdb.com/title/tt0468569/"
+  },
+  {
+    "id": 4,
+    "movie": "Pulp Fiction",
+    "rating": 8.9,
+    "price": 136,
+    "image": "https://m.media-amazon.com/images/M/MV5BNGNhMDIzZTUtNTBlZi00MTRlLWFjM2ItYzViMjE3YzI5MjljXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_.jpg",
+    "imdb_url": "https://www.imdb.com/title/tt0110912/"
+  },
+  {
+    "id": 5,
+    "movie": "The Lord of the Rings: The Return of the King",
+    "rating": 9,
+    "price": 200,
+    "image": "https://m.media-amazon.com/images/M/MV5BNzA5ZDNlZWMtM2NhNS00NDJjLTk4NDItYTRmY2EwMWZlMTY3XkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_.jpg",
+    "imdb_url": "https://www.imdb.com/title/tt0167260/"
+  },
+  {
+    "id": 6,
+    "movie": "The Good, the Bad and the Ugly",
+    "rating": 8.8,
+    "price": 162,
+    "image": "https://upload.wikimedia.org/wikipedia/en/4/45/Good_the_bad_and_the_ugly_poster.jpg",
+    "imdb_url": "https://www.imdb.com/title/tt0060196/"
+  },
+  {
+    "id": 7,
+    "movie": "Fight Club",
+    "rating": 8.8,
+    "price": 122,
+    "image": "https://upload.wikimedia.org/wikipedia/en/f/fc/Fight_Club_poster.jpg",
+    "imdb_url": "https://www.imdb.com/title/tt0137523/"
+  },
+  {
+    "id": 8,
+    "movie": "The Lord of the Rings: The Fellowship of the Ring",
+    "rating": 8.8,
+    "price": 180,
+    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQwjvtARVQAFZvjgby4i1ev7I2h0OgHcG8YoQ&s",
+    "imdb_url": "https://www.imdb.com/title/tt0120737/"
+  },
+  {
+    "id": 9,
+    "movie": "Forrest Gump",
+    "rating": 8.8,
+    "price": 116,
+    "image": "https://upload.wikimedia.org/wikipedia/en/6/67/Forrest_Gump_poster.jpg",
+    "imdb_url": "https://www.imdb.com/title/tt0109830/"
+  },
+  {
+    "id": 10,
+    "movie": "Inception",
+    "rating": 8.8,
+    "price": 127,
+    "image": "https://m.media-amazon.com/images/M/MV5BMjAxMzY3NjcxNF5BMl5BanBnXkFtZTcwNTI5OTM0Mw@@._V1_.jpg",
+    "imdb_url": "https://www.imdb.com/title/tt1375666/"
+  },
+  {
+    "id": 11,
+    "movie": "Interstellar",
+    "rating": 8.6,
+    "price": 189,
+    "image": "https://upload.wikimedia.org/wikipedia/en/b/bc/Interstellar_film_poster.jpg",
+    "imdb_url": "https://www.imdb.com/title/tt0816692/"
+  },
+  {
+    "id": 12,
+    "movie": "The Matrix",
+    "rating": 8.7,
+    "price": 146,
+    "image": "https://upload.wikimedia.org/wikipedia/en/c/c1/The_Matrix_Poster.jpg",
+    "imdb_url": "https://www.imdb.com/title/tt0133093/"
+  },
+  {
+    "id": 13,
+    "movie": "Schindler's List",
+    "rating": 8.9,
+    "price": 175,
+    "image": "https://upload.wikimedia.org/wikipedia/en/3/38/Schindler%27s_List_movie.jpg",
+    "imdb_url": "https://www.imdb.com/title/tt0108052/"
+  },
+  {
+    "id": 14,
+    "movie": "The Silence of the Lambs",
+    "rating": 8.6,
+    "price": 134,
+    "image": "https://upload.wikimedia.org/wikipedia/en/8/86/The_Silence_of_the_Lambs_poster.jpg",
+    "imdb_url": "https://www.imdb.com/title/tt0102926/"
+  },
+  {
+    "id": 15,
+    "movie": "Star Wars: Episode V - The Empire Strikes Back",
+    "rating": 8.7,
+    "price": 167,
+    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRHpG9Uw7Md7jDCMBfrhGTJxpdoMUUH0HKGRg&s",
+    "imdb_url": "https://www.imdb.com/title/tt0080684/"
+  },
+  {
+    "id": 16,
+    "movie": "Saving Private Ryan",
+    "rating": 8.6,
+    "price": 142,
+    "image": "https://upload.wikimedia.org/wikipedia/en/a/ac/Saving_Private_Ryan_poster.jpg",
+    "imdb_url": "https://www.imdb.com/title/tt0120815/"
+  },
+  {
+    "id": 17,
+    "movie": "Parasite",
+    "rating": 8.6,
+    "price": 134,
+    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTcyJYd_sWzQdj87gwIiDRpi6JtzfY6-XLG-w&s",
+    "imdb_url": "https://www.imdb.com/title/tt6751668/"
+  },
+  {
+    "id": 18,
+    "movie": "Gladiator",
+    "rating": 8.5,
+    "price": 156,
+    "image": "https://upload.wikimedia.org/wikipedia/en/f/fb/Gladiator_%282000_film_poster%29.png",
+    "imdb_url": "https://www.imdb.com/title/tt0172495/"
+  },
+  {
+    "id": 19,
+    "movie": "Jurassic Park",
+    "rating": 8.1,
+    "price": 127,
+    "image": "https://upload.wikimedia.org/wikipedia/en/e/e7/Jurassic_Park_poster.jpg",
+    "imdb_url": "https://www.imdb.com/title/tt0107290/"
+  },
+  {
+    "id": 20,
+    "movie": "The Lion King",
+    "rating": 8.5,
+    "price": 148,
+    "image": "https://upload.wikimedia.org/wikipedia/en/3/3d/The_Lion_King_poster.jpg",
+    "imdb_url": "https://www.imdb.com/title/tt0110357/"
+  },
+  {
+    "id": 21,
+    "movie": "Blade Runner 2049",
+    "rating": 8,
+    "price": 139,
+    "image": "https://m.media-amazon.com/images/M/MV5BNzA1Njg4NzYxOV5BMl5BanBnXkFtZTgwODk5NjU3MzI@._V1_.jpg",
+    "imdb_url": "https://www.imdb.com/title/tt1856101/"
+  },
+  {
+    "id": 22,
+    "movie": "The Prestige",
+    "rating": 8.5,
+    "price": 127,
+    "image": "https://upload.wikimedia.org/wikipedia/en/d/d2/Prestige_poster.jpg",
+    "imdb_url": "https://www.imdb.com/title/tt0482571/"
+  },
+  {
+    "id": 23,
+    "movie": "Mad Max: Fury Road",
+    "rating": 8.1,
+    "price": 148,
+    "image": "https://upload.wikimedia.org/wikipedia/en/6/6e/Mad_Max_Fury_Road.jpg",
+    "imdb_url": "https://www.imdb.com/title/tt1392190/"
+  },
+  {
+    "id": 24,
+    "movie": "The Departed",
+    "rating": 8.5,
+    "price": 153,
+    "image": "https://upload.wikimedia.org/wikipedia/en/5/50/Departed234.jpg",
+    "imdb_url": "https://www.imdb.com/title/tt0407887/"
+  },
+  {
+    "id": 25,
+    "movie": "Whiplash",
+    "rating": 8.5,
+    "price": 131,
+    "image": "https://upload.wikimedia.org/wikipedia/en/0/01/Whiplash_poster.jpg",
+    "imdb_url": "https://www.imdb.com/title/tt2582802/"
+  },
+  {
+    "id": 26,
+    "movie": "Inglourious Basterds",
+    "rating": 8.3,
+    "price": 152,
+    "image": "https://upload.wikimedia.org/wikipedia/en/c/c3/Inglourious_Basterds_poster.jpg",
+    "imdb_url": "https://www.imdb.com/title/tt0361748/"
+  },
+  {
+    "id": 27,
+    "movie": "Alien",
+    "rating": 8.4,
+    "price": 142,
+    "image": "https://upload.wikimedia.org/wikipedia/en/c/c3/Alien_movie_poster.jpg",
+    "imdb_url": "https://www.imdb.com/title/tt0078748/"
+  },
+  {
+    "id": 28,
+    "movie": "Amélie",
+    "rating": 8.3,
+    "price": 124,
+    "image": "https://upload.wikimedia.org/wikipedia/en/5/53/Amelie_poster.jpg",
+    "imdb_url": "https://www.imdb.com/title/tt0211915/"
+  },
+  {
+    "id": 29,
+    "movie": "Eternal Sunshine of the Spotless Mind",
+    "rating": 8.3,
+    "price": 119,
+    "image": "https://m.media-amazon.com/images/M/MV5BMTY4NzcwODg3Nl5BMl5BanBnXkFtZTcwNTEwOTMyMw@@._V1_FMjpg_UX1000_.jpg",
+    "imdb_url": "https://www.imdb.com/title/tt0338013/"
+  }
+]

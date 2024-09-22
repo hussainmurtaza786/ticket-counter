@@ -1,15 +1,14 @@
-import React from 'react'
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import footballData from '../../json-data/football.json'
-import { Box, Button, HStack, Text, VStack } from '@chakra-ui/react';
+import football from '../../json-data/football.json';
+import { Box, Button, Grid, HStack, Text, useToast, VStack } from '@chakra-ui/react';
 import { addSportTicketThunk } from '../../store/ticketSlice';
 
-
-
-function FootBall({ selectedSport, onClose }) {
+function Tennis({ selectedSport }) {
   const userId = useSelector((state) => state.auth.user.id);
   const loader = useSelector((state) => state.ticket.fetchingState.loadTickets);
   const dispatch = useDispatch();
+  const toast = useToast();
 
   const sendData = async (ticketData) => {
     try {
@@ -20,34 +19,47 @@ function FootBall({ selectedSport, onClose }) {
       };
 
       await dispatch(addSportTicketThunk(data)).unwrap();
-      console.log('Football data ==>', data)
-
-      onClose();
+      toast({
+        // title: "Success!",
+        description: "Ticket booked successfully!",
+        status: "success",
+        duration: 3000,
+        isClosable: true,
+      });
     } catch (error) {
       console.error('Error sending data:', error);
       alert(error.message);
     }
   };
+
   return (
     <div>
       {loader && <Text>Loading...</Text>}
-
-      <VStack spacing={6} align="stretch">
-        {footballData.map((ticket, index) => (
-          <Box key={index} borderWidth="1px" borderRadius="lg" p={4} bg="gray.50">
-
-            <HStack>
-              <Text textAlign='center' width='100%' fontWeight='bolder' fontSize='20px' >{ticket.teams}</Text>
+      <Grid templateColumns="repeat(3, 1fr)" gap={6}>
+        {football.map((ticket, index) => (
+          <Box
+            key={index}
+            borderWidth="1px"
+            borderRadius="lg"
+            p={4}
+            bg="white"
+            boxShadow="lg"
+            transition="transform 0.2s"
+            _hover={{ transform: 'scale(1.05)', boxShadow: 'xl' }}
+          >
+            <HStack bgColor="teal.500" color="white" p={2} borderRadius="md">
+              <Text textAlign="center" width="100%" fontWeight="bolder" fontSize="20px">
+                {ticket.teams}
+              </Text>
             </HStack>
             <HStack>
               <Text fontWeight="bold">Date:</Text>
               <Text>{ticket.matchDate}</Text>
             </HStack>
             <HStack>
-              <Text fontWeight="bold">Stadium:</Text>
+              <Text fontWeight="bold">Venue:</Text>
               <Text>{ticket.venue}</Text>
             </HStack>
-           
             <HStack>
               <Text fontWeight="bold">Price:</Text>
               <Text>${ticket.price}</Text>
@@ -57,9 +69,9 @@ function FootBall({ selectedSport, onClose }) {
             </Button>
           </Box>
         ))}
-      </VStack>
+      </Grid>
     </div>
-  )
+  );
 }
 
-export default FootBall
+export default Tennis;

@@ -1,4 +1,13 @@
-import { Box, IconButton, Drawer, DrawerBody, DrawerHeader, DrawerOverlay, DrawerContent, useDisclosure } from "@chakra-ui/react";
+import {
+  Box,
+  IconButton,
+  Drawer,
+  DrawerBody,
+  DrawerHeader,
+  DrawerOverlay,
+  DrawerContent,
+  useDisclosure,
+} from "@chakra-ui/react";
 import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
 import Items from "./Items";
 import Logo from "./Logo";
@@ -30,7 +39,6 @@ function Navbar({ showForm }) {
         <Logo />
       </Box>
 
-      {/* Toggle Button for Small Screens */}
       <Box display={{ base: "block", md: "none" }}>
         <IconButton
           aria-label="Open Menu"
@@ -40,7 +48,6 @@ function Navbar({ showForm }) {
         />
       </Box>
 
-      {/* Normal Navbar Items (hidden on small screens) */}
       <Box
         flex="1"
         display={{ base: "none", md: "flex" }}
@@ -53,7 +60,6 @@ function Navbar({ showForm }) {
         <Auth onLogout={logoutHandler} showForm={showForm} />
       </Box>
 
-      {/* Drawer for Small Screens */}
       <Drawer placement="right" onClose={onClose} isOpen={isOpen}>
         <DrawerOverlay>
           <DrawerContent>
