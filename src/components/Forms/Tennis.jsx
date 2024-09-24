@@ -53,7 +53,10 @@ function Tennis({ selectedSport }) {
   return (
     <div>
       {loader && <Text>Loading...</Text>}
-      <Grid templateColumns="repeat(3, 1fr)" gap={6}>
+      <Grid
+        templateColumns={{ base: "repeat(1, 1fr)", md: "repeat(2, 1fr)", lg: "repeat(3, 1fr)" }} // Responsive grid
+        gap={6}
+      >
         {tennis.map((ticket, index) => (
           <Box
             key={index}
@@ -66,7 +69,7 @@ function Tennis({ selectedSport }) {
             _hover={{ transform: "scale(1.05)", boxShadow: "xl" }}
           >
             <HStack bgColor="teal.500" color="white" p={2} borderRadius="md">
-              <Text textAlign="center" width="100%" fontWeight="bolder" fontSize="20px">
+              <Text textAlign="center" width="100%" fontWeight="bolder" fontSize={{ base: "18px", md: "20px" }}>
                 {ticket.match}
               </Text>
             </HStack>
@@ -87,6 +90,7 @@ function Tennis({ selectedSport }) {
               colorScheme="teal"
               isLoading={loadingStates[index]}
               onClick={() => sendData(ticket, index)}
+              size={{ base: "md", sm: "lg" }} // Responsive button size
             >
               {loadingStates[index] ? "Booking..." : "Book Now"}
             </Button>

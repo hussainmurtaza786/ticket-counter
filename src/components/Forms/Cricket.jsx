@@ -7,7 +7,6 @@ import {
   Box,
   Grid,
   useToast,
-  Image,
 } from "@chakra-ui/react";
 import cricketData from "../../json-data/cricket.json";
 import { useDispatch, useSelector } from "react-redux";
@@ -68,7 +67,11 @@ function Cricket({ selectedSport }) {
     <div>
       {loader && <Text>Loading...</Text>}
 
-      <Grid templateColumns="repeat(3, 1fr)" userSelect="none" gap={6}>
+      <Grid 
+        templateColumns={{ base: "repeat(1, 1fr)", md: "repeat(2, 1fr)", lg: "repeat(3, 1fr)" }} 
+        userSelect="none" 
+        gap={6}
+      >
         {cricketData.map((ticket, index) => (
           <Box
             key={index}
@@ -85,7 +88,7 @@ function Cricket({ selectedSport }) {
                 textAlign="center"
                 width="100%"
                 fontWeight="bolder"
-                fontSize="20px"
+                fontSize={{ base: "16px", md: "18px", lg: "20px" }} // Responsive font size
               >
                 {ticket.teams} {ticket.match}
               </Text>
@@ -98,11 +101,10 @@ function Cricket({ selectedSport }) {
               borderRadius="md"
               justifyContent="center"
             >
-              <Text fontSize="18px">{ticket.cricketType}</Text>
+              <Text fontSize={{ base: "14px", md: "16px", lg: "18px" }}>{ticket.cricketType}</Text>
             </HStack>
 
             <VStack align="start" mt={4} spacing={2}>
-           
               <HStack>
                 <Text fontWeight="bold">Date:</Text>
                 <Text>{ticket.matchDate}</Text>
@@ -121,6 +123,7 @@ function Cricket({ selectedSport }) {
               isDisabled={loadingStates[index]}
               mt={4}
               colorScheme="teal"
+              width="full" // Make the button full width
               onClick={() => sendData(ticket, index)}
             >
               {loadingStates[index] ? "Booking..." : "Book Now"}

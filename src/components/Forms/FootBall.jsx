@@ -61,7 +61,7 @@ function FootBall({ selectedSport }) {
   return (
     <div>
       {loader && <Text>Loading...</Text>}
-      <Grid templateColumns="repeat(3, 1fr)" gap={6}>
+      <Grid templateColumns={{ base: "repeat(1, 1fr)", md: "repeat(2, 1fr)", lg: "repeat(3, 1fr)" }} gap={6}>
         {football.map((ticket, index) => (
           <Box
             key={index}
@@ -73,9 +73,8 @@ function FootBall({ selectedSport }) {
             transition="transform 0.2s"
             _hover={{ transform: 'scale(1.05)', boxShadow: 'xl' }}
           >
-            
             <HStack bgColor="teal.500" color="white" p={2} borderRadius="md">
-              <Text textAlign="center" width="100%" fontWeight="bolder" fontSize="20px">
+              <Text textAlign="center" width="100%" fontWeight="bolder" fontSize={{ base: "16px", md: "20px" }}>
                 {ticket.teams}
               </Text>
             </HStack>
@@ -97,6 +96,7 @@ function FootBall({ selectedSport }) {
               isDisabled={loadingStates[index]}
               mt={4}
               colorScheme="teal"
+              size={{ base: "sm", md: "md" }} // Responsive button size
               onClick={() => sendData(ticket, index)} 
             >
               {loadingStates[index] ? 'Booking...' : 'Book Now'}

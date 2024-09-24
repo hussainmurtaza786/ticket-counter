@@ -3,25 +3,36 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 
-function Items() {
+function Items({ onClose }) {
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
 
   return (
     <Box color={"whitesmoke"} padding="10px">
-      
       <Flex
         direction={{ base: "column", md: "row" }}
         alignItems={{ base: "center", md: "center" }}
         justifyContent="space-between"
         wrap="nowrap"
-        gap="8px" 
+        gap="8px"
       >
-        <ListStyle path="/">Home</ListStyle>
-        <ListStyle path="/contact">Contact</ListStyle>
-        <ListStyle path="/about">About</ListStyle>
-        <ListStyle path="/review">Review</ListStyle>
-        <ListStyle path="/ticket">Tickets</ListStyle>
-        {isAuthenticated && <ListStyle path="/bookTicket">Booked-Ticket</ListStyle>}
+        <ListStyle onClick={onClose} path="/">
+          Home
+        </ListStyle>
+        <ListStyle onClick={onClose} path="/contact">
+          Contact
+        </ListStyle>
+        <ListStyle onClick={onClose} path="/about">
+          About
+        </ListStyle>
+        <ListStyle onClick={onClose} path="/review">
+          Review
+        </ListStyle>
+        <ListStyle onClick={onClose} path="/ticket">
+          Tickets
+        </ListStyle>
+        {isAuthenticated && (
+          <ListStyle path="/bookTicket">Booked-Ticket</ListStyle>
+        )}
       </Flex>
     </Box>
   );
@@ -29,13 +40,14 @@ function Items() {
 
 export default Items;
 
-const ListStyle = ({ children, path }) => {
+const ListStyle = ({ children, path, onClick }) => {
   return (
     <Box
-      m="0px" 
-      p="0px 10px" 
+      m="0px"
+      p="0px 10px"
       userSelect="none"
       borderRadius="md"
+      onClick={onClick}
     >
       <NavLink
         to={path}

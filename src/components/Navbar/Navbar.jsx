@@ -69,8 +69,8 @@ function Navbar({ showForm }) {
           <DrawerContent>
             <DrawerHeader borderBottomWidth="1px">Menu</DrawerHeader>
             <DrawerBody>
-              <Items />
-              <Auth onLogout={logoutHandler} showForm={showForm} />
+              <Items onClose={onClose} />
+              <Auth onLogout={logoutHandler} showForm={showForm} onClose={onClose} />
             </DrawerBody>
           </DrawerContent>
         </DrawerOverlay>

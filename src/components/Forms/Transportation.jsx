@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import ticketsData from "../../json-data/flight.json";
-import { Box, Button, Input, Heading, List, ListItem, Text, useToast } from "@chakra-ui/react";
+import { Box, Button, Input, Heading, List, ListItem, Text, useToast, SimpleGrid } from "@chakra-ui/react";
 import { useDispatch, useSelector } from "react-redux";
 import { addTransportTicketThunk } from "../../store/ticketSlice";
 
-const TicketSearch = () => {
+const Transportation = () => {
   const dispatch = useDispatch();
   const userId = useSelector((state) => state.auth.user?.id);
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
@@ -84,29 +84,33 @@ const TicketSearch = () => {
         value={destination}
         onChange={(e) => setDestination(e.target.value)}
         mb={3}
+        width={{ base: "100%", md: "70%" }} // Responsive width
       />
       <Input
         placeholder="Enter your destination to (e.g., Lahore)"
         value={journey}
         onChange={(e) => setJourney(e.target.value)}
         mb={3}
+        width={{ base: "100%", md: "70%" }} // Responsive width
       />
       <Button
         isDisabled={journey.length === 0 || destination.length === 0}
         colorScheme="teal"
         onClick={handleSearch}
         mb={4}
+        size={{ base: "md", md: "lg" }} // Responsive button size
       >
         Search Tickets
       </Button>
-      <List spacing={3}>
+      <SimpleGrid columns={{ base: 1, sm: 2, md: 3 }} spacing={4}> {/* Responsive grid layout for tickets */}
         {availableTickets.map((ticket, index) => (
-          <ListItem key={ticket.id} p={3} borderWidth="1px" borderRadius="md">
-            {ticket.type.toUpperCase()} from {ticket.from} to {ticket.to} at {ticket.departure_time}, Price: {ticket.price} PKR
+          <ListItem key={ticket.id} p={3} borderWidth="1px" borderRadius="md" display="flex" justifyContent="space-between" alignItems="center">
+            <Text>
+              {ticket.type.toUpperCase()} from {ticket.from} to {ticket.to} at {ticket.departure_time}, Price: {ticket.price} PKR
+            </Text>
             <Button
               colorScheme="blue"
               variant="outline"
-              ml={4}
               isLoading={loadingStates[index]}
               _hover={{ bg: "blue.500", color: "white" }}
               onClick={() => bookTicketHandler(ticket, index)}
@@ -115,9 +119,9 @@ const TicketSearch = () => {
             </Button>
           </ListItem>
         ))}
-      </List>
+      </SimpleGrid>
     </Box>
   );
 };
 
-export default TicketSearch;
+export default Transportation;
