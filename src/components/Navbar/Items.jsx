@@ -8,24 +8,13 @@ function Items() {
 
   return (
     <Box color={"whitesmoke"} padding="10px">
-      {!isAuthenticated && (
-        <Text
-          color="red"
-          m="0px 20px"
-          outline="none"
-          width="400px"
-          fontSize="20px"
-          userSelect="none"
-        >
-          Please log in to book a ticket.
-        </Text>
-      )}
+      
       <Flex
         direction={{ base: "column", md: "row" }}
         alignItems={{ base: "center", md: "center" }}
         justifyContent="space-between"
         wrap="nowrap"
-        gap="8px" // Minimal gap between items
+        gap="8px" 
       >
         <ListStyle path="/">Home</ListStyle>
         <ListStyle path="/contact">Contact</ListStyle>

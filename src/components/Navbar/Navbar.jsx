@@ -39,6 +39,7 @@ function Navbar({ showForm }) {
         <Logo />
       </Box>
 
+
       <Box display={{ base: "block", md: "none" }}>
         <IconButton
           aria-label="Open Menu"
@@ -48,6 +49,7 @@ function Navbar({ showForm }) {
         />
       </Box>
 
+
       <Box
         flex="1"
         display={{ base: "none", md: "flex" }}
@@ -56,9 +58,11 @@ function Navbar({ showForm }) {
         <Items />
       </Box>
 
+
       <Box display={{ base: "none", md: "block" }}>
         <Auth onLogout={logoutHandler} showForm={showForm} />
       </Box>
+
 
       <Drawer placement="right" onClose={onClose} isOpen={isOpen}>
         <DrawerOverlay>

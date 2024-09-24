@@ -10,6 +10,7 @@ import Contact from './components/Pages/Contact';
 import About from './components/Pages/About';
 import Form from './components/Forms/Form';
 import BookTicket from './components/Pages/BookTicket'
+import Message from './components/Navbar/Message';
 
 function App() {
   const [formType, setFormType] = useState("");
@@ -55,6 +56,7 @@ function App() {
   return (
     <ChakraProvider>
       <Box p={0} m={0}>
+        <Message/>
         <RouterProvider router={router} />
       </Box>
     </ChakraProvider>

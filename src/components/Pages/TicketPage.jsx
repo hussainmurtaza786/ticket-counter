@@ -33,13 +33,14 @@ function FetchData() {
   };
 
   return (
-    <Box userSelect="none" p={{ base: 2, md: 4 }} > {/* Added padding for responsiveness */}
-      <Box display="flex" m="2px" userSelect="none">
+    <Box userSelect="none" p={{ base: 2, md: 4 }}>
+      <Box justifyContent="center" m="2px">
         <Select
           value={selectedTicket}
           onChange={handleSportChange}
           m={4}
-          width={{ base: "100%", sm: "200px" }} 
+          width={{ base: "100px", sm: "200px", md: "300px" }}
+          fontSize={{ base: "16px", md: "18px" }}
         >
           {values.map((val) => (
             <option key={val} value={val}>
@@ -48,13 +49,15 @@ function FetchData() {
           ))}
         </Select>
       </Box>
-      
-      <Text 
-        fontSize={{ base: "18px", md: "20px", lg: "25px" }} // Adjust font size for responsiveness
-        mb={4} 
+
+      <Text
+        fontSize={{ base: "16px", md: "18px", lg: "20px" }}
+        mb={4}
         textAlign="center"
+        bgColor='#EDF2F7'
       >
-        <Kbd p={{ base: "2px 8px", md: "4px 10px" }}>{getDescription()}</Kbd> {/* Adjust padding for Kbd */}
+        {getDescription()}
+
       </Text>
 
       <Box m="12px 3px">
