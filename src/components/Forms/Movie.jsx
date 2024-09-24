@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Button,
   Text,
@@ -15,11 +15,30 @@ import { useDispatch, useSelector } from "react-redux";
 import { addMovieTicketThunk } from "../../store/ticketSlice";
 
 function Movie() {
-  const userId = useSelector((state) => state.auth.user.id);
   const loader = useSelector((state) => state.ticket.fetchingState.loadTickets);
+  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+  const userId = useSelector((state) => state.auth.user?.id);
   const dispatch = useDispatch();
   const toast = useToast();
-  const sendData = async (ticketData) => {
+
+  const [loadingStates, setLoadingStates] = useState({});
+
+  const sendData = async (ticketData, index) => {
+    if (!isAuthenticated) {
+      toast({
+        description: "You need to Sign in to book a ticket.",
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+      });
+      return;
+    }
+
+    setLoadingStates((prevState) => ({
+      ...prevState,
+      [index]: true,
+    }));
+
     try {
       const data = {
         ...ticketData,
@@ -28,7 +47,6 @@ function Movie() {
 
       await dispatch(addMovieTicketThunk(data)).unwrap();
       toast({
-        // title: "Success!",
         description: "Ticket booked successfully!",
         status: "success",
         duration: 3000,
@@ -36,7 +54,17 @@ function Movie() {
       });
     } catch (error) {
       console.error("Error sending data:", error);
-      alert(error.message);
+      toast({
+        description: error.message,
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+      });
+    } finally {
+      setLoadingStates((prevState) => ({
+        ...prevState,
+        [index]: false,
+      }));
     }
   };
 
@@ -44,7 +72,11 @@ function Movie() {
     <div>
       {loader && <Text>Loading...</Text>}
 
-      <Grid templateColumns="repeat(3, 1fr)" userSelect="none" gap={6}>
+      <Grid 
+        templateColumns={{ base: "repeat(1, 1fr)", md: "repeat(2, 1fr)", lg: "repeat(3, 1fr)" }} 
+        userSelect="none" 
+        gap={6}
+      >
         {movieData.map((movie, index) => (
           <Box
             key={index}
@@ -70,8 +102,8 @@ function Movie() {
                 w="100%"
                 src={movie.image}
                 alt={movie.movie}
-                boxSize="100%"
-                objectFit="cover"
+                maxH="200px" // Set a maximum height to prevent cutting
+                objectFit="cover" // Maintain aspect ratio
                 borderRadius="md"
               />
               <HStack>
@@ -90,8 +122,13 @@ function Movie() {
               </HStack>
             </VStack>
 
-            <Button mt={4} colorScheme="teal" onClick={() => sendData(movie)}>
-              Book Now
+            <Button
+              isDisabled={loadingStates[index]} 
+              mt={4}
+              colorScheme="teal"
+              onClick={() => sendData(movie, index)} 
+            >
+              {loadingStates[index] ? "Booking..." : "Book Now"} 
             </Button>
           </Box>
         ))}

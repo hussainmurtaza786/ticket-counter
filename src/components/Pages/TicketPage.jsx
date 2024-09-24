@@ -26,21 +26,20 @@ function FetchData() {
       case "tennis":
         return "Experience the intensity of tennis matches and witness the top players in action!";
       case "flight":
-        return "Book your tickets for the next adventure and explore new destinations!"
-
+        return "Book your tickets for the next adventure and explore new destinations!";
       default:
         return "";
     }
   };
 
   return (
-    <Box userSelect="none">
+    <Box userSelect="none" p={{ base: 2, md: 4 }} > {/* Added padding for responsiveness */}
       <Box display="flex" m="2px" userSelect="none">
         <Select
           value={selectedTicket}
           onChange={handleSportChange}
           m={4}
-          width="200px"
+          width={{ base: "100%", sm: "200px" }} 
         >
           {values.map((val) => (
             <option key={val} value={val}>
@@ -49,8 +48,13 @@ function FetchData() {
           ))}
         </Select>
       </Box>
-      <Text fontSize="25px" mb="8" textAlign="center">
-        <Kbd p="4px 10px">{getDescription()}</Kbd>
+      
+      <Text 
+        fontSize={{ base: "18px", md: "20px", lg: "25px" }} // Adjust font size for responsiveness
+        mb={4} 
+        textAlign="center"
+      >
+        <Kbd p={{ base: "2px 8px", md: "4px 10px" }}>{getDescription()}</Kbd> {/* Adjust padding for Kbd */}
       </Text>
 
       <Box m="12px 3px">

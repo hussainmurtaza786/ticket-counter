@@ -38,8 +38,8 @@ const addTransportTicketThunk = createAsyncThunk(
 
 const addSportTicketThunk = createAsyncThunk(
     "addSportTicket",
-    async ({  date, matchDate, venue, teams, price, cricketType, userId }, thunkAPI) => {
-        const sportTicket = await addSportTicket({  date, matchDate, venue, teams, price, cricketType, userId });
+    async ({  date, matchDate, venue, teams, price, cricketType,match, userId }, thunkAPI) => {
+        const sportTicket = await addSportTicket({  date, matchDate, venue, teams, price, cricketType,match, userId });
         return sportTicket
 
     }

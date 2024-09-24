@@ -95,12 +95,7 @@ function Auth({ onLogout, showForm }) {
           </Box>
         </ButtonGroup>
 
-        {!isAuthenticated && (
-          <Text color="red" m="2px 20px" outline="none" userSelect="none">
-           Please log in to book a ticket.
-
-          </Text>
-        )}
+      
       </Box>
     </Box>
   );

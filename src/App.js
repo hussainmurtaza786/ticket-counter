@@ -1,16 +1,15 @@
-import { Box, Button, ChakraProvider, Heading, Highlight, Text } from '@chakra-ui/react';
+import { Box,  ChakraProvider, } from '@chakra-ui/react';
 import './App.css';
 import Navbar from './components/Navbar/Navbar';
 import Home from './components/home-page/Home';
 import Ticket from './components/Pages/TicketPage'
-import { useSelector } from 'react-redux';
 import { createBrowserRouter, RouterProvider, Outlet } from 'react-router-dom';
 import { useState } from 'react';
 import ReviewPage from './components/Pages/ReviewPage';
 import Contact from './components/Pages/Contact';
 import About from './components/Pages/About';
 import Form from './components/Forms/Form';
-import Sport from './components/Forms/Sport';
+import BookTicket from './components/Pages/BookTicket'
 
 function App() {
   const [formType, setFormType] = useState("");
@@ -19,7 +18,6 @@ function App() {
   const onClose = () => setFormType("");
 
 
-  const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
   const router = createBrowserRouter([
     {
       path: '/',
@@ -41,24 +39,14 @@ function App() {
         { path: '/review', element: <ReviewPage /> },
         {
           path: '/ticket',
-          element: isAuthenticated
-            ? <Ticket />
-            : <Text display='flex' fontSize='30px' fontWeight='bold' height='600px' justifyContent='center' alignItems='center'>
+          element: < Ticket />
 
 
-              <Heading lineHeight='tall' userSelect='none'>
-                <Highlight
-                  query='Please Sign in to show Ticket'
-                  styles={{ px: '2', py: '1', rounded: 'full', bg: 'blue.400' }}
-                >
-                  Please Sign in to show Ticket
-                </Highlight>
-              </Heading>
-            </Text>
+
         },
-        { path: '/sport', element: <Sport /> },
         { path: '/contact', element: <Contact /> },
         { path: '/about', element: <About /> },
+        { path: '/bookTicket', element: <BookTicket /> },
       ],
     },
   ]);

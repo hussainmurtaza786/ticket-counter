@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Button,
   Text,
@@ -7,28 +7,42 @@ import {
   Box,
   Grid,
   useToast,
+  Image,
 } from "@chakra-ui/react";
 import cricketData from "../../json-data/cricket.json";
 import { useDispatch, useSelector } from "react-redux";
 import { addSportTicketThunk } from "../../store/ticketSlice";
 
 function Cricket({ selectedSport }) {
-  const userId = useSelector((state) => state.auth.user.id);
+  const userId = useSelector((state) => state.auth.user?.id);
+  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
   const loader = useSelector((state) => state.ticket.fetchingState.loadTickets);
   const dispatch = useDispatch();
   const toast = useToast();
+  const [loadingStates, setLoadingStates] = useState({});
 
-  const sendData = async (ticketData) => {
+  const sendData = async (ticketData, index) => {
+    if (!isAuthenticated) {
+      toast({
+        description: "You need to Sign in to book a ticket.",
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+      });
+      return;
+    }
+    setLoadingStates((prevState) => ({
+      ...prevState,
+      [index]: true,
+    }));
     try {
       const data = {
         ...ticketData,
         sportType: selectedSport,
         userId: userId,
       };
-      // console.log(data);
       await dispatch(addSportTicketThunk(data)).unwrap();
       toast({
-        // title: "Success!",
         description: "Ticket booked successfully!",
         status: "success",
         duration: 3000,
@@ -36,7 +50,17 @@ function Cricket({ selectedSport }) {
       });
     } catch (error) {
       console.error("Error sending data:", error);
-      alert(error.message);
+      toast({
+        description: error.message,
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+      });
+    } finally {
+      setLoadingStates((prevState) => ({
+        ...prevState,
+        [index]: false,
+      }));
     }
   };
 
@@ -63,7 +87,7 @@ function Cricket({ selectedSport }) {
                 fontWeight="bolder"
                 fontSize="20px"
               >
-                {ticket.teams}
+                {ticket.teams} {ticket.match}
               </Text>
             </HStack>
 
@@ -78,6 +102,7 @@ function Cricket({ selectedSport }) {
             </HStack>
 
             <VStack align="start" mt={4} spacing={2}>
+           
               <HStack>
                 <Text fontWeight="bold">Date:</Text>
                 <Text>{ticket.matchDate}</Text>
@@ -92,8 +117,13 @@ function Cricket({ selectedSport }) {
               </HStack>
             </VStack>
 
-            <Button mt={4} colorScheme="teal" onClick={() => sendData(ticket)}>
-              Book Now
+            <Button
+              isDisabled={loadingStates[index]}
+              mt={4}
+              colorScheme="teal"
+              onClick={() => sendData(ticket, index)}
+            >
+              {loadingStates[index] ? "Booking..." : "Book Now"}
             </Button>
           </Box>
         ))}

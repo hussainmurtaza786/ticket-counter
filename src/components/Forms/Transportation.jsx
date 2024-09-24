@@ -1,25 +1,18 @@
 import React, { useState } from "react";
 import ticketsData from "../../json-data/flight.json";
-import {
-  Box,
-  Button,
-  Input,
-  Heading,
-  List,
-  ListItem,
-  Text,
-  useToast,
-} from "@chakra-ui/react";
+import { Box, Button, Input, Heading, List, ListItem, Text, useToast } from "@chakra-ui/react";
 import { useDispatch, useSelector } from "react-redux";
 import { addTransportTicketThunk } from "../../store/ticketSlice";
 
 const TicketSearch = () => {
-  const dispatch =useDispatch()
-  const userId = useSelector((state) => state.auth.user.id);
+  const dispatch = useDispatch();
+  const userId = useSelector((state) => state.auth.user?.id);
+  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
   const toast = useToast();
   const [destination, setDestination] = useState("");
   const [journey, setJourney] = useState("");
   const [availableTickets, setAvailableTickets] = useState([]);
+  const [loadingStates, setLoadingStates] = useState({});
 
   const handleSearch = () => {
     const filteredTickets = ticketsData.tickets.filter((ticket) => {
@@ -43,7 +36,19 @@ const TicketSearch = () => {
     }
   };
 
-  const bookTicketHandler = async (ticketData) => {
+  const bookTicketHandler = async (ticketData, index) => {
+    if (!isAuthenticated) {
+      toast({
+        description: "You need to Sign in to book a ticket.",
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+      });
+      return;
+    }
+
+    setLoadingStates((prevState) => ({ ...prevState, [index]: true }));
+
     try {
       const data = {
         ...ticketData,
@@ -51,7 +56,6 @@ const TicketSearch = () => {
       };
 
       await dispatch(addTransportTicketThunk(data)).unwrap();
-      console.log(data);
       toast({
         title: "Success!",
         description: "Ticket booked successfully!",
@@ -60,7 +64,6 @@ const TicketSearch = () => {
         isClosable: true,
       });
     } catch (error) {
-      console.error("Error sending data:", error);
       toast({
         title: "Error!",
         description: error.message,
@@ -68,6 +71,8 @@ const TicketSearch = () => {
         duration: 3000,
         isClosable: true,
       });
+    } finally {
+      setLoadingStates((prevState) => ({ ...prevState, [index]: false }));
     }
   };
 
@@ -95,18 +100,18 @@ const TicketSearch = () => {
         Search Tickets
       </Button>
       <List spacing={3}>
-        {availableTickets.map((ticket) => (
+        {availableTickets.map((ticket, index) => (
           <ListItem key={ticket.id} p={3} borderWidth="1px" borderRadius="md">
-            {ticket.type.toUpperCase()} from {ticket.from} to {ticket.to} at{" "}
-            {ticket.departure_time}, Price: {ticket.price} PKR
+            {ticket.type.toUpperCase()} from {ticket.from} to {ticket.to} at {ticket.departure_time}, Price: {ticket.price} PKR
             <Button
               colorScheme="blue"
               variant="outline"
               ml={4}
+              isLoading={loadingStates[index]}
               _hover={{ bg: "blue.500", color: "white" }}
-              onClick={() => bookTicketHandler(ticket)}
+              onClick={() => bookTicketHandler(ticket, index)}
             >
-              Book Ticket
+              {loadingStates[index] ? "Booking..." : "Book Ticket"}
             </Button>
           </ListItem>
         ))}
