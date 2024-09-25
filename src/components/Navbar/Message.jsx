@@ -24,7 +24,7 @@ function Message() {
                             fontWeight="bold"
                             userSelect="none"
                         >
-                            Please log in to book a ticket.
+                            Please Sign in to book a ticket.
                         </Text>
                     </Box>
                 )}

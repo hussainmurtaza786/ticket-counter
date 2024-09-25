@@ -13,6 +13,7 @@ import {
   InputRightElement,
   InputGroup,
   Spinner,
+  useToast,
 } from "@chakra-ui/react";
 import { useFormik } from "formik";
 import { loginFormSchema } from "../../Schemas/Index";
@@ -22,6 +23,7 @@ import { IoEyeSharp } from "react-icons/io5";
 import { signInThunk } from "../../store/authSlice";
 
 const Login = ({ onClose }) => {
+  const toast=useToast()
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const isAuthenticating = useSelector((state) => state.auth.isAuthenticating);
 
@@ -35,7 +37,13 @@ const Login = ({ onClose }) => {
       await dispatch(signInThunk(values)).unwrap();
       onClose();
     } catch (error) {
-      alert(error);
+      // alert(error);
+      toast({
+        description: error,
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+      });
     }
   };
 

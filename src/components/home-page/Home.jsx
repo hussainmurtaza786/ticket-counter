@@ -17,8 +17,9 @@ function Home() {
         <Image width="100%" height="100vh" objectFit="cover" opacity={0.3} src={background} />
 
         <Box
+          width={{ base: "100%", sm:"70%" }}
           position="absolute"
-          top="40%"
+          top={{ base: "30%" }}
           left="50%"
           transform="translate(-50%, -50%)"
           zIndex="1"
@@ -29,7 +30,15 @@ function Home() {
 
       <Box
         position="absolute"
-        bottom="17rem"
+        bottom={{
+          base: "17rem",
+          sm: '12rem',
+          md: "10rem",
+          lg: "12rem",
+          xl: "17rem",
+          "2xl": "40rem",
+
+        }}
         left="50%"
         transform="translateX(-50%)"
         zIndex="1"
@@ -53,14 +62,8 @@ function Home() {
         </Link>
       </Box>
 
-      {/* Ticket List */}
-      <Box
-        position="absolute"
-        bottom="10rem"
-        left="50%"
-        transform="translateX(-50%)"
-        zIndex="1"
-      ></Box>
+
+
     </Box>
   );
 }

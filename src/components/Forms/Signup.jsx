@@ -12,6 +12,7 @@ import {
   Stack,
   Text,
   Flex,
+  useToast,
 } from '@chakra-ui/react';
 import { useDispatch, useSelector } from 'react-redux';
 import { signUpThunk } from '../../store/authSlice';
@@ -21,6 +22,7 @@ import { IoEyeSharp } from 'react-icons/io5';
 import { FaRegEyeSlash } from 'react-icons/fa';
 
 const Signup = ({ onClose }) => {
+  const toast=useToast()
   const isAuthenticating = useSelector((state) => state.auth.isAuthenticating);
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
 
@@ -35,7 +37,13 @@ const Signup = ({ onClose }) => {
       await dispatch(signUpThunk(values)).unwrap();
       onClose();
     } catch (error) {
-      alert(error.message);
+
+      toast({
+        description: error.message,
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+      });
     }
   };
 
@@ -57,11 +65,11 @@ const Signup = ({ onClose }) => {
       display='flex'
       justifyContent='center'
       alignItems='center'
-      p={{ base: 4, md: 6 }} // Responsive padding
+      p={{ base: 4, md: 6 }} 
       borderRadius='md'
-      height='100vh' // Fill the viewport height
+      height='100vh' 
     >
-      <Box width={{ base: '90%', sm: '70%', md: '50%', lg: '40%' }} borderWidth={1} borderRadius='lg' p={6}>
+      <Box width={{ base: '100%', sm: '70%', md: '50%', lg: '100%' }} borderWidth={1} borderRadius='lg' p={6}>
         <form onSubmit={handleSubmit}>
           <Stack spacing={4}>
             {isAuthenticating && <Spinner />}
