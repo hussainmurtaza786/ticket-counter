@@ -6,9 +6,11 @@ import {
   Input,
   Heading,
   ListItem,
+  List,
   Text,
   useToast,
   SimpleGrid,
+  Stack,
 } from "@chakra-ui/react";
 import { useDispatch, useSelector } from "react-redux";
 import { addTransportTicketThunk } from "../../store/ticketSlice";
@@ -101,61 +103,70 @@ const Transportation = () => {
   };
 
   return (
-    <Box p={5} shadow="md" borderWidth="1px" borderRadius="lg">
-      <Heading mb={4}>Flight Ticket Search</Heading>
-      <Input
-        placeholder="Enter your Journey from (e.g., Karachi)"
-        value={destination}
-        onChange={(e) => setDestination(e.target.value)}
-        onKeyDown={handleKeyDown} // Add this line
-        mb={3}
-        width={{ base: "100%", md: "70%" }}
-      />
-      <Input
-        placeholder="Enter your destination to (e.g., Lahore)"
-        value={journey}
-        onChange={(e) => setJourney(e.target.value)}
-        onKeyDown={handleKeyDown} // Add this line
-        mb={3}
-        width={{ base: "100%", md: "70%" }}
-      />
-      <Button
-        isDisabled={journey.length === 0 || destination.length === 0}
-        colorScheme="teal"
-        onClick={handleSearch}
-        mb={4}
-        ml={2}
-        size={{ base: "md", md: "lg" }}
-      >
-        Search Tickets
-      </Button>
-      <SimpleGrid columns={{ base: 1, sm: 2, md: 3 }} spacing={4}>
-        {availableTickets.map((ticket, index) => (
-          <ListItem
-            key={ticket.id}
-            p={3}
-            borderWidth="1px"
-            borderRadius="md"
-            display="flex"
-            justifyContent="space-between"
-            alignItems="center"
-          >
-            <Text>
-              {ticket.type.toUpperCase()} from {ticket.from} to {ticket.to} at{" "}
-              {ticket.departure_time}, Price: {ticket.price} PKR
-            </Text>
-            <Button
-              colorScheme="blue"
-              variant="outline"
-              isLoading={loadingStates[index]}
-              _hover={{ bg: "blue.500", color: "white" }}
-              onClick={() => bookTicketHandler(ticket, index)}
+    <Box p={{ base: 3, md: 5 }} shadow="md" borderWidth="1px" borderRadius="lg">
+      <Heading mb={4} fontSize={{ base: "lg", md: "xl" }}>
+        Flight Ticket Search
+      </Heading>
+      <Stack spacing={4}>
+        <Input
+          placeholder="Enter your Journey from (e.g., Karachi)"
+          value={destination}
+          onChange={(e) => setDestination(e.target.value)}
+          onKeyDown={handleKeyDown}
+          mb={3}
+          width={{ base: "100%", md: "70%" }}
+        />
+        <Input
+          placeholder="Enter your destination to (e.g., Lahore)"
+          value={journey}
+          onChange={(e) => setJourney(e.target.value)}
+          onKeyDown={handleKeyDown}
+          mb={3}
+          width={{ base: "100%", md: "70%" }}
+        />
+        <Button
+          isDisabled={journey.length === 0 || destination.length === 0}
+          colorScheme="teal"
+          onClick={handleSearch}
+          mb={4}
+          size={{ base: "md", md: "lg" }}
+          width={{ base: "100%", md: "auto" }}
+        >
+          Search Tickets
+        </Button>
+      </Stack>
+
+      <List spacing={3}>
+        <SimpleGrid columns={{ base: 1, sm: 2, md: 3 }} spacing={4}>
+          {availableTickets.map((ticket, index) => (
+            <ListItem
+              key={ticket.id}
+              p={3}
+              borderWidth="1px"
+              borderRadius="md"
+              display="flex"
+              justifyContent="space-between"
+              alignItems="center"
+              flexDirection={{ base: "column", md: "row" }} // Stack vertically on small screens
             >
-              {loadingStates[index] ? "Booking..." : "Book Ticket"}
-            </Button>
-          </ListItem>
-        ))}
-      </SimpleGrid>
+              <Text fontSize={{ base: "sm", md: "md" }} mb={{ base: 2, md: 0 }}>
+                {ticket.type.toUpperCase()} from {ticket.from} to {ticket.to} at{" "}
+                {ticket.departure_time}, Price: {ticket.price} PKR
+              </Text>
+              <Button
+                colorScheme="blue"
+                variant="outline"
+                isLoading={loadingStates[index]}
+                _hover={{ bg: "blue.500", color: "white" }}
+                size={{ base: "md", md: "lg" }}
+                onClick={() => bookTicketHandler(ticket, index)}
+              >
+                {loadingStates[index] ? "Booking..." : "Book Ticket"}
+              </Button>
+            </ListItem>
+          ))}
+        </SimpleGrid>
+      </List>
     </Box>
   );
 };
