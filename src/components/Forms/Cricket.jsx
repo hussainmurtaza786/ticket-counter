@@ -67,9 +67,13 @@ function Cricket({ selectedSport }) {
     <div>
       {loader && <Text>Loading...</Text>}
 
-      <Grid 
-        templateColumns={{ base: "repeat(1, 1fr)", md: "repeat(2, 1fr)", lg: "repeat(3, 1fr)" }} 
-        userSelect="none" 
+      <Grid
+        templateColumns={{
+          base: "repeat(1, 1fr)",
+          md: "repeat(2, 1fr)",
+          lg: "repeat(3, 1fr)",
+        }}
+        userSelect="none"
         gap={6}
       >
         {cricketData.map((ticket, index) => (
@@ -88,7 +92,7 @@ function Cricket({ selectedSport }) {
                 textAlign="center"
                 width="100%"
                 fontWeight="bolder"
-                fontSize={{ base: "16px", md: "18px", lg: "20px" }} // Responsive font size
+                fontSize={{ base: "16px", md: "18px", lg: "20px" }}
               >
                 {ticket.teams} {ticket.match}
               </Text>
@@ -101,7 +105,9 @@ function Cricket({ selectedSport }) {
               borderRadius="md"
               justifyContent="center"
             >
-              <Text fontSize={{ base: "14px", md: "16px", lg: "18px" }}>{ticket.cricketType}</Text>
+              <Text fontSize={{ base: "14px", md: "16px", lg: "18px" }}>
+                {ticket.cricketType}
+              </Text>
             </HStack>
 
             <VStack align="start" mt={4} spacing={2}>
@@ -123,7 +129,7 @@ function Cricket({ selectedSport }) {
               isDisabled={loadingStates[index]}
               mt={4}
               colorScheme="teal"
-              width="full" // Make the button full width
+              width="full"
               onClick={() => sendData(ticket, index)}
             >
               {loadingStates[index] ? "Booking..." : "Book Now"}

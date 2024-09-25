@@ -13,29 +13,31 @@ function About() {
     <Box
       userSelect="none"
       position="relative"
-      height="100vh" // Full height for the viewport
+      height="100vh"
       overflow="hidden"
     >
       <Image
         src="https://img.freepik.com/premium-photo/stylish-bearded-businessman-formal-business-suit-standing-working-with-tablet-hands-background-modern-office-building-outside-man-using-smartphone-uses-mobile-phone-outdoors-city-street_321831-6806.jpg"
         alt="About Us"
         objectFit="cover"
-        height="100%" // Cover full height
-        width="100%" // Cover full width
-        filter="brightness(35%)" // Darken image for text contrast
+        height="100%"
+        width="100%"
+        filter="brightness(35%)"
       />
       <Flex
         direction="column"
         align="center"
-        justify="flex-start" // Start from top
+        justify="flex-start"
         position="absolute"
-        top="20%" // Position from the top for visibility
+        top="0%"
         left="50%"
-        transform="translate(-50%, 0)" // Center horizontally
-        textAlign="center" // Center text
+        transform="translate(-50%, 0)"
+        textAlign="center"
         color="white"
         p={4}
-        maxWidth={{ base: "90%", md: "60%" }} // Responsive width
+        width={{ base: "100%", md: "60%" }}
+        height="100%" // Set a fixed height for the Flex container
+        overflowY="auto" // Enable vertical scrolling
       >
         <Heading color="teal.400" mb={4} fontSize={{ base: "xl", md: "2xl" }}>
           About Us

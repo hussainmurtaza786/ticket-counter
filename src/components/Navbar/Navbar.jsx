@@ -35,12 +35,13 @@ function Navbar({ showForm }) {
       position="sticky"
       top="0"
     >
+      {/* Logo */}
       <Box>
         <Logo />
       </Box>
 
-
-      <Box display={{ base: "block", md: "none" }}>
+      {/* Mobile Hamburger Menu Icon */}
+      <Box display={{ base: "block", lg: "none" }}>
         <IconButton
           aria-label="Open Menu"
           icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
@@ -49,28 +50,30 @@ function Navbar({ showForm }) {
         />
       </Box>
 
-
+      {/* Navbar Items - Hidden on Mobile */}
       <Box
         flex="1"
-        display={{ base: "none", md: "flex" }}
+        display={{ base: "none", lg: "flex" }} // Adjusted breakpoint for 918px
         justifyContent="center"
       >
         <Items />
       </Box>
 
-
-      <Box display={{ base: "none", md: "block" }}>
+      {/* Auth Buttons - Hidden on Mobile */}
+      <Box display={{ base: "none", lg: "block" }}>
         <Auth onLogout={logoutHandler} showForm={showForm} />
       </Box>
 
-
+      {/* Drawer for Mobile */}
       <Drawer placement="right" onClose={onClose} isOpen={isOpen}>
         <DrawerOverlay>
           <DrawerContent>
             <DrawerHeader borderBottomWidth="1px">Menu</DrawerHeader>
-            <DrawerBody>
+            <DrawerBody overflowY="auto">
               <Items onClose={onClose} />
-              <Auth onLogout={logoutHandler} showForm={showForm} onClose={onClose} />
+              <Box mt="10px">
+                <Auth onLogout={logoutHandler} showForm={showForm} />
+              </Box>
             </DrawerBody>
           </DrawerContent>
         </DrawerOverlay>

@@ -1,6 +1,15 @@
 import React, { useState } from "react";
 import ticketsData from "../../json-data/flight.json";
-import { Box, Button, Input, Heading, List, ListItem, Text, useToast, SimpleGrid } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Input,
+  Heading,
+  ListItem,
+  Text,
+  useToast,
+  SimpleGrid,
+} from "@chakra-ui/react";
 import { useDispatch, useSelector } from "react-redux";
 import { addTransportTicketThunk } from "../../store/ticketSlice";
 
@@ -15,6 +24,15 @@ const Transportation = () => {
   const [loadingStates, setLoadingStates] = useState({});
 
   const handleSearch = () => {
+    if (!isAuthenticated) {
+      toast({
+        description: "You need to Sign in to book a ticket.",
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+      });
+      return;
+    }
     const filteredTickets = ticketsData.tickets.filter((ticket) => {
       return (
         ticket.from.toLowerCase() === destination.toLowerCase() &&
@@ -33,6 +51,12 @@ const Transportation = () => {
         duration: 3000,
         isClosable: true,
       });
+    }
+  };
+
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter") {
+      handleSearch();
     }
   };
 
@@ -83,30 +107,42 @@ const Transportation = () => {
         placeholder="Enter your Journey from (e.g., Karachi)"
         value={destination}
         onChange={(e) => setDestination(e.target.value)}
+        onKeyDown={handleKeyDown} // Add this line
         mb={3}
-        width={{ base: "100%", md: "70%" }} // Responsive width
+        width={{ base: "100%", md: "70%" }}
       />
       <Input
         placeholder="Enter your destination to (e.g., Lahore)"
         value={journey}
         onChange={(e) => setJourney(e.target.value)}
+        onKeyDown={handleKeyDown} // Add this line
         mb={3}
-        width={{ base: "100%", md: "70%" }} // Responsive width
+        width={{ base: "100%", md: "70%" }}
       />
       <Button
         isDisabled={journey.length === 0 || destination.length === 0}
         colorScheme="teal"
         onClick={handleSearch}
         mb={4}
-        size={{ base: "md", md: "lg" }} // Responsive button size
+        ml={2}
+        size={{ base: "md", md: "lg" }}
       >
         Search Tickets
       </Button>
-      <SimpleGrid columns={{ base: 1, sm: 2, md: 3 }} spacing={4}> {/* Responsive grid layout for tickets */}
+      <SimpleGrid columns={{ base: 1, sm: 2, md: 3 }} spacing={4}>
         {availableTickets.map((ticket, index) => (
-          <ListItem key={ticket.id} p={3} borderWidth="1px" borderRadius="md" display="flex" justifyContent="space-between" alignItems="center">
+          <ListItem
+            key={ticket.id}
+            p={3}
+            borderWidth="1px"
+            borderRadius="md"
+            display="flex"
+            justifyContent="space-between"
+            alignItems="center"
+          >
             <Text>
-              {ticket.type.toUpperCase()} from {ticket.from} to {ticket.to} at {ticket.departure_time}, Price: {ticket.price} PKR
+              {ticket.type.toUpperCase()} from {ticket.from} to {ticket.to} at{" "}
+              {ticket.departure_time}, Price: {ticket.price} PKR
             </Text>
             <Button
               colorScheme="blue"

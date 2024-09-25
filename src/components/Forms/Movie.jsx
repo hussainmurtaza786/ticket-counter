@@ -72,10 +72,18 @@ function Movie() {
     <div>
       {loader && <Text>Loading...</Text>}
 
-      <Grid 
-        templateColumns={{ base: "repeat(1, 1fr)", md: "repeat(2, 1fr)", lg: "repeat(3, 1fr)" }} 
-        userSelect="none" 
+      <Grid
+        templateColumns={{
+          base: "repeat(1, 1fr)", 
+          sm: "repeat(1, 1fr)",   
+          md: "repeat(2, 1fr)",   
+          lg: "repeat(2, 1fr)",  
+          xl: "repeat(3, 1fr)",   
+          "2xl": "repeat(4, 1fr)" 
+        }}
         gap={6}
+        maxW="100%"
+        px={4} 
       >
         {movieData.map((movie, index) => (
           <Box
@@ -85,6 +93,7 @@ function Movie() {
             p={4}
             bg="gray.50"
             boxShadow="md"
+            maxW="100%"
           >
             <HStack>
               <Text
@@ -102,8 +111,8 @@ function Movie() {
                 w="100%"
                 src={movie.image}
                 alt={movie.movie}
-                maxH="200px" // Set a maximum height to prevent cutting
-                objectFit="cover" // Maintain aspect ratio
+                maxH="200px"
+                objectFit="cover"
                 borderRadius="md"
               />
               <HStack>
@@ -123,12 +132,12 @@ function Movie() {
             </VStack>
 
             <Button
-              isDisabled={loadingStates[index]} 
+              isDisabled={loadingStates[index]}
               mt={4}
               colorScheme="teal"
-              onClick={() => sendData(movie, index)} 
+              onClick={() => sendData(movie, index)}
             >
-              {loadingStates[index] ? "Booking..." : "Book Now"} 
+              {loadingStates[index] ? "Booking..." : "Book Now"}
             </Button>
           </Box>
         ))}
