@@ -22,7 +22,7 @@ import { IoEyeSharp } from 'react-icons/io5';
 import { FaRegEyeSlash } from 'react-icons/fa';
 
 const Signup = ({ onClose }) => {
-  const toast=useToast()
+  const toast = useToast()
   const isAuthenticating = useSelector((state) => state.auth.isAuthenticating);
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
 
@@ -37,9 +37,8 @@ const Signup = ({ onClose }) => {
       await dispatch(signUpThunk(values)).unwrap();
       onClose();
     } catch (error) {
-
       toast({
-        description: error.message,
+        description: error.message || error,
         status: "error",
         duration: 3000,
         isClosable: true,
@@ -62,12 +61,10 @@ const Signup = ({ onClose }) => {
 
   return (
     <Flex
-      display='flex'
       justifyContent='center'
       alignItems='center'
-      p={{ base: 4, md: 6 }} 
+      p={{ base: 4, md: 6 }}
       borderRadius='md'
-      height='100vh' 
     >
       <Box width={{ base: '100%', sm: '70%', md: '50%', lg: '100%' }} borderWidth={1} borderRadius='lg' p={6}>
         <form onSubmit={handleSubmit}>
@@ -167,11 +164,10 @@ const Signup = ({ onClose }) => {
             </FormControl>
 
             <Button
-              spacing={4}
               mt={4}
               colorScheme="teal"
               type="submit"
-              isLoading={isSubmitting} // Show spinner on submit
+              isLoading={isSubmitting}
               isDisabled={!isValid || isSubmitting}
             >
               Submit

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Box, Kbd, Select, Text } from "@chakra-ui/react";
+import { Box, Select, Text } from "@chakra-ui/react";
 import Cricket from "../Forms/Cricket";
 import FootBall from "../Forms/FootBall";
 import Movie from "../Forms/Movie";
@@ -57,7 +57,6 @@ function FetchData() {
         bgColor='#EDF2F7'
       >
         {getDescription()}
-
       </Text>
 
       <Box m="12px 3px">

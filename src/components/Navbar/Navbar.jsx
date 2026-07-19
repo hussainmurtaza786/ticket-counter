@@ -30,25 +30,26 @@ function Navbar({ showForm }) {
       alignItems="center"
       width="100%"
       zIndex={100}
-      bgColor="#B0C4DE"
-      px="20px"
+      bg="white"
+      borderBottom="1px"
+      borderColor="gray.100"
+      px="24px"
       position="sticky"
       top="0"
+      boxShadow="sm"
     >
       <Box>
         <Logo />
       </Box>
 
-
       <Box display={{ base: "block", lg: "none" }}>
         <IconButton
           aria-label="Open Menu"
           icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
-          variant="outline"
+          variant="ghost"
           onClick={isOpen ? onClose : onOpen}
         />
       </Box>
-
 
       <Box
         flex="1"
@@ -62,11 +63,10 @@ function Navbar({ showForm }) {
         <Auth onLogout={logoutHandler} showForm={showForm} />
       </Box>
 
-
       <Drawer placement="right" onClose={onClose} isOpen={isOpen}>
         <DrawerOverlay>
           <DrawerContent>
-            <DrawerHeader borderBottomWidth="1px">Menu</DrawerHeader>
+            <DrawerHeader borderBottomWidth="1px" fontWeight="bold">Menu</DrawerHeader>
             <DrawerBody overflowY="auto">
               <Items onClose={onClose} />
               <Box mt="10px">

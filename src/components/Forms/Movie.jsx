@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Button,
   Text,
@@ -9,19 +9,29 @@ import {
   Link,
   Image,
   useToast,
+  Spinner,
 } from "@chakra-ui/react";
-import movieData from "../../json-data/movie.json";
 import { useDispatch, useSelector } from "react-redux";
 import { addMovieTicketThunk } from "../../store/ticketSlice";
+import { getMovies } from "../../api";
 
 function Movie() {
-  const loader = useSelector((state) => state.ticket.fetchingState.loadTickets);
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
   const userId = useSelector((state) => state.auth.user?.id);
   const dispatch = useDispatch();
   const toast = useToast();
 
+  const [movies, setMovies] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [loadingStates, setLoadingStates] = useState({});
+
+  useEffect(() => {
+    (async () => {
+      const data = await getMovies();
+      setMovies(data);
+      setLoading(false);
+    })();
+  }, []);
 
   const sendData = async (ticketData, index) => {
     if (!isAuthenticated) {
@@ -40,12 +50,7 @@ function Movie() {
     }));
 
     try {
-      const data = {
-        ...ticketData,
-        userId: userId,
-      };
-
-      await dispatch(addMovieTicketThunk(data)).unwrap();
+      await dispatch(addMovieTicketThunk({ ...ticketData, userId })).unwrap();
       toast({
         description: "Ticket booked successfully!",
         status: "success",
@@ -53,7 +58,6 @@ function Movie() {
         isClosable: true,
       });
     } catch (error) {
-      console.error("Error sending data:", error);
       toast({
         description: error.message,
         status: "error",
@@ -68,81 +72,79 @@ function Movie() {
     }
   };
 
+  if (loading) return <Spinner />;
+
   return (
-    <div>
-      {loader && <Text>Loading...</Text>}
-
-      <Grid
-        templateColumns={{
-          base: "repeat(1, 1fr)", 
-          sm: "repeat(1, 1fr)",   
-          md: "repeat(2, 1fr)",   
-          lg: "repeat(2, 1fr)",  
-          xl: "repeat(3, 1fr)",   
-          "2xl": "repeat(4, 1fr)" 
-        }}
-        gap={6}
-        maxW="100%"
-        px={4} 
-      >
-        {movieData.map((movie, index) => (
-          <Box
-            key={index}
-            borderWidth="1px"
-            borderRadius="lg"
-            p={4}
-            bg="gray.50"
-            boxShadow="md"
-            maxW="100%"
-          >
-            <HStack>
-              <Text
-                textAlign="center"
-                width="100%"
-                fontWeight="bolder"
-                fontSize="20px"
-              >
-                {movie.movie}
-              </Text>
-            </HStack>
-
-            <VStack align="start" mt={4} spacing={2}>
-              <Image
-                w="100%"
-                src={movie.image}
-                alt={movie.movie}
-                maxH="200px"
-                objectFit="cover"
-                borderRadius="md"
-              />
-              <HStack>
-                <Text fontWeight="bold">Rating:</Text>
-                <Text>{movie.rating}</Text>
-              </HStack>
-              <HStack>
-                <Text fontWeight="bold">Price:</Text>
-                <Text>${movie.price}</Text>
-              </HStack>
-              <HStack>
-                <Text fontWeight="bold">Web Link:</Text>
-                <Link href={movie.imdb_url} color="teal.500" isExternal>
-                  {movie.imdb_url}
-                </Link>
-              </HStack>
-            </VStack>
-
-            <Button
-              isDisabled={loadingStates[index]}
-              mt={4}
-              colorScheme="teal"
-              onClick={() => sendData(movie, index)}
+    <Grid
+      templateColumns={{
+        base: "repeat(1, 1fr)",
+        sm: "repeat(1, 1fr)",
+        md: "repeat(2, 1fr)",
+        lg: "repeat(2, 1fr)",
+        xl: "repeat(3, 1fr)",
+        "2xl": "repeat(4, 1fr)",
+      }}
+      gap={6}
+      maxW="100%"
+      px={4}
+    >
+      {movies.map((movie, index) => (
+        <Box
+          key={movie.id}
+          borderWidth="1px"
+          borderRadius="lg"
+          p={4}
+          bg="gray.50"
+          boxShadow="md"
+          maxW="100%"
+        >
+          <HStack>
+            <Text
+              textAlign="center"
+              width="100%"
+              fontWeight="bolder"
+              fontSize="20px"
             >
-              {loadingStates[index] ? "Booking..." : "Book Now"}
-            </Button>
-          </Box>
-        ))}
-      </Grid>
-    </div>
+              {movie.movie}
+            </Text>
+          </HStack>
+
+          <VStack align="start" mt={4} spacing={2}>
+            <Image
+              w="100%"
+              src={movie.image}
+              alt={movie.movie}
+              maxH="200px"
+              objectFit="cover"
+              borderRadius="md"
+            />
+            <HStack>
+              <Text fontWeight="bold">Rating:</Text>
+              <Text>{movie.rating}</Text>
+            </HStack>
+            <HStack>
+              <Text fontWeight="bold">Price:</Text>
+              <Text>${movie.price}</Text>
+            </HStack>
+            <HStack>
+              <Text fontWeight="bold">Web Link:</Text>
+              <Link href={movie.imdb_url} color="teal.500" isExternal>
+                View Details
+              </Link>
+            </HStack>
+          </VStack>
+
+          <Button
+            isDisabled={loadingStates[index]}
+            mt={4}
+            colorScheme="teal"
+            onClick={() => sendData(movie, index)}
+          >
+            {loadingStates[index] ? "Booking..." : "Book Now"}
+          </Button>
+        </Box>
+      ))}
+    </Grid>
   );
 }
 

@@ -8,7 +8,6 @@ import {
   Stack,
   Heading,
   Text,
-  useColorModeValue,
   IconButton,
   InputRightElement,
   InputGroup,
@@ -23,7 +22,7 @@ import { IoEyeSharp } from "react-icons/io5";
 import { signInThunk } from "../../store/authSlice";
 
 const Login = ({ onClose }) => {
-  const toast=useToast()
+  const toast = useToast()
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const isAuthenticating = useSelector((state) => state.auth.isAuthenticating);
 
@@ -37,9 +36,8 @@ const Login = ({ onClose }) => {
       await dispatch(signInThunk(values)).unwrap();
       onClose();
     } catch (error) {
-      // alert(error);
       toast({
-        description: error,
+        description: error.message || error,
         status: "error",
         duration: 3000,
         isClosable: true,
@@ -65,7 +63,7 @@ const Login = ({ onClose }) => {
           <Heading fontSize="2xl" textAlign="center">
             Welcome Back
           </Heading>
-          <Text fontSize="lg" color={useColorModeValue("gray.600", "gray.300")}>
+          <Text fontSize="lg" color="gray.600">
             Please enter your email and password to log in
           </Text>
 
@@ -78,7 +76,7 @@ const Login = ({ onClose }) => {
               value={values.email}
               onChange={handleChange}
               onBlur={handleBlur}
-              width="100%" // Full width
+              width="100%"
             />
             {touched.email && errors.email && (
               <Text color="red.500" fontSize="sm">
@@ -97,7 +95,7 @@ const Login = ({ onClose }) => {
                 onChange={handleChange}
                 onBlur={handleBlur}
                 type={isPasswordVisible ? "text" : "password"}
-                width="100%" // Full width
+                width="100%"
               />
               <InputRightElement>
                 <IconButton
@@ -117,13 +115,11 @@ const Login = ({ onClose }) => {
           </FormControl>
 
           <Button
-            spacing={4}
             mt={4}
             colorScheme="teal"
             type="submit"
-            aria-disabled={!isValid || isSubmitting}
-            disabled={!isValid || isSubmitting}
-            size={{ base: "md", sm: "lg" }} // Responsive button size
+            isDisabled={!isValid || isSubmitting}
+            size={{ base: "md", sm: "lg" }}
           >
             Submit
           </Button>

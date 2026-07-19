@@ -7,10 +7,10 @@ const BookTicket = () => {
   const sports = useSelector((state) => state.ticket.sports);
   const transports = useSelector((state) => state.ticket.transports);
 
-  const cardBg = useColorModeValue("white", "gray.800"); // Light/Dark mode support
+  const cardBg = useColorModeValue("white", "gray.800");
   const borderColor = useColorModeValue("gray.300", "gray.700");
   const hoverColor = useColorModeValue("gray.100", "gray.700");
-  const values = ["movie", "sports", "flight"];
+  const values = ["movie", "sports", "transport"];
   const [selectedTicket, setSelectedTicket] = useState("movie");
 
   const handleTicketChange = (e) => {
@@ -96,7 +96,7 @@ const BookTicket = () => {
           ))
         }
         {/* /////////// Transport Tickets ////////// */}
-        {selectedTicket === 'flight' &&
+        {selectedTicket === 'transport' &&
 
           transports.map((item) => (
             <HStack
@@ -123,7 +123,7 @@ const BookTicket = () => {
                     />
                   </HStack>
                 </Box>
-                <Text>Transport Type: <strong>{item.type.toUpperCase()}</strong></Text>
+                <Text>Transport Type: <strong>{item.type?.toUpperCase()}</strong></Text>
                 <Text>Departure Time: <strong>{item.departure_time}</strong></Text>
                 <Text>Arrival Time: <strong>{item.arrival_time}</strong></Text>
                 <Text>Price: <strong>${item.price}</strong></Text>

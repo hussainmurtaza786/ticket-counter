@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Button,
   Text,
@@ -7,18 +7,28 @@ import {
   Box,
   Grid,
   useToast,
+  Spinner,
 } from "@chakra-ui/react";
-import cricketData from "../../json-data/cricket.json";
 import { useDispatch, useSelector } from "react-redux";
 import { addSportTicketThunk } from "../../store/ticketSlice";
+import { getCricket } from "../../api";
 
-function Cricket({ selectedSport }) {
+function Cricket() {
   const userId = useSelector((state) => state.auth.user?.id);
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
-  const loader = useSelector((state) => state.ticket.fetchingState.loadTickets);
   const dispatch = useDispatch();
   const toast = useToast();
+
+  const [matches, setMatches] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [loadingStates, setLoadingStates] = useState({});
+
+  useEffect(() => {
+    (async () => {
+      setMatches(await getCricket());
+      setLoading(false);
+    })();
+  }, []);
 
   const sendData = async (ticketData, index) => {
     if (!isAuthenticated) {
@@ -30,114 +40,55 @@ function Cricket({ selectedSport }) {
       });
       return;
     }
-    setLoadingStates((prevState) => ({
-      ...prevState,
-      [index]: true,
-    }));
+    setLoadingStates((prevState) => ({ ...prevState, [index]: true }));
     try {
-      const data = {
-        ...ticketData,
-        sportType: selectedSport,
-        userId: userId,
-      };
-      await dispatch(addSportTicketThunk(data)).unwrap();
-      toast({
-        description: "Ticket booked successfully!",
-        status: "success",
-        duration: 3000,
-        isClosable: true,
-      });
+      await dispatch(addSportTicketThunk({ ...ticketData, sportType: "cricket", userId })).unwrap();
+      toast({ description: "Ticket booked successfully!", status: "success", duration: 3000, isClosable: true });
     } catch (error) {
-      console.error("Error sending data:", error);
-      toast({
-        description: error.message,
-        status: "error",
-        duration: 3000,
-        isClosable: true,
-      });
+      toast({ description: error.message, status: "error", duration: 3000, isClosable: true });
     } finally {
-      setLoadingStates((prevState) => ({
-        ...prevState,
-        [index]: false,
-      }));
+      setLoadingStates((prevState) => ({ ...prevState, [index]: false }));
     }
   };
 
+  if (loading) return <Spinner />;
+
   return (
-    <div>
-      {loader && <Text>Loading...</Text>}
-
-      <Grid
-        templateColumns={{
-          base: "repeat(1, 1fr)",
-          md: "repeat(2, 1fr)",
-          lg: "repeat(3, 1fr)",
-        }}
-        userSelect="none"
-        gap={6}
-      >
-        {cricketData.map((ticket, index) => (
-          <Box
-            key={index}
-            borderWidth="1px"
-            borderRadius="lg"
-            p={4}
-            bg="white"
-            boxShadow="lg"
-            transition="transform 0.2s"
-            _hover={{ transform: "scale(1.05)", boxShadow: "xl" }}
-          >
-            <HStack>
-              <Text
-                textAlign="center"
-                width="100%"
-                fontWeight="bolder"
-                fontSize={{ base: "16px", md: "18px", lg: "20px" }}
-              >
-                {ticket.teams} {ticket.match}
-              </Text>
-            </HStack>
-
-            <HStack
-              backgroundColor="teal.500"
-              color="white"
-              p={2}
-              borderRadius="md"
-              justifyContent="center"
-            >
-              <Text fontSize={{ base: "14px", md: "16px", lg: "18px" }}>
-                {ticket.cricketType}
-              </Text>
-            </HStack>
-
-            <VStack align="start" mt={4} spacing={2}>
-              <HStack>
-                <Text fontWeight="bold">Date:</Text>
-                <Text>{ticket.matchDate}</Text>
-              </HStack>
-              <HStack>
-                <Text fontWeight="bold">Stadium:</Text>
-                <Text>{ticket.venue}</Text>
-              </HStack>
-              <HStack>
-                <Text fontWeight="bold">Price:</Text>
-                <Text>${ticket.price}</Text>
-              </HStack>
-            </VStack>
-
-            <Button
-              isDisabled={loadingStates[index]}
-              mt={4}
-              colorScheme="teal"
-              width="full"
-              onClick={() => sendData(ticket, index)}
-            >
-              {loadingStates[index] ? "Booking..." : "Book Now"}
-            </Button>
-          </Box>
-        ))}
-      </Grid>
-    </div>
+    <Grid
+      templateColumns={{ base: "repeat(1, 1fr)", md: "repeat(2, 1fr)", lg: "repeat(3, 1fr)" }}
+      userSelect="none"
+      gap={6}
+    >
+      {matches.map((ticket, index) => (
+        <Box
+          key={index}
+          borderWidth="1px"
+          borderRadius="lg"
+          p={4}
+          bg="white"
+          boxShadow="lg"
+          transition="transform 0.2s"
+          _hover={{ transform: "scale(1.05)", boxShadow: "xl" }}
+        >
+          <HStack>
+            <Text textAlign="center" width="100%" fontWeight="bolder" fontSize={{ base: "16px", md: "18px", lg: "20px" }}>
+              {ticket.teams}
+            </Text>
+          </HStack>
+          <HStack backgroundColor="teal.500" color="white" p={2} borderRadius="md" justifyContent="center">
+            <Text fontSize={{ base: "14px", md: "16px", lg: "18px" }}>{ticket.cricketType}</Text>
+          </HStack>
+          <VStack align="start" mt={4} spacing={2}>
+            <HStack><Text fontWeight="bold">Date:</Text><Text>{ticket.matchDate}</Text></HStack>
+            <HStack><Text fontWeight="bold">Stadium:</Text><Text>{ticket.venue}</Text></HStack>
+            <HStack><Text fontWeight="bold">Price:</Text><Text>${ticket.price}</Text></HStack>
+          </VStack>
+          <Button isDisabled={loadingStates[index]} mt={4} colorScheme="teal" width="full" onClick={() => sendData(ticket, index)}>
+            {loadingStates[index] ? "Booking..." : "Book Now"}
+          </Button>
+        </Box>
+      ))}
+    </Grid>
   );
 }
 

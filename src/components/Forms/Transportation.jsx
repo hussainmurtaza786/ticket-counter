@@ -1,19 +1,19 @@
 import React, { useState } from "react";
-import ticketsData from "../../json-data/flight.json";
 import {
   Box,
   Button,
   Input,
   Heading,
-  ListItem,
-  List,
   Text,
   useToast,
   SimpleGrid,
   Stack,
+  VStack,
+  Spinner,
 } from "@chakra-ui/react";
 import { useDispatch, useSelector } from "react-redux";
 import { addTransportTicketThunk } from "../../store/ticketSlice";
+import { searchTransport } from "../../api";
 
 const Transportation = () => {
   const dispatch = useDispatch();
@@ -23,80 +23,39 @@ const Transportation = () => {
   const [destination, setDestination] = useState("");
   const [journey, setJourney] = useState("");
   const [availableTickets, setAvailableTickets] = useState([]);
+  const [loading, setLoading] = useState(false);
   const [loadingStates, setLoadingStates] = useState({});
 
-  const handleSearch = () => {
+  const handleSearch = async () => {
     if (!isAuthenticated) {
-      toast({
-        description: "You need to Sign in to book a ticket.",
-        status: "error",
-        duration: 3000,
-        isClosable: true,
-      });
+      toast({ description: "You need to Sign in to book a ticket.", status: "error", duration: 3000, isClosable: true });
       return;
     }
-    const filteredTickets = ticketsData.tickets.filter((ticket) => {
-      return (
-        ticket.from.toLowerCase() === destination.toLowerCase() &&
-        ticket.to.toLowerCase() === journey.toLowerCase() &&
-        ticket.available
-      );
-    });
+    setLoading(true);
+    const filtered = await searchTransport(destination, journey);
+    setAvailableTickets(filtered);
+    setLoading(false);
 
-    setAvailableTickets(filteredTickets);
-
-    if (filteredTickets.length === 0) {
-      toast({
-        title: "No Tickets Found",
-        description: "No available tickets found for your selected route.",
-        status: "error",
-        duration: 3000,
-        isClosable: true,
-      });
+    if (filtered.length === 0) {
+      toast({ title: "No Tickets Found", description: "No available tickets found for your selected route.", status: "error", duration: 3000, isClosable: true });
     }
   };
 
   const handleKeyDown = (e) => {
-    if (e.key === "Enter") {
-      handleSearch();
-    }
+    if (e.key === "Enter") handleSearch();
   };
 
   const bookTicketHandler = async (ticketData, index) => {
     if (!isAuthenticated) {
-      toast({
-        description: "You need to Sign in to book a ticket.",
-        status: "error",
-        duration: 3000,
-        isClosable: true,
-      });
+      toast({ description: "You need to Sign in to book a ticket.", status: "error", duration: 3000, isClosable: true });
       return;
     }
-
     setLoadingStates((prevState) => ({ ...prevState, [index]: true }));
-
     try {
-      const data = {
-        ...ticketData,
-        userId: userId,
-      };
-
-      await dispatch(addTransportTicketThunk(data)).unwrap();
-      toast({
-        title: "Success!",
-        description: "Ticket booked successfully!",
-        status: "success",
-        duration: 3000,
-        isClosable: true,
-      });
+      await dispatch(addTransportTicketThunk({ ...ticketData, userId })).unwrap();
+      toast({ title: "Success!", description: "Ticket booked successfully!", status: "success", duration: 3000, isClosable: true });
     } catch (error) {
-      toast({
-        title: "Error!",
-        description: error.message,
-        status: "error",
-        duration: 3000,
-        isClosable: true,
-      });
+      toast({ title: "Error!", description: error.message, status: "error", duration: 3000, isClosable: true });
     } finally {
       setLoadingStates((prevState) => ({ ...prevState, [index]: false }));
     }
@@ -105,11 +64,11 @@ const Transportation = () => {
   return (
     <Box p={{ base: 3, md: 5 }} shadow="md" borderWidth="1px" borderRadius="lg">
       <Heading mb={4} fontSize={{ base: "lg", md: "xl" }}>
-        Flight Ticket Search
+        Flight & Travel Search
       </Heading>
       <Stack spacing={4}>
         <Input
-          placeholder="Enter your Journey from (e.g., Karachi)"
+          placeholder="From (e.g., New York)"
           value={destination}
           onChange={(e) => setDestination(e.target.value)}
           onKeyDown={handleKeyDown}
@@ -117,7 +76,7 @@ const Transportation = () => {
           width={{ base: "100%", md: "70%" }}
         />
         <Input
-          placeholder="Enter your destination to (e.g., Lahore)"
+          placeholder="To (e.g., London)"
           value={journey}
           onChange={(e) => setJourney(e.target.value)}
           onKeyDown={handleKeyDown}
@@ -125,33 +84,23 @@ const Transportation = () => {
           width={{ base: "100%", md: "70%" }}
         />
         <Button
-          isDisabled={journey.length === 0 || destination.length === 0}
+          isDisabled={journey.length === 0 || destination.length === 0 || loading}
           colorScheme="teal"
           onClick={handleSearch}
           mb={4}
           size={{ base: "md", md: "lg" }}
           width={{ base: "100%", md: "auto" }}
         >
-          Search Tickets
+          {loading ? "Searching..." : "Search Tickets"}
         </Button>
       </Stack>
 
-      <List spacing={3}>
+      {loading ? <Spinner /> : (
         <SimpleGrid columns={{ base: 1, sm: 2, md: 3 }} spacing={4}>
           {availableTickets.map((ticket, index) => (
-            <ListItem
-              key={ticket.id}
-              p={3}
-              borderWidth="1px"
-              borderRadius="md"
-              display="flex"
-              justifyContent="space-between"
-              alignItems="center"
-              flexDirection={{ base: "column", md: "row" }} // Stack vertically on small screens
-            >
-              <Text fontSize={{ base: "sm", md: "md" }} mb={{ base: 2, md: 0 }}>
-                {ticket.type.toUpperCase()} from {ticket.from} to {ticket.to} at{" "}
-                {ticket.departure_time}, Price: {ticket.price} PKR
+            <VStack key={ticket.id} p={3} borderWidth="1px" borderRadius="md" align="stretch" spacing={2}>
+              <Text fontSize={{ base: "sm", md: "md" }}>
+                {ticket.type.toUpperCase()} from {ticket.from} to {ticket.to} at {ticket.departure_time}, Price: ${ticket.price}
               </Text>
               <Button
                 colorScheme="blue"
@@ -163,10 +112,10 @@ const Transportation = () => {
               >
                 {loadingStates[index] ? "Booking..." : "Book Ticket"}
               </Button>
-            </ListItem>
+            </VStack>
           ))}
         </SimpleGrid>
-      </List>
+      )}
     </Box>
   );
 };

@@ -1,4 +1,4 @@
-import { Box, Flex, Text } from "@chakra-ui/react";
+import { Box, Flex } from "@chakra-ui/react";
 import React from "react";
 import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
@@ -7,31 +7,28 @@ function Items({ onClose }) {
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
 
   return (
-    <Box color={"whitesmoke"} padding="10px">
+    <Box padding="10px">
       <Flex
         direction={{ base: "column", md: "row" }}
         alignItems={{ base: "center", md: "center" }}
-        justifyContent="space-between"
+        justifyContent="center"
         wrap="nowrap"
-        gap="8px"
+        gap="4px"
       >
         <ListStyle onClick={onClose} path="/">
           Home
         </ListStyle>
-        <ListStyle onClick={onClose} path="/contact">
-          Contact
+        <ListStyle onClick={onClose} path="/ticket">
+          Tickets
         </ListStyle>
         <ListStyle onClick={onClose} path="/about">
           About
         </ListStyle>
-        <ListStyle onClick={onClose} path="/review">
-          Review
-        </ListStyle>
-        <ListStyle onClick={onClose} path="/ticket">
-          Tickets
+        <ListStyle onClick={onClose} path="/contact">
+          Contact
         </ListStyle>
         {isAuthenticated && (
-          <ListStyle path="/bookTicket">Booked-Ticket</ListStyle>
+          <ListStyle path="/bookTicket">My Bookings</ListStyle>
         )}
       </Flex>
     </Box>
@@ -44,7 +41,7 @@ const ListStyle = ({ children, path, onClick }) => {
   return (
     <Box
       m="0px"
-      p="0px 10px"
+      p="6px 14px"
       userSelect="none"
       borderRadius="md"
       onClick={onClick}
@@ -52,21 +49,18 @@ const ListStyle = ({ children, path, onClick }) => {
       <NavLink
         to={path}
         style={({ isActive }) => ({
-          fontSize: "18px",
-          color: isActive ? "#386B99" : "black",
+          fontSize: "15px",
+          fontWeight: "500",
+          color: isActive ? "teal" : "gray.600",
           textDecoration: "none",
-          transition: "transform 0.2s ease, color 0.2s ease",
-          transform: isActive ? "scale(1.05)" : "scale(1)",
-          outline: "none",
+          transition: "color 0.2s ease",
         })}
         onMouseEnter={(e) => {
-          e.currentTarget.style.color = "#386B99";
-          e.currentTarget.style.transform = "scale(1.05)";
+          e.currentTarget.style.color = "teal";
         }}
         onMouseLeave={(e) => {
           if (!e.currentTarget.classList.contains("active")) {
-            e.currentTarget.style.color = "black";
-            e.currentTarget.style.transform = "scale(1)";
+            e.currentTarget.style.color = "gray.600";
           }
         }}
       >
